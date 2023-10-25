@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>스탬프투어 가이드</title>
+    <style>
+        @import url('./resources/css/font.css');
+        @import url('./resources/css/root.css');
+        .mainContainer {
+            padding: 1em;
+            margin-top: 4em;
+            box-sizing: border-box;
+        }
+        img {
+            width: 90%;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="titleBar" class="titleBar">
+        <h1>대충 이름 OR 로고</h1>
+    </div>
+    <div class="mainContainer">
+        <h1>어떻게 참여하나요?</h1>
+        <hr>
+        <h2>1. 휴대 전화의 NFC 기능 활성화해주세요.</h2>
+        <h2>2. 지도에서 스탬프를 확인하세요.</h2>
+        <h2>3. 스탬프를 찾아 왼쪽 태그 부분에 휴대 전화를 인식하세요.</h2>
+        <picture>
+            <source srcset="./resources/imagesDemo_Tag.webp" type="image/webp">
+            <img src="./resources/imagesDemo_Tag.png">
+        </picture>
+        <h2>3. 인식한 NFC 태그를 브라우저에서 열면 스탬프가 기록됩니다.</h2>
+
+    </div>
+    <div id="stampView" class="stampView">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-compact-up" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M7.776 5.553a.5.5 0 0 1 .448 0l6 3a.5.5 0 1 1-.448.894L8 6.56 2.224 9.447a.5.5 0 1 1-.448-.894l6-3z"/>
+          </svg>
+        <h1>스탬프투어</h1>
+        <!--<img id="stampImg" src="/map_N.png" style="height: 80vh;">
+        <button onclick="deleteCookie('stamp_Test');">스탬프 초기화(임시 버튼)</button>-->
+    </div>
+</body>
+<script src="https://unpkg.com/panzoom@9.4.3/dist/panzoom.min.js"></script>
+<script src="/resources/scripts/root.js"></script>
+<script>
+
+    function setClassroom() {
+    }
+    var mapElement = document.getElementById('mapF4');
+
+    function enableZoom() {
+        var cityMinZoom = 0.6;
+        if ('ontouchstart' in window || navigator.msMaxTouchPoints) {
+            zoom = panzoom(mapElement, {
+                bounds: true,
+                boundsPadding: 0,
+                maxZoom: 5,
+                minZoom: cityMinZoom,
+                zoomDoubleClickSpeed: 1,
+
+                onTouch: (e) => {
+                    const targetElem = e.target
+                    if (targetElem.tagName === 'circle') {
+                        return false
+                    } else {
+                        e.preventDefault()
+                    }
+                }
+            });
+        } else {
+            zoom = panzoom(mapElement, {
+                bounds: true,
+                boundsPadding: 0,
+                maxZoom: 5,
+                minZoom: cityMinZoom,
+                zoomDoubleClickSpeed: 1,
+            });
+        }
+        var timeoutID = setTimeout(fixText(), 500);
+
+    }
+    function fixText() {
+        for (var i = 0; i < text.length; i++) {
+            text[i].setAttribute('x', text[i].getAttribute('x') - 0.001);
+        }
+        for (var i = 0; i < text.length; i++) {
+            text[i].setAttribute('x', text[i].getAttribute('x') + 0.001);
+        }
+        //mapElement.innerHTML += "";
+    }
+
+    window.onload = function () {
+        // Expose to window namespase for testing purposes
+        enableZoom();
+        // 노선명 텍스트 표시 여기서 해야 Safari에서 돌아감
+        //enableZoom();
+    }
+    eById("stampView").addEventListener("click", function () {
+        eById("stampView").classList.toggle("open");
+    });
+
+
+    function setCookie(name, value, exp) {
+        var date = new Date();
+        date.setTime(date.getTime() + exp * 24 * 60 * 60 * 1000);
+        document.cookie = encodeURIComponent(name) + '=' + encodeURIComponent(value) + ';expires=' + date.toUTCString() + ';path=';
+    }
+    function getCookie(name) {
+        var value = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
+        return value ? value[2] : null;
+    }
+    function deleteCookie(name) {
+        document.cookie = encodeURIComponent(name) + '=; expires=Thu, 01 JAN 1999 00:00:10 GMT';
+    }
+
+    // every 1 second
+
+    setInterval(function () {
+        if (getCookie('stamp_Test') == 'Computer_1F') {
+            eById('stampImg').src = '/map_C.png';
+        } else {
+            eById('stampImg').src = '/map_N.png';
+        }
+    }, 1000);
+
+</script>
+
+</html>

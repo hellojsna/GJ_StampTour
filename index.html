@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>스탬프투어</title>
+    <style>
+        @import url('./resources/css/font.css');
+        @import url('./resources/css/root.css');
+    </style>
+</head>
+
+<body>
+    <div id="titleBar" class="titleBar">
+        <h1>4층</h1>
+    </div>
+    <div class="mainContainer">
+        <svg id="mapF4" class="map">
+            <g id="복도">
+                <rect class="hallway" x="150" y="100" width="50" height="300" />
+                <rect class="hallway" x="150" y="400" width="1100" height="50" />
+                <rect class="hallway" x="850" y="0" width="50" height="400" />
+                <rect class="hallway" x="1200" y="450" width="50" height="550" />
+                <polygon class="hallway" points="90,360 130,400 150,400 150,500 130,500 90,540 0,450" />
+                <rect class="hallway" x="150" y="450" width="150" height="100" />
+                <!--계단-->
+                <rect class="hallway" x="1100" y="450" width="50" height="100" />
+                <rect class="hallway" x="1100" y="450" width="50" height="100" />
+                <rect class="hallway" x="800" y="0" width="50" height="100" />
+            </g>
+            <g id="교실">
+                <g id="기술실" class="classroom">
+                    <rect x="100" y="0" width="150" height="100" />
+                    <text x="175" y="50">기술실</text>
+                </g>
+                <rect x="250" y="0" width="50" height="100" />
+                <g id="가사실" class="classroom">
+                    <rect x="200" y="100" width="100" height="150" />
+                    <text x="250" y="175">가사실</text>
+                </g>
+                <g id="뉴턴실(수)" class="classroom">
+                    <rect x="100" y="100" width="50" height="100" />
+                    <text x="125" y="150" dy="-0.3em" style="font-size: 1em;">뉴턴실</text>
+                    <text x="125" y="150" dy="0.8em" style="font-size: 0.8em; font-weight: normal;">(수)</text>
+                </g>
+                <g id="가우스실(수)" class="classroom">
+                    <rect x="200" y="250" width="100" height="50" />
+                    <text x="250" y="275" dy="-0.3em" style="font-size: 1em;">가우스실</text>
+                    <text x="250" y="275" dy="0.8em" style="font-size: 0.8em; font-weight: normal;">(수)</text>
+                </g>
+                <g id="교실203" class="classroom">
+                    <rect x="300" y="450" width="150" height="100" />
+                    <text x="375" y="500">교실 2-3</text>
+                </g>
+                <g id="교실204" class="classroom">
+                    <rect x="450" y="450" width="150" height="100" />
+                    <text x="525" y="500">교실 2-4</text>
+                </g>
+                <g id="교실205" class="classroom">
+                    <rect x="600" y="450" width="150" height="100" />
+                    <text x="675" y="500">교실 2-5</text>
+                </g>
+                <g id="교실206" class="classroom">
+                    <rect x="750" y="450" width="150" height="100" />
+                    <text x="825" y="500">교실 2-6</text>
+                </g>
+                <g id="교실207" class="classroom">
+                    <rect x="900" y="450" width="150" height="100" />
+                    <text x="975" y="500">교실 2-7</text>
+                </g>
+                <g id="교실208" class="classroom">
+                    <rect x="1250" y="400" width="100" height="150" />
+                    <text x="1300" y="475">교실 2-8</text>
+                </g>
+                <g id="교실209" class="classroom">
+                    <rect x="1250" y="550" width="100" height="150" />
+                    <text x="1300" y="625">교실 2-9</text>
+                </g>
+                <g id="교실210" class="classroom">
+                    <rect x="1250" y="700" width="100" height="150" />
+                    <text x="1300" y="775">교실 2-10</text>
+                </g>
+                <g id="교실211" class="classroom">
+                    <rect x="1250" y="850" width="100" height="150" />
+                    <text x="1300" y="925">교실 2-11</text>
+                </g>
+
+                <g id="화장실1" class="notClassroom">
+                    <rect x="200" y="300" width="100" height="100" />
+                    <text x="250" y="350">화장실</text>
+                </g>
+                <g id="화장실2" class="notClassroom">
+                    <rect x="750" y="300" width="100" height="100" />
+                    <text x="800" y="350">화장실</text>
+                </g>
+
+                <g id="교무실" class="notClassroom">
+                    <rect x="900" y="300" width="100" height="100" />
+                    <text x="950" y="350">교무실</text>
+                </g>
+                <rect class="notClassroom" x="1050" y="450" width="50" height="100" />
+                <rect class="notClassroom" x="900" y="0" width="100" height="300" />
+            </g>
+        </svg>
+    </div>
+    <div id="stampView" class="stampView">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+            class="bi bi-chevron-compact-up" viewBox="0 0 16 16">
+            <path fill-rule="evenodd"
+                d="M7.776 5.553a.5.5 0 0 1 .448 0l6 3a.5.5 0 1 1-.448.894L8 6.56 2.224 9.447a.5.5 0 1 1-.448-.894l6-3z" />
+        </svg>
+        <h1>스탬프투어</h1>
+        <div id="stampList" class="stampList">
+
+        </div>
+        <!--<img id="stampImg" src="/map_N.png" style="height: 80vh;">
+        <button onclick="deleteCookie('stamp_Test');">스탬프 초기화(임시 버튼)</button>-->
+    </div>
+</body>
+<script src="https://unpkg.com/panzoom@9.4.3/dist/panzoom.min.js"></script>
+<script src="/resources/scripts/root.js"></script>
+<script src="/resources/scripts/JsAPI.js"></script>
+<script>
+
+    function getClassroom() {
+        getJSON(`/api/classList.json`, function (err, data) {
+            if (err != null) {
+                alert("데이터를 불러오는 중 오류가 발생했습니다.");
+                console.error(err);
+            } else if (data !== null) {
+                console.log(data);
+                let classList = data.classList;
+                console.log(classList);
+                for (let i = 0; i < classList.length; i++) {
+                    let classData = classList[i];
+                    let classElement = eById(classData.classID);
+                    if (classElement != null) {
+                        classElement.classList.add("active");
+                        classElement.addEventListener("click", function () {
+                            window.open(`/info/${classData.classID}`, "_self");
+                        });
+                    }
+                }
+            }
+        });
+    }
+    function getStamp() {
+        getJSON(`/api/stampList.json`, function (err, data) {
+            if (err != null) {
+                alert("데이터를 불러오는 중 오류가 발생했습니다.");
+                console.error(err);
+            } else if (data !== null) {
+                console.log(data);
+                let stampList = data.stampList;
+                console.log(stampList);
+                for (let i = 0; i < stampList.length; i++) {
+                    let stampData = stampList[i];
+                    let stampElement = document.createElement("div");
+                    stampElement.classList.add("stamp");
+                    stampElement.id = stampData.stampID;
+                    stampElement.innerHTML = `<img src="/resources/images/check.svg"><h3 style="font-size: 0.9em">${stampData.stampName}</h3>`;
+                    eById("stampList").appendChild(stampElement);
+                }
+            }
+        });
+    }
+    var mapElement = document.getElementById("mapF4");
+
+    function enableZoom() {
+        var cityMinZoom = 0.6;
+        if ('ontouchstart' in window || navigator.msMaxTouchPoints) {
+            zoom = panzoom(mapElement, {
+                bounds: true,
+                boundsPadding: 0,
+                maxZoom: 5,
+                minZoom: cityMinZoom,
+                zoomDoubleClickSpeed: 1,
+
+                onTouch: (e) => {
+                    const targetElem = e.target
+                    if (targetElem.tagName === 'circle') {
+                        return false
+                    } else {
+                        e.preventDefault()
+                    }
+                }
+            });
+        } else {
+            zoom = panzoom(mapElement, {
+                bounds: true,
+                boundsPadding: 0,
+                maxZoom: 5,
+                minZoom: cityMinZoom,
+                zoomDoubleClickSpeed: 1,
+            });
+        }
+    }
+
+    window.onload = function () {
+        // Expose to window namespase for testing purposes
+        enableZoom();
+        getClassroom();
+        getStamp();
+    }
+    eById("stampView").addEventListener("click", function () {
+        eById("stampView").classList.toggle("open");
+    });
+
+
+    // Check new stamp every 1 second
+    setInterval(function () {
+        let stampJSON = getCookie('localStamp');
+        if (stampJSON != null) {
+            stampJSON = decodeURIComponent(stampJSON);
+            let stampList = JSON.parse(stampJSON);
+            console.log(stampList);
+            for (let i = 0; i < stampList.length; i++) {
+                let stampData = stampList[i];
+                let stampElement = eById(stampData);
+                if (stampElement != null) {
+                    stampElement.classList.add("checked");
+                }
+            }
+        }
+    }, 1000);
+
+</script>
+
+</html>
