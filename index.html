@@ -1,3 +1,10 @@
+<!--
+  index.html
+  GJ_StampTour
+
+  Created by Js Na on 2023/09/13.
+  Copyright © 2023 Js Na, All rights reserved.
+-->
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -104,127 +111,19 @@
             </g>
         </svg>
     </div>
-    <div id="stampView" class="stampView">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-            class="bi bi-chevron-compact-up" viewBox="0 0 16 16">
-            <path fill-rule="evenodd"
-                d="M7.776 5.553a.5.5 0 0 1 .448 0l6 3a.5.5 0 1 1-.448.894L8 6.56 2.224 9.447a.5.5 0 1 1-.448-.894l6-3z" />
-        </svg>
-        <h1>스탬프투어</h1>
-        <div id="stampList" class="stampList">
-
-        </div>
-        <!--<img id="stampImg" src="/map_N.png" style="height: 80vh;">
-        <button onclick="deleteCookie('stamp_Test');">스탬프 초기화(임시 버튼)</button>-->
-    </div>
+    <div id="stampView" class="stampView"></div>
 </body>
 <script src="https://unpkg.com/panzoom@9.4.3/dist/panzoom.min.js"></script>
 <script src="/resources/scripts/root.js"></script>
 <script src="/resources/scripts/JsAPI.js"></script>
+
 <script>
-
-    function getClassroom() {
-        getJSON(`/api/classList.json`, function (err, data) {
-            if (err != null) {
-                alert("데이터를 불러오는 중 오류가 발생했습니다.");
-                console.error(err);
-            } else if (data !== null) {
-                console.log(data);
-                let classList = data.classList;
-                console.log(classList);
-                for (let i = 0; i < classList.length; i++) {
-                    let classData = classList[i];
-                    let classElement = eById(classData.classID);
-                    if (classElement != null) {
-                        classElement.classList.add("active");
-                        classElement.addEventListener("click", function () {
-                            window.open(`/info/${classData.classID}`, "_self");
-                        });
-                    }
-                }
-            }
-        });
-    }
-    function getStamp() {
-        getJSON(`/api/stampList.json`, function (err, data) {
-            if (err != null) {
-                alert("데이터를 불러오는 중 오류가 발생했습니다.");
-                console.error(err);
-            } else if (data !== null) {
-                console.log(data);
-                let stampList = data.stampList;
-                console.log(stampList);
-                for (let i = 0; i < stampList.length; i++) {
-                    let stampData = stampList[i];
-                    let stampElement = document.createElement("div");
-                    stampElement.classList.add("stamp");
-                    stampElement.id = stampData.stampID;
-                    stampElement.innerHTML = `<img src="/resources/images/check.svg"><h3 style="font-size: 0.9em">${stampData.stampName}</h3>`;
-                    eById("stampList").appendChild(stampElement);
-                }
-            }
-        });
-    }
-    var mapElement = document.getElementById("mapF4");
-
-    function enableZoom() {
-        var cityMinZoom = 0.6;
-        if ('ontouchstart' in window || navigator.msMaxTouchPoints) {
-            zoom = panzoom(mapElement, {
-                bounds: true,
-                boundsPadding: 0,
-                maxZoom: 5,
-                minZoom: cityMinZoom,
-                zoomDoubleClickSpeed: 1,
-
-                onTouch: (e) => {
-                    const targetElem = e.target
-                    if (targetElem.tagName === 'circle') {
-                        return false
-                    } else {
-                        e.preventDefault()
-                    }
-                }
-            });
-        } else {
-            zoom = panzoom(mapElement, {
-                bounds: true,
-                boundsPadding: 0,
-                maxZoom: 5,
-                minZoom: cityMinZoom,
-                zoomDoubleClickSpeed: 1,
-            });
-        }
-    }
-
+    var mapView = document.getElementById("mapF4");
     window.onload = function () {
-        // Expose to window namespase for testing purposes
-        enableZoom();
-        getClassroom();
-        getStamp();
+        init();
+        getClassroomList();
+        enableMapZoom(mapView);
     }
-    eById("stampView").addEventListener("click", function () {
-        eById("stampView").classList.toggle("open");
-    });
-
-
-    // Check new stamp every 1 second
-    setInterval(function () {
-        let stampJSON = getCookie('localStamp');
-        if (stampJSON != null) {
-            stampJSON = decodeURIComponent(stampJSON);
-            let stampList = JSON.parse(stampJSON);
-            console.log(stampList);
-            for (let i = 0; i < stampList.length; i++) {
-                let stampData = stampList[i];
-                let stampElement = eById(stampData);
-                if (stampElement != null) {
-                    stampElement.classList.add("checked");
-                }
-            }
-        }
-    }, 1000);
-
 </script>
 
 </html>

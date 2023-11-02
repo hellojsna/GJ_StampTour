@@ -1,3 +1,10 @@
+/*
+  root.css
+  GJ_StampTour
+
+  Created by Js Na on 2023/09/15.
+  Copyright © 2023 Js Na, All rights reserved.
+*/
 * {
     font-family: 'GmarketSans', sans-serif;
     -webkit-user-select: none;
@@ -20,6 +27,11 @@ h1 {
     margin: 0;
 }
 
+a {
+    color: #007aff;
+    text-decoration: none;
+}
+
 .stampView {
     background-color: #2C2C2E;
     color: #FFFFFF;
@@ -33,6 +45,16 @@ h1 {
     transition: all 0.5s ease;
 }
 
+.stampViewTitle {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.stampViewTitle a {
+    margin-top: 1em;
+}
+
 .stampList {
     width: 100%;
     overflow-y: scroll;
@@ -43,34 +65,42 @@ h1 {
     box-sizing: border-box;
     padding: 1em;
 }
+
 .stampList div {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
+
 .stamp {
     width: 8em;
     height: 8em;
     filter: grayscale(100%);
 }
+
 .stamp.checked {
     filter: grayscale(0%);
 }
+
 .stamp img {
-height: 5em;
+    height: 5em;
 }
+
 .stampView.open {
     height: 80%;
 }
-.stampView.open .stampList {
+
+.stampView .stampList {
     display: flex;
 }
+
 .bi-chevron-compact-up {
     width: 100%;
     height: 2em;
     transition: all 0.5s ease;
 }
+
 .stampView.open .bi-chevron-compact-up {
     transform: rotateX(180deg)
 }
@@ -80,6 +110,7 @@ height: 5em;
     height: 100%;
     position: fixed;
 }
+
 .map {
     width: 1400px;
     height: 1400px;
@@ -101,6 +132,7 @@ rect {
 .classroom {
     fill: #4E7CF133;
 }
+
 .classroom.active {
     fill: #4E7CF1FF;
 }
@@ -125,4 +157,20 @@ svg text {
     fill: #000000;
     text-anchor: middle;
     dominant-baseline: middle;
+}
+
+.loginButton {
+    background: none;
+    border: none;
+}
+
+.loginButton img {
+    min-height: 2em;
+    max-height: 4em;
+}
+
+@media screen and (max-width: 300px) {
+    .stampViewTitle a {
+        margin: 0;
+    }
 }

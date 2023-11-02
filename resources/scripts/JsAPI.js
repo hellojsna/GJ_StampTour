@@ -1,3 +1,10 @@
+//
+//  JsAPI.js
+//  GJ_StampTour (original code from metro.jsna)
+//
+//  Created by Js Na on 2023/10/08.
+//  Copyright © 2023 Js Na, All rights reserved.
+//
 var getJSON = function(url, callback) {
     var xhr = new XMLHttpRequest();
     xhr.open('GET', url, true);
