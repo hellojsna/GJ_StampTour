@@ -129,7 +129,7 @@ function getStampList() {
                 let stampElement = document.createElement("div");
                 stampElement.classList.add("stamp");
                 stampElement.id = stampData.stampId;
-                stampElement.innerHTML = `<img src="/resources/images/check.svg"><h3 style="font-size: 0.9em">${stampData.stampName}</h3>`;
+                stampElement.innerHTML = `<img src="/images/check.svg"><h3 style="font-size: 0.9em">${stampData.stampName}</h3>`;
                 eById("stampList").appendChild(stampElement);
             }
         }
@@ -159,7 +159,7 @@ function setLoginView() {
     stampView.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-compact-up" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M7.776 5.553a.5.5 0 0 1 .448 0l6 3a.5.5 0 1 1-.448.894L8 6.56 2.224 9.447a.5.5 0 1 1-.448-.894l6-3z" /></svg><span class="stampViewTitle"><h1>스탬프투어</h1><a href="/guide.html">참여 방법 알아보기 ></a></span><div id="loginView" class="stampList">
     <div class="login">
         <h2>스탬프투어 참여를 위해 로그인이 필요합니다.</h2>
-        <button id="loginButton" class="loginButton"><img src="/resources/images/kakao_login_large_wide.png" alt="카카오 로그인" /></button>
+        <button id="loginButton" class="loginButton"><img src="/images/kakao_login_large_wide.png" alt="카카오 로그인" /></button>
     </div>`;
     eById("stampView").addEventListener("click", function () {
         eById("stampView").classList.toggle("open");
