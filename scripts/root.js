@@ -5,6 +5,9 @@
 //  Created by Js Na on 2023/03/20.
 //  Copyright © 2023 Js Na, All rights reserved.
 //
+
+let userSignedIn = true;
+
 function eById(id) {
     return document.getElementById(id);
 }
@@ -26,6 +29,7 @@ function getParameter(name) {
 }
 
 function init() {
+    Kakao.init('5b24f0e66bf8d4dbdce5f3bfb98cd1dd'); // 사용하려는 앱의 JavaScript 키 입력
     if (userSignedIn) {
         setStampView();
         getStampList();
@@ -34,6 +38,7 @@ function init() {
         setLoginView();
     }
 }
+
 function enableCookieUpdate() {
     setInterval(function () {
         let stampJSON = getCookie('localStamp');
@@ -145,10 +150,9 @@ function getStampInfo(stampId) {
         }
     });
 }
-let userSignedIn = false;
 function setStampView() {
     let stampView = eById("stampView");
-    stampView.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-compact-up" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M7.776 5.553a.5.5 0 0 1 .448 0l6 3a.5.5 0 1 1-.448.894L8 6.56 2.224 9.447a.5.5 0 1 1-.448-.894l6-3z" /></svg><span class="stampViewTitle"><h1>스탬프투어</h1><a href="/guide.html">참여 방법 알아보기 ></a></span><div id="stampList" class="stampList"></div>`;
+    stampView.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-compact-up" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M7.776 5.553a.5.5 0 0 1 .448 0l6 3a.5.5 0 1 1-.448.894L8 6.56 2.224 9.447a.5.5 0 1 1-.448-.894l6-3z" /></svg><span class="stampViewTitle"><h1>스탬프투어</h1><a href="/guide">참여 방법 알아보기 ></a></span><div id="stampList" class="stampList"></div>`;
     eById("stampView").addEventListener("click", function () {
         eById("stampView").classList.toggle("open");
     });
@@ -156,12 +160,18 @@ function setStampView() {
 function setLoginView() {
     let stampView = eById("stampView");
     // sign in with Kakao
-    stampView.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-compact-up" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M7.776 5.553a.5.5 0 0 1 .448 0l6 3a.5.5 0 1 1-.448.894L8 6.56 2.224 9.447a.5.5 0 1 1-.448-.894l6-3z" /></svg><span class="stampViewTitle"><h1>스탬프투어</h1><a href="/guide.html">참여 방법 알아보기 ></a></span><div id="loginView" class="stampList">
+    stampView.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-compact-up" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M7.776 5.553a.5.5 0 0 1 .448 0l6 3a.5.5 0 1 1-.448.894L8 6.56 2.224 9.447a.5.5 0 1 1-.448-.894l6-3z" /></svg><span class="stampViewTitle"><h1>스탬프투어</h1><a href="/guide">참여 방법 알아보기 ></a></span><div id="loginView" class="stampList">
     <div class="login">
         <h2>스탬프투어 참여를 위해 로그인이 필요합니다.</h2>
-        <button id="loginButton" class="loginButton"><img src="/images/kakao_login_large_wide.png" alt="카카오 로그인" /></button>
+        <button id="loginButton" class="loginButton" onclick="loginWithKakao();"><img src="/images/kakao_login_large_wide.png" alt="카카오 로그인" /></button>
     </div>`;
     eById("stampView").addEventListener("click", function () {
         eById("stampView").classList.toggle("open");
+    });
+}
+
+function loginWithKakao() {
+    Kakao.Auth.authorize({
+      redirectUri: 'https://stamptour.space/auth/kakao/callback',
     });
 }
