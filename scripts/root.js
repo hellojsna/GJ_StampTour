@@ -6,15 +6,13 @@
 //  Copyright © 2023 Js Na, All rights reserved.
 //
 
-let userSignedIn = true;
-
 function eById(id) {
     return document.getElementById(id);
 }
 function setCookie(name, value, exp) {
     var date = new Date();
     date.setTime(date.getTime() + exp * 24 * 60 * 60 * 1000);
-    document.cookie = encodeURIComponent(name) + '=' + encodeURIComponent(value) + ';expires=' + date.toUTCString() + ';path=';
+    document.cookie = encodeURIComponent(name) + '=' + encodeURIComponent(value) + ';expires=' + date.toUTCString() + ';path=/;';
 }
 function getCookie(name) {
     var value = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
@@ -28,22 +26,14 @@ function getParameter(name) {
         return decodeURIComponent(name[1]);
 }
 
-function init() {
-    Kakao.init('5b24f0e66bf8d4dbdce5f3bfb98cd1dd'); // 사용하려는 앱의 JavaScript 키 입력
-    if (userSignedIn) {
-        setStampView();
-        getStampList();
-        enableCookieUpdate();
-    } else {
-        setLoginView();
-    }
-}
-
 function enableCookieUpdate() {
     setInterval(function () {
-        let stampJSON = getCookie('localStamp');
-        if (stampJSON != null) {
-            stampJSON = decodeURIComponent(stampJSON);
+        console.log("Checking for stamp updates");
+        let stampCookie = getCookie("LocalStamp");
+        console.log(stampCookie);
+        if (stampCookie != null) {
+            let stampJSON = decodeURIComponent(stampCookie);
+            console.log(stampJSON);
             let stampList = JSON.parse(stampJSON);
             console.log(stampList);
             for (let i = 0; i < stampList.length; i++) {
@@ -55,36 +45,6 @@ function enableCookieUpdate() {
             }
         }
     }, 1000);
-}
-
-function enableMapZoom(mapElement) {
-    var cityMinZoom = 0.6;
-    if ('ontouchstart' in window || navigator.msMaxTouchPoints) {
-        zoom = panzoom(mapElement, {
-            bounds: true,
-            boundsPadding: 0,
-            maxZoom: 5,
-            minZoom: cityMinZoom,
-            zoomDoubleClickSpeed: 1,
-            // svg 내부 버튼 처리. circle 바꾸면 될 듯.
-            /*onTouch: (e) => {
-                const targetElem = e.target
-                if (targetElem.tagName === 'circle') {
-                    return false
-                } else {
-                    e.preventDefault()
-                }
-            } */
-        });
-    } else {
-        zoom = panzoom(mapElement, {
-            bounds: true,
-            boundsPadding: 0,
-            maxZoom: 5,
-            minZoom: cityMinZoom,
-            zoomDoubleClickSpeed: 1,
-        });
-    }
 }
 
 function getClassroomList() {
@@ -101,9 +61,9 @@ function getClassroomList() {
                 let classElement = eById(classData.classId);
                 if (classElement != null) {
                     classElement.classList.add("active");
-                    classElement.addEventListener("click", function () {
+                    /*classElement.addEventListener("click", function () {
                         window.open(`/info/${classData.classId}`, "_self");
-                    });
+                    });*/
                 }
             }
         }
@@ -120,26 +80,7 @@ function getClassroomInfo(classroomId) {
         }
     });
 }
-function getStampList() {
-    getJSON(`/api/stampList.json`, function (err, data) {
-        if (err != null) {
-            alert("스탬프 목록 데이터를 불러오는 중 오류가 발생했습니다.");
-            console.error(err);
-        } else if (data !== null) {
-            console.log(data);
-            let stampList = data.stampList;
-            console.log(stampList);
-            for (let i = 0; i < stampList.length; i++) {
-                let stampData = stampList[i];
-                let stampElement = document.createElement("div");
-                stampElement.classList.add("stamp");
-                stampElement.id = stampData.stampId;
-                stampElement.innerHTML = `<img src="/images/check.svg"><h3 style="font-size: 0.9em">${stampData.stampName}</h3>`;
-                eById("stampList").appendChild(stampElement);
-            }
-        }
-    });
-}
+
 function getStampInfo(stampId) {
     getJSON(`/api/stamp/${stampId}.json`, function (err, data) {
         if (err != null) {
@@ -151,27 +92,13 @@ function getStampInfo(stampId) {
     });
 }
 function setStampView() {
-    let stampView = eById("stampView");
-    stampView.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-compact-up" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M7.776 5.553a.5.5 0 0 1 .448 0l6 3a.5.5 0 1 1-.448.894L8 6.56 2.224 9.447a.5.5 0 1 1-.448-.894l6-3z" /></svg><span class="stampViewTitle"><h1>스탬프투어</h1><a href="/guide">참여 방법 알아보기 ></a></span><div id="stampList" class="stampList"></div>`;
-    eById("stampView").addEventListener("click", function () {
-        eById("stampView").classList.toggle("open");
+    let StampView = eById("StampView");
+    StampView.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-compact-up" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M7.776 5.553a.5.5 0 0 1 .448 0l6 3a.5.5 0 1 1-.448.894L8 6.56 2.224 9.447a.5.5 0 1 1-.448-.894l6-3z" /></svg><span class="StampViewTitle"><h1>스탬프투어</h1> <button id="ShowGuideButton" class="LinkButton">참여 방법 알아보기 &gt;</button> </span><div id="stampList" class="stampList"></div>`;
+    eById("StampView").addEventListener("click", function () {
+        eById("StampView").classList.toggle("open");
     });
-}
-function setLoginView() {
-    let stampView = eById("stampView");
-    // sign in with Kakao
-    stampView.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-compact-up" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M7.776 5.553a.5.5 0 0 1 .448 0l6 3a.5.5 0 1 1-.448.894L8 6.56 2.224 9.447a.5.5 0 1 1-.448-.894l6-3z" /></svg><span class="stampViewTitle"><h1>스탬프투어</h1><a href="/guide">참여 방법 알아보기 ></a></span><div id="loginView" class="stampList">
-    <div class="login">
-        <h2>스탬프투어 참여를 위해 로그인이 필요합니다.</h2>
-        <button id="loginButton" class="loginButton" onclick="loginWithKakao();"><img src="/images/kakao_login_large_wide.png" alt="카카오 로그인" /></button>
-    </div>`;
-    eById("stampView").addEventListener("click", function () {
-        eById("stampView").classList.toggle("open");
-    });
-}
-
-function loginWithKakao() {
-    Kakao.Auth.authorize({
-      redirectUri: 'https://stamptour.space/auth/kakao/callback',
+    eById("ShowGuideButton").addEventListener("click", function () {
+        eById("GuideModalContainer").style.display = "flex";
+        showNextGuide();
     });
 }

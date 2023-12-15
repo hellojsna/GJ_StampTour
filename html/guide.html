@@ -15,79 +15,14 @@
     <style>
         @import url('/css/font.css');
         @import url('/css/root.css');
-        /*
-        쓸 일은 없겠다만 iOS 6 느낌
-        element.style {
-            background: linear-gradient(#b4bfce 0%, #4e6484 100%);
-            outline: 2px solid #445673;
-        }
-        body {
-        background: #d2d4dd;
-            background-image: linear-gradient(90deg, transparent 30%, rgba(0, 0, 0, 0.02) 45%, rgba(0, 0, 0, 0.02) 55%, transparent 70%);
-            background-size: 8px 8px;
-        }
-        
-        */
-        .mainContainer {
-            padding: 1em;
-            margin-top: 3em;
-            box-sizing: border-box;
-            position: absolute;
-        }
-        .footerContainer {
-            display: flex;
-            width: 100%;
-            position: fixed;
-            left: 0;
-            bottom: 0;
-        }
-        #guideHint {
-            margin: 0;
-            word-break: keep-all;
-        }
-        .GuideVideo {
-            width: 100%;
-            max-height: 45vh;
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-
-        .longButton {
-            background-color: #4E7CF1;
-            color: #FFFFFF;
-            font-size: 1.5em;
-            font-weight: 800;
-            width: 100%;
-            height: 2em;
-            border: none;
-            border-radius: 10px;
-            margin: 1em;
-            transition: background-color 0.2s ease-in-out;
-        }
-        .longButton:disabled {
-            background-color: #A0A0A0;
-        }
-        .guideText {
-            margin: 0.3em;
-            text-align: center;
-            word-break: keep-all;
-        }
-        #GuideText {
-            font-weight: 800;
-
-        }
-        #replayButtonContainer {
-            display: none;
-            text-align: center;
-        }
     </style>
 </head>
 
 <body>
     <div id="guideTitleBar" class="titleBar">
-        <img class="titleLogo" src="/images/StampTourLogo.png" alt="스탬프투어">
+        <img class="titleLogo" src="/images/StampTourLogo.png" alt="스탬프투어">(로고변경예정)
     </div>
-    <div class="mainContainer">
+    <div class="MainContainer">
         <span id="GuideTitle"><h1>스탬프투어 참여 방법</h1><p id="guideHint">참여 방법을 알려 드릴게요.</p></span>
         <hr>
         <video id="GuideVideo" class="GuideVideo" playsinline muted>
@@ -107,9 +42,8 @@
 <script src="/scripts/root.js"></script>
 <script src="/scripts/JsAPI.js"></script>
 <script>
-    //SM-F700
     let videoPlayer = eById("GuideVideo");
-    let nextGuideButton = eById("NextGuide");
+    let nextGuideButton = eById("NextGuideButton");
     nextGuideButton.addEventListener("click", NextGuide);
     let guidePage = 0;
     videoPlayer.pause();
@@ -117,7 +51,11 @@
 
     let displayDeviceType = "접속하신 기기";
     let displayNFCLocation = "후면 중앙";
-    if (userAgent.includes("iphone")) {
+    if (window.screen.width > 1024) {
+        loadGuideVideo("iPhone");
+            displayDeviceType = "PC 또는 태블릿";
+            displayNFCLocation = "(설명 변경 예정)상단";
+    } else if (userAgent.includes("iphone")) {
         displayDeviceType = "iPhone";
         displayNFCLocation = "상단";
         loadGuideVideo("iPhone");
@@ -128,8 +66,11 @@
     } else {
         loadGuideVideo("Center");
     }
+
     eById("guideHint").innerText = `${displayDeviceType}에서의 참여 방법을 알려 드릴게요.`;
     
+    setCookie("showGuide", "true", 1);
+
     function NextGuide() {
         nextGuideButton.disabled = true;
         videoPlayer.play();
@@ -153,10 +94,14 @@
                 guideText.innerText = `NFC 태그에 ${displayDeviceType}의 ${displayNFCLocation}을 대주세요.`;
                 setTimeout(() => {
                     videoPlayer.pause();
+                    nextGuideButton.innerText = "시작하기";
                     nextGuideButton.disabled = false;
                     eById("replayButtonContainer").style.display = "block";
                 }, 4000);
                 guidePage += 1;
+                break;
+            case 2:
+                window.location.href = "https://stamptour.space/";
                 break;
             default:
                 break;
