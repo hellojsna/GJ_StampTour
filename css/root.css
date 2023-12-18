@@ -119,7 +119,7 @@ iframe {
 }
 
 @media screen and (max-width: 300px) {
-    .StampViewTitle a {
+    .StampViewTitle button {
         margin: 0;
     }
 }

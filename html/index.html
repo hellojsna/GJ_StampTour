@@ -18,6 +18,12 @@
         @import url('/css/StampListView.css');
         @import url('/css/MapView.css');
 
+        body {
+            width: 100%;
+            height: 100%;
+            touch-action: none;
+            -webkit-touch-callout: none;
+        }
         #GuideModalContainer {
             z-index: 56789;
         }
@@ -141,31 +147,36 @@
             text-align: center;
         }
 
-        .BottomRightContainer {
+        .BottomContainer {
             position: absolute;
-            width: 100%;
             display: flex;
             flex-direction: row;
             align-items: flex-end;
             justify-content: space-between;
-            right: 0;
             bottom: 0;
             padding: 5em 1em;
             box-sizing: border-box;
         }
-
-        .BottomRightContainer a {
+        .BottomContainer.right {
+            right: 0;
+        }
+        .BottomContainer.left {
+            left: 0;
+        }
+        .BottomContainer a {
             width: 5em;
             background-color: #4E7CF1;
-            border: none;
+            border: 2px solid #ffffff;
             text-align: center;
-            font-size: 1.2em;
             padding: 0.5em;
             margin-bottom: 1em;
             border-radius: 100px;
-            color: #FFFFFF;
+            color: #ffffff;
             font-weight: 700;
             transition: all 0.2s ease-in-out;
+        }
+        .BottomContainer a:focus {
+            outline: none;
         }
 
         #FloorSelect {
@@ -175,7 +186,7 @@
         }
 
         #FloorSelect a {
-            background-color: #FFFFFF;
+            background-color: #ffffff;
             color: #4E7CF1;
             margin-bottom: 0.2em;
             border: 2px solid #4E7CF1;
@@ -183,21 +194,22 @@
 
         #FloorSelect a.selected {
             background-color: #4E7CF1;
-            color: #FFFFFF;
+            border: 2px solid #ffffff;
+            color: #ffffff;
             margin-bottom: 0.2em;
         }
 
     </style>
 </head>
 
-<body>
+<body style="overflow: hidden">
     <div id="titleBar" class="titleBar">
         <img class="titleLogo" src="/images/StampTourLogo.png" alt="스탬프투어">
-        <h1>4층</h1>
+        <h2>축제 부스 지도</h2>
     </div>
-    <div id="MapContainer" class="MainContainer MapContainer">
-        <div id="MainMapView">
-        <svg id="AlwaysVisibleMap" class="active">
+    <div id="MapContainer" class="MainContainer MapContainer" style="width: 100%; height: inherit; overflow: hidden; cursor: default;">
+        <!--<div id="MainMapView">-->
+       <!--<svg id="AlwaysVisibleMap" class="active">
             <polygon class="hallway" points="90,360 130,400 150,400 150,500 130,500 90,540 0,450" />
             <rect class="hallway" x="150" y="100" width="50" height="300" />
             <rect class="hallway" x="150" y="400" width="1100" height="50" />
@@ -206,10 +218,17 @@
             <rect class="hallway" x="850" y="0" width="50" height="400" />
             <rect class="hallway" x="1100" y="450" width="50" height="100" />
             <rect class="hallway" x="1200" y="450" width="50" height="550" />
-        </svg>
+        </svg>-->
         <svg id="Floor1MapView" class="active">
-            <rect style="fill: #ffffff; stroke: none;" x="1200" y="850" width="50" height="150" />
-            <g id="교실">
+            <g id="Floor1Map">
+                <polygon class="hallway" points="90,360 130,400 150,400 150,500 130,500 90,540 0,450" />
+                <rect class="hallway" x="150" y="100" width="50" height="300" />
+                <rect class="hallway" x="150" y="400" width="1100" height="50" />
+                <rect class="hallway" x="150" y="450" width="150" height="100" />
+                <rect class="hallway" x="800" y="0" width="50" height="100" />
+                <rect class="hallway" x="850" y="0" width="50" height="400" />
+                <rect class="hallway" x="1100" y="450" width="50" height="100" />
+                <rect class="hallway" x="1200" y="450" width="50" height="400" />
                 <g id="이동수업실1" class="classroom">
                     <rect x="100" y="0" width="200" height="100" />
                     <text x="200" y="50" dy="-0.3em">이동수업실1</text>
@@ -217,15 +236,15 @@
                 </g>
                 <rect class="notClassroom" x="100" y="100" width="50" height="100" />
                 <rect class="notClassroom" x="200" y="100" width="100" height="50" />
-                <g id="생명과학실" class="classroom">
+                <g id="컴퓨터실" class="classroom">
                     <rect x="200" y="150" width="100" height="150" />
                     <text x="250" y="225">컴퓨터실</text>
                 </g>
-                <g id="교실106" class="notClassroom">
+                <g id="행정실" class="notClassroom">
                     <rect x="300" y="450" width="150" height="100" />
                     <text x="375" y="500">행정실</text>
                 </g>
-                <g id="교실107" class="notClassroom">
+                <g id="교장실" class="notClassroom">
                     <rect x="450" y="450" width="150" height="100" />
                     <text x="525" y="500">교장실</text>
                 </g>
@@ -269,9 +288,17 @@
             </g>
         </svg>
         <svg id="Floor2MapView">
-            <!--차오름관연결통로-->
-            <rect class="hallway" x="200" y="550" width="100" height="150" />
-            <g id="교실">
+            <g id="Floor2Map">
+                <polygon class="hallway" points="90,360 130,400 150,400 150,500 130,500 90,540 0,450" />
+                <rect class="hallway" x="150" y="100" width="50" height="300" />
+                <rect class="hallway" x="150" y="400" width="1100" height="50" />
+                <rect class="hallway" x="150" y="450" width="150" height="100" />
+                <rect class="hallway" x="800" y="0" width="50" height="100" />
+                <rect class="hallway" x="850" y="0" width="50" height="400" />
+                <rect class="hallway" x="1100" y="450" width="50" height="100" />
+                <rect class="hallway" x="1200" y="450" width="50" height="550" />
+                <!--차오름관연결통로-->
+                <rect class="hallway" x="200" y="550" width="100" height="150" />
                 <g id="화학실" class="classroom">
                     <rect x="100" y="0" width="150" height="100" />
                     <text x="175" y="50">화학실</text>
@@ -301,7 +328,7 @@
                     <rect x="600" y="450" width="150" height="100" />
                     <text x="675" y="500">방송실</text>
                 </g>
-                <g id="교무실" class="notClassroom">
+                <g id="교무실1" class="notClassroom">
                     <rect x="750" y="450" width="150" height="100" />
                     <text x="825" y="500">교무실</text>
                 </g>
@@ -332,7 +359,7 @@
                     <text x="800" y="350">화장실</text>
                 </g>
     
-                <g id="교무실" class="notClassroom">
+                <g id="교무실2" class="notClassroom">
                     <rect x="900" y="300" width="100" height="100" />
                     <text x="950" y="350">교무실</text>
                 </g>
@@ -349,7 +376,15 @@
             </g>
         </svg>
         <svg id="Floor3MapView">
-            <g id="교실">
+            <g id="Floor3Map">
+                <polygon class="hallway" points="90,360 130,400 150,400 150,500 130,500 90,540 0,450" />
+                <rect class="hallway" x="150" y="100" width="50" height="300" />
+                <rect class="hallway" x="150" y="400" width="1100" height="50" />
+                <rect class="hallway" x="150" y="450" width="150" height="100" />
+                <rect class="hallway" x="800" y="0" width="50" height="100" />
+                <rect class="hallway" x="850" y="0" width="50" height="400" />
+                <rect class="hallway" x="1100" y="450" width="50" height="100" />
+                <rect class="hallway" x="1200" y="450" width="50" height="550" />
                 <g id="물리지학실" class="classroom">
                     <rect x="100" y="0" width="150" height="100" />
                     <text x="175" y="50">물리·지학실</text>
@@ -363,7 +398,7 @@
                     <rect x="100" y="100" width="50" height="100" />
                     <text x="123" y="150" style="font-size: 1em; writing-mode: vertical-rl;">진로활동실</text>
                 </g>
-                <g id="가우스실(수)" class="notClassroom">
+                <g id="파스칼실(수)" class="notClassroom">
                     <rect x="200" y="250" width="100" height="50" />
                     <text x="250" y="275" dy="-0.3em" style="font-size: 1em;">파스칼실</text>
                     <text x="250" y="275" dy="0.8em" style="font-size: 0.8em; font-weight: normal;">(수)</text>
@@ -414,7 +449,7 @@
                     <text x="800" y="350">화장실</text>
                 </g>
     
-                <g id="교무실" class="notClassroom">
+                <g id="교무실3" class="notClassroom">
                     <rect x="900" y="300" width="100" height="100" />
                     <text x="950" y="350">교무실</text>
                 </g>
@@ -427,7 +462,15 @@
             </g>
         </svg>
         <svg id="Floor4MapView">
-            <g id="교실">
+            <g id="Floor4Map">
+                <polygon class="hallway" points="90,360 130,400 150,400 150,500 130,500 90,540 0,450" />
+                <rect class="hallway" x="150" y="100" width="50" height="300" />
+                <rect class="hallway" x="150" y="400" width="1100" height="50" />
+                <rect class="hallway" x="150" y="450" width="150" height="100" />
+                <rect class="hallway" x="800" y="0" width="50" height="100" />
+                <rect class="hallway" x="850" y="0" width="50" height="400" />
+                <rect class="hallway" x="1100" y="450" width="50" height="100" />
+                <rect class="hallway" x="1200" y="450" width="50" height="550" />
                 <g id="기술실" class="notClassroom">
                     <rect x="100" y="0" width="150" height="100" />
                     <text x="175" y="50">기술실</text>
@@ -506,7 +549,7 @@
                 </g>
             </g>
         </svg>
-    </div>
+    <!--</div>-->
     </div>
     <div id="ClassInfoModalContainer" class="ModalContainer">
         <div id="ClassInfoModal" class="Modal">
@@ -555,13 +598,16 @@
             </div>
         </div>
     </div>
-    <div class="BottomRightContainer">
+    <div class="BottomContainer left">
         <div id="FloorSelect">
             <a id="Floor4" href="#Floor4">4층</a>
             <a id="Floor3" href="#Floor3">3층</a>
             <a id="Floor2" href="#Floor2">2층</a>
             <a id="Floor1" class="selected" href="#Floor1">1층</a>
         </div>
+    </div> 
+
+    <div class="BottomContainer right">
         <a id="TagScanButton" href="/scanner" target="_blank">태그 스캔</a>
     </div>
     <div id="StampView" class="StampView"></div>
@@ -573,17 +619,17 @@
 <script src="https://unpkg.com/panzoom@9.4.3/dist/panzoom.min.js"></script>
 <script>
     function enableMapZoom(mapElement) {
-    var cityMinZoom = 0.5;
     if ('ontouchstart' in window || navigator.msMaxTouchPoints) {
         zoom = panzoom(mapElement, {
             bounds: true,
-            boundsPadding: -0.5,
-            maxZoom: 5,
-            minZoom: cityMinZoom,
-            zoomDoubleClickSpeed: 1,
+                    boundsPadding: 0,
+                    maxZoom: 2,
+                    minZoom: 0.3,
+                    zoomDoubleClickSpeed: 1,
             onTouch: (e) => {
                 const targetElem = e.target;
-                if (targetElem.tagName === "g" || targetElem.tagName === "rect" || targetElem.tagName === "text") {
+                console.log(targetElem.classList[0]);
+                if ((targetElem.classList[0] != "hallway" && targetElem.classList[0] != "notClassroom")  && (targetElem.tagName === "g" || targetElem.tagName === "rect" || targetElem.tagName === "text")) {
                     return false;
                 } else {
                     e.preventDefault();
@@ -595,27 +641,28 @@
             bounds: true,
             boundsPadding: -0.5,
             maxZoom: 5,
-            minZoom: cityMinZoom,
-            zoomDoubleClickSpeed: 1
+            minZoom: 0.5,
+            zoomDoubleClickSpeed: 1,
+            contain: 'outside'
         });
     }
 }
 
     let CurrentFloor = 1;
-    let AlwaysVisibleMapView = eById("AlwaysVisibleMap");
+    //let AlwaysVisibleMapView = eById("AlwaysVisibleMap");
     let Floor1Button = eById("Floor1");
     let Floor2Button = eById("Floor2");
     let Floor3Button = eById("Floor3");
     let Floor4Button = eById("Floor4");
-    enableMapZoom(eById("MainMapView"))
-    /*
-    enableMapZoom(AlwaysVisibleMapView);
-    enableMapZoom(Floor1MapView);
-    enableMapZoom(Floor2MapView);
-    enableMapZoom(Floor3MapView);
-    enableMapZoom(Floor4MapView);*/
+    //enableMapZoom(eById("MainMapView"))
+    
+    //enableMapZoom(AlwaysVisibleMapView);
+    enableMapZoom(eById("Floor1MapView"));
+    enableMapZoom(eById("Floor2MapView"));
+    enableMapZoom(eById("Floor3MapView"));
+    enableMapZoom(eById("Floor4MapView"));
     function animateFloorChange(f) {
-        console.log(`CurrentFloor: ${CurrentFloor}, f: ${f}`);
+        /*console.log(`CurrentFloor: ${CurrentFloor}, f: ${f}`);
         let CurrentFloorMap = eById(`Floor${CurrentFloor}MapView`);
         let NewFloorMap = eById(`Floor${f}MapView`);
         eById(`Floor${CurrentFloor}`).classList.remove("selected");
@@ -653,7 +700,13 @@
                 AlwaysVisibleMapView.classList.remove("ZoomOutAndFadeIn");
                 NewFloorMap.classList.remove("ZoomOutAndFadeIn");
             }, 500);
-        }
+        }*/
+        let CurrentFloorMap = eById(`Floor${CurrentFloor}MapView`);
+        let NewFloorMap = eById(`Floor${f}MapView`);
+        eById(`Floor${CurrentFloor}`).classList.remove("selected");
+        eById(`Floor${f}`).classList.add("selected");
+        CurrentFloorMap.classList.remove("active");
+        NewFloorMap.classList.add("active");
         CurrentFloor = f;
     }
     Floor1Button.addEventListener("click", () => {
@@ -668,7 +721,9 @@
     Floor4Button.addEventListener("click", () => {
         animateFloorChange(4);
     });
-    animateFloorChange(window.location.hash.replace("#Floor", ""));
+    if (window.location.hash.startsWith("#Floor")) {
+        animateFloorChange(window.location.hash.replace("#Floor", ""));
+    }
     // MapContainer get child element that has class "classroom"
     let classroomList = document.getElementsByClassName("classroom");
     console.log(classroomList);
@@ -677,6 +732,12 @@
             console.log(classroomList[i].id);
             eById("ClassInfoModalContainer").style.display = "flex";
             eById("ModalTitle").innerText = classroomList[i].id;
+        });
+    }
+    let notClassroomList = document.getElementsByClassName("notClassroom");
+    for (let i = 0; i < notClassroomList.length; i++) {
+        notClassroomList[i].addEventListener("click", () => {
+            alert(`${notClassroomList[i].id}의 부스 정보가 없습니다.`);
         });
     }
     let StampView = eById("StampView");
@@ -761,6 +822,9 @@
         displayDeviceType = "iPhone";
         displayNFCLocation = "상단";
         loadGuideVideo("iPhone");
+        document.ondblclick = function(e) {
+            e.preventDefault();
+        }
     } else if (userAgent.includes("sm-f700") || userAgent.includes("sm-f711") || userAgent.includes("sm-f721") || userAgent.includes("sm-f731")) {
         displayDeviceType = "갤럭시 Z 플립";
         displayNFCLocation = "후면 하단";
@@ -774,6 +838,7 @@
         guidePage = 0;
         showNextGuide();
     });
+    var loginResponse;
     function showNextGuide() {
         console.log(guidePage);
         NextGuideButton.disabled = true;
@@ -850,6 +915,23 @@
                 guidePage += 1;
                 break;
             case 3:
+                var xhr = new XMLHttpRequest();
+                xhr.open('POST', "/login", true);
+                xhr.setRequestHeader("Content-Type", "application/json");
+
+                xhr.responseType = 'json';
+                xhr.onload = function() {
+                    var status = xhr.status;
+                    if (status === 200) {
+                        console.log(xhr.response);
+                        alert(`${xhr.response.user_name}(${xhr.response.user_id})님, 환영합니다.)`);
+                    } else {
+                        console.warn(xhr.response);
+                        alert(`로그인에 실패했습니다. 다시 시도해 주세요.`);
+                    }
+                };
+                xhr.send(`{ "username": "${StudentIdInput.value}${StudentNameInput.value}" }`); // 보낼 데이터 지정
+             /*
                 fetch("/login", {
                     method: "POST",
                     credentials: 'include',
@@ -861,13 +943,17 @@
                     }
                 })
                     .then((response) => {
+                        loginResponse = response;
+                        response.json();
                         alert(response);
+                        console.log(response);
                     })
                     .then((json) => {
                         alert(json);
+                        console.log(json);
                     });
-
-                    setCookie("UserName", StudentIdInput.value + StudentNameInput.value, 7);
+                    */
+                    setCookie("username", StudentIdInput.value + StudentNameInput.value, 7);
 
                 setCookie("ShowGuide", "true", 1);
                 guidePage = 0;

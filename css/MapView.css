@@ -8,9 +8,13 @@
     visibility: hidden;
     position: absolute;
     background: none;
+    touch-action: pan-x pan-y;
 }
 #MainMapView {
     background-color: #ffffff;
+    overflow: hidden;
+    width: 1400px;
+    height: 1400px;
 }
 
 .MapContainer svg.active {

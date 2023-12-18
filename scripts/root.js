@@ -28,14 +28,14 @@ function getParameter(name) {
 
 function enableCookieUpdate() {
     setInterval(function () {
-        console.log("Checking for stamp updates");
+        //console.log("Checking for stamp updates");
         let stampCookie = getCookie("LocalStamp");
-        console.log(stampCookie);
+        //console.log(stampCookie);
         if (stampCookie != null) {
             let stampJSON = decodeURIComponent(stampCookie);
-            console.log(stampJSON);
+            //console.log(stampJSON);
             let stampList = JSON.parse(stampJSON);
-            console.log(stampList);
+            //console.log(stampList);
             for (let i = 0; i < stampList.length; i++) {
                 let stampData = stampList[i];
                 let stampElement = eById(stampData);
