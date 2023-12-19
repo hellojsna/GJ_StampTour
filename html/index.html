@@ -925,7 +925,7 @@
                     if (status === 200) {
                         console.log(xhr.response);
                         alert(`${xhr.response.user_name}(${xhr.response.user_id})님, 환영합니다.)`);
-                        setCookie("userid", xhr.response.user_id, 7);
+                        setCookie("user_id", xhr.response.user_id, 7);
                         setCookie("username", StudentIdInput.value + StudentNameInput.value, 7);
                         setCookie("ShowGuide", "true", 1);
                         guidePage = 0;
