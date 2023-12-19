@@ -925,12 +925,17 @@
                     if (status === 200) {
                         console.log(xhr.response);
                         alert(`${xhr.response.user_name}(${xhr.response.user_id})님, 환영합니다.)`);
+                        setCookie("user_id", xhr.response.user_id, 7);
+                        setCookie("username", StudentIdInput.value + StudentNameInput.value, 7);
+                        setCookie("ShowGuide", "true", 1);
+                        guidePage = 0;
+                        GuideModalContainer.style.display = "none";
                     } else {
                         console.warn(xhr.response);
                         alert(`로그인에 실패했습니다. 다시 시도해 주세요.`);
                     }
                 };
-                xhr.send(`{ "username": "${StudentIdInput.value}${StudentNameInput.value}" }`); // 보낼 데이터 지정
+                xhr.send(`{ "user_name": "${StudentIdInput.value}${StudentNameInput.value}" }`); // 보낼 데이터 지정
              /*
                 fetch("/login", {
                     method: "POST",
@@ -953,11 +958,7 @@
                         console.log(json);
                     });
                     */
-                    setCookie("username", StudentIdInput.value + StudentNameInput.value, 7);
 
-                setCookie("ShowGuide", "true", 1);
-                guidePage = 0;
-                GuideModalContainer.style.display = "none";
                 break;
             default:
                 break;
