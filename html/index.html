@@ -16,209 +16,17 @@
         @import url('/css/font.css');
         @import url('/css/root.css');
         @import url('/css/StampListView.css');
-        @import url('/css/MapView.css');
-
-        body {
-            width: 100%;
-            height: 100%;
-            touch-action: none;
-            -webkit-touch-callout: none;
-        }
-        #GuideModalContainer {
-            z-index: 56789;
-        }
-
-        .bi-x {
-            width: 75%;
-            height: 75%;
-            position: absolute;
-        }
-
-        /* 가이드 */
-        /*
-        쓸 일은 없겠다만 iOS 6 느낌
-        element.style {
-            background: linear-gradient(#b4bfce 0%, #4e6484 100%);
-            outline: 2px solid #445673;
-        }
-        body {
-        background: #d2d4dd;
-            background-image: linear-gradient(90deg, transparent 30%, rgba(0, 0, 0, 0.02) 45%, rgba(0, 0, 0, 0.02) 55%, transparent 70%);
-            background-size: 8px 8px;
-        }
-        
-        */
-        .GuideContainer {
-            padding: 1em;
-            box-sizing: border-box;
-        }
-
-        .FooterContainer {
-            display: flex;
-            width: 100%;
-            left: 0;
-            bottom: 0;
-        }
-
-        #GuideHint {
-            margin: 0;
-            word-break: keep-all;
-        }
-
-        .GuideVideo {
-            width: 100%;
-            max-height: 45vh;
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-
-        .LinkButton {
-            margin: 0;
-            padding: 0;
-            font-size: 1em;
-            background: none;
-            border: none;
-            color: #007aff;
-        }
-
-        .LongButton {
-            background-color: #4E7CF1;
-            color: #FFFFFF;
-            font-size: 1.5em;
-            font-weight: 800;
-            width: 100%;
-            height: 2em;
-            border: none;
-            border-radius: 10px;
-            margin: 0 1em 1em;
-            transition: background-color 0.2s ease-in-out;
-        }
-
-        .LongButton:disabled {
-            background-color: #A0A0A0;
-        }
-
-        .GuideText {
-            margin: 0.3em;
-            text-align: center;
-            word-break: keep-all;
-        }
-
-        #PrivacyPolicyCheckboxContainer {
-            display: none;
-            flex-direction: row;
-            align-items: center;
-            justify-content: center;
-        }
-
-        #GuideText {
-            font-weight: 600;
-        }
-
-        #UserRegisterContainer {
-            margin: 5em 0;
-        }
-
-        .UserRegisterInput {
-            display: none;
-            opacity: 0;
-            width: 100%;
-            border: 1px solid #AFAFAF;
-            border-radius: 25px;
-            font-size: 1.3em;
-            margin: 0.5em 0;
-            padding: 0.2em;
-            box-sizing: border-box;
-            text-align: center;
-            transition: all 0.5s ease-in-out;
-        }
-
-        .UserRegisterInput.show {
-            opacity: 1;
-        }
-
-        .UserRegisterInput:focus {
-            border: 1px solid #4E7CF1;
-            outline: 1px solid #4E7CF1;
-        }
-
-        #ReplayButtonContainer {
-            visibility: hidden;
-            text-align: center;
-        }
-
-        .BottomContainer {
-            position: absolute;
-            display: flex;
-            flex-direction: row;
-            align-items: flex-end;
-            justify-content: space-between;
-            bottom: 0;
-            padding: 5em 1em;
-            box-sizing: border-box;
-        }
-        .BottomContainer.right {
-            right: 0;
-        }
-        .BottomContainer.left {
-            left: 0;
-        }
-        .BottomContainer a {
-            width: 5em;
-            background-color: #4E7CF1;
-            border: 2px solid #ffffff;
-            text-align: center;
-            padding: 0.5em;
-            margin-bottom: 1em;
-            border-radius: 100px;
-            color: #ffffff;
-            font-weight: 700;
-            transition: all 0.2s ease-in-out;
-        }
-        .BottomContainer a:focus {
-            outline: none;
-        }
-
-        #FloorSelect {
-            display: flex;
-            flex-direction: column;
-            margin-bottom: 0.8em;
-        }
-
-        #FloorSelect a {
-            background-color: #ffffff;
-            color: #4E7CF1;
-            margin-bottom: 0.2em;
-            border: 2px solid #4E7CF1;
-        }
-
-        #FloorSelect a.selected {
-            background-color: #4E7CF1;
-            border: 2px solid #ffffff;
-            color: #ffffff;
-            margin-bottom: 0.2em;
-        }
-
+        @import url('/css/index.css');
     </style>
 </head>
 
 <body style="overflow: hidden">
     <div id="titleBar" class="titleBar">
         <img class="titleLogo" src="/images/StampTourLogo.png" alt="스탬프투어">
-        <h2>축제 부스 지도</h2>
+        <h2>부스 지도</h2>
     </div>
-    <div id="MapContainer" class="MainContainer MapContainer" style="width: 100%; height: inherit; overflow: hidden; cursor: default;">
-        <!--<div id="MainMapView">-->
-       <!--<svg id="AlwaysVisibleMap" class="active">
-            <polygon class="hallway" points="90,360 130,400 150,400 150,500 130,500 90,540 0,450" />
-            <rect class="hallway" x="150" y="100" width="50" height="300" />
-            <rect class="hallway" x="150" y="400" width="1100" height="50" />
-            <rect class="hallway" x="150" y="450" width="150" height="100" />
-            <rect class="hallway" x="800" y="0" width="50" height="100" />
-            <rect class="hallway" x="850" y="0" width="50" height="400" />
-            <rect class="hallway" x="1100" y="450" width="50" height="100" />
-            <rect class="hallway" x="1200" y="450" width="50" height="550" />
-        </svg>-->
+    <div id="MapContainer" class="MainContainer MapContainer"
+        style="width: 100%; height: inherit; overflow: hidden; cursor: default;">
         <svg id="Floor1MapView" class="active">
             <g id="Floor1Map">
                 <polygon class="hallway" points="90,360 130,400 150,400 150,500 130,500 90,540 0,450" />
@@ -333,7 +141,7 @@
                     <text x="825" y="500">교무실</text>
                 </g>
                 <rect class="notClassroom" x="900" y="450" width="150" height="100" />
-    
+
                 <g id="교실108" class="classroom">
                     <rect x="1250" y="400" width="100" height="150" />
                     <text x="1300" y="475">교실 1-8</text>
@@ -350,15 +158,15 @@
                     <rect x="1250" y="850" width="100" height="150" />
                     <text x="1300" y="925">교실 1-11</text>
                 </g>
-                <g id="화장실1" class="notClassroom">
+                <g id="화장실3" class="notClassroom">
                     <rect x="200" y="300" width="100" height="100" />
                     <text x="250" y="350">화장실</text>
                 </g>
-                <g id="화장실2" class="notClassroom">
+                <g id="화장실4" class="notClassroom">
                     <rect x="750" y="300" width="100" height="100" />
                     <text x="800" y="350">화장실</text>
                 </g>
-    
+
                 <g id="교무실2" class="notClassroom">
                     <rect x="900" y="300" width="100" height="100" />
                     <text x="950" y="350">교무실</text>
@@ -439,16 +247,16 @@
                     <rect x="1250" y="850" width="100" height="150" />
                     <text x="1300" y="925">교실 1-5</text>
                 </g>
-    
-                <g id="화장실1" class="notClassroom">
+
+                <g id="화장실5" class="notClassroom">
                     <rect x="200" y="300" width="100" height="100" />
                     <text x="250" y="350">화장실</text>
                 </g>
-                <g id="화장실2" class="notClassroom">
+                <g id="화장실6" class="notClassroom">
                     <rect x="750" y="300" width="100" height="100" />
                     <text x="800" y="350">화장실</text>
                 </g>
-    
+
                 <g id="교무실3" class="notClassroom">
                     <rect x="900" y="300" width="100" height="100" />
                     <text x="950" y="350">교무실</text>
@@ -526,17 +334,17 @@
                     <rect x="1250" y="850" width="100" height="150" />
                     <text x="1300" y="925">교실 2-11</text>
                 </g>
-    
-                <g id="화장실1" class="notClassroom">
+
+                <g id="화장실7" class="notClassroom">
                     <rect x="200" y="300" width="100" height="100" />
                     <text x="250" y="350">화장실</text>
                 </g>
-                <g id="화장실2" class="notClassroom">
+                <g id="화장실8" class="notClassroom">
                     <rect x="750" y="300" width="100" height="100" />
                     <text x="800" y="350">화장실</text>
                 </g>
-    
-                <g id="교무실" class="notClassroom">
+
+                <g id="교무실4" class="notClassroom">
                     <rect x="900" y="300" width="100" height="100" />
                     <text x="950" y="350">교무실</text>
                 </g>
@@ -549,14 +357,13 @@
                 </g>
             </g>
         </svg>
-    <!--</div>-->
     </div>
     <div id="ClassInfoModalContainer" class="ModalContainer">
         <div id="ClassInfoModal" class="Modal">
             <div class="ModalTitleContainer">
-                <h2 id="ModalTitle">교실2-8</h2>
+                <h2 id="ClassInfoModalTitle">교실2-8</h2>
             </div>
-            <div class="ModalContent">
+            <div class="ClassModalContent">
                 <p>TODO: 동아리 목록 표시</p>
                 <!--<p>동아리 정보가 없습니다.</p>-->
                 <!--<span style="display: flex;"><h3>(체크)</h3>&nbsp;&nbsp;<h3>동아리 이름</h3>&nbsp;&nbsp;<h3><a>기록 보기</a></h3></span>-->
@@ -586,7 +393,7 @@
                 </div>
                 <div id="PrivacyPolicyCheckboxContainer">
                     <input type="checkbox" id="PrivacyPolicyCheckbox">
-                    <label for="PrivacyPolicyCheckbox"><a href="/privacypolicy">개인정보처리방침에</a> 동의합니다.</label>
+                    <label for="PrivacyPolicyCheckbox"><a href="/privacypolicy">개인정보처리방침</a>에 동의합니다.</label>
                 </div>
                 <h3 id="GuideText" class="GuideText"></h3>
                 <div id="ReplayButtonContainer">
@@ -605,375 +412,28 @@
             <a id="Floor2" href="#Floor2">2층</a>
             <a id="Floor1" class="selected" href="#Floor1">1층</a>
         </div>
-    </div> 
+    </div>
 
     <div class="BottomContainer right">
-        <a id="TagScanButton" href="/scanner" target="_blank">태그 스캔</a>
+        <a id="TagScanButton" href="/scanner" target="_blank">코드 스캔</a>
     </div>
-    <div id="StampView" class="StampView"></div>
+    <div id="StampView" class="StampView">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+            class="bi bi-chevron-compact-up" viewBox="0 0 16 16">
+            <path fill-rule="evenodd"
+                d="M7.776 5.553a.5.5 0 0 1 .448 0l6 3a.5.5 0 1 1-.448.894L8 6.56 2.224 9.447a.5.5 0 1 1-.448-.894l6-3z" />
+        </svg>
+        <span class="StampViewTitle">
+            <h1>스탬프투어</h1>
+            <button id="ShowGuideButton" class="LinkButton">참여 방법 알아보기 &gt;</button>
+        </span>
+        <div id="stampList" class="stampList"></div>
+    </div>
 
 </body>
-<script src="/scripts/root.js"></script>
-<script src="/scripts/index.js"></script>
-<script src="/scripts/JsAPI.js"></script>
 <script src="https://unpkg.com/panzoom@9.4.3/dist/panzoom.min.js"></script>
-<script>
-    function enableMapZoom(mapElement) {
-    if ('ontouchstart' in window || navigator.msMaxTouchPoints) {
-        zoom = panzoom(mapElement, {
-            bounds: true,
-                    boundsPadding: 0,
-                    maxZoom: 2,
-                    minZoom: 0.3,
-                    zoomDoubleClickSpeed: 1,
-            onTouch: (e) => {
-                const targetElem = e.target;
-                console.log(targetElem.classList[0]);
-                if ((targetElem.classList[0] != "hallway" && targetElem.classList[0] != "notClassroom")  && (targetElem.tagName === "g" || targetElem.tagName === "rect" || targetElem.tagName === "text")) {
-                    return false;
-                } else {
-                    e.preventDefault();
-                }
-            }
-        });
-    } else {
-        zoom = panzoom(mapElement, {
-            bounds: true,
-            boundsPadding: -0.5,
-            maxZoom: 5,
-            minZoom: 0.5,
-            zoomDoubleClickSpeed: 1,
-            contain: 'outside'
-        });
-    }
-}
-
-    let CurrentFloor = 1;
-    //let AlwaysVisibleMapView = eById("AlwaysVisibleMap");
-    let Floor1Button = eById("Floor1");
-    let Floor2Button = eById("Floor2");
-    let Floor3Button = eById("Floor3");
-    let Floor4Button = eById("Floor4");
-    //enableMapZoom(eById("MainMapView"))
-    
-    //enableMapZoom(AlwaysVisibleMapView);
-    enableMapZoom(eById("Floor1MapView"));
-    enableMapZoom(eById("Floor2MapView"));
-    enableMapZoom(eById("Floor3MapView"));
-    enableMapZoom(eById("Floor4MapView"));
-    function animateFloorChange(f) {
-        /*console.log(`CurrentFloor: ${CurrentFloor}, f: ${f}`);
-        let CurrentFloorMap = eById(`Floor${CurrentFloor}MapView`);
-        let NewFloorMap = eById(`Floor${f}MapView`);
-        eById(`Floor${CurrentFloor}`).classList.remove("selected");
-        eById(`Floor${f}`).classList.add("selected");
-        if (CurrentFloor > f) {
-            console.log("ZoomInAndFade");
-            CurrentFloorMap.classList.add("ZoomInAndFadeOut");
-            AlwaysVisibleMapView.classList.add("ZoomInAndFadeOut");
-            setTimeout(() => {
-                CurrentFloorMap.classList.remove("active");
-                NewFloorMap.classList.add("active");
-                CurrentFloorMap.classList.remove("ZoomInAndFadeOut");
-                AlwaysVisibleMapView.classList.remove("ZoomInAndFadeOut");
-                AlwaysVisibleMapView.classList.add("ZoomInAndFadeIn");
-                NewFloorMap.classList.add("ZoomInAndFadeIn");
-            }, 200);
-            setTimeout(() => {
-                AlwaysVisibleMapView.classList.remove("ZoomInAndFadeIn");
-                NewFloorMap.classList.remove("ZoomInAndFadeIn");
-            }, 500);
-        } else if (CurrentFloor < f) {
-            console.log("ZoomOutAndFade");
-            CurrentFloorMap.classList.add("ZoomOutAndFadeOut");
-            AlwaysVisibleMapView.classList.add("ZoomOutAndFadeOut");
-
-            setTimeout(() => {
-                CurrentFloorMap.classList.remove("active");
-                NewFloorMap.classList.add("active");
-                CurrentFloorMap.classList.remove("ZoomOutAndFadeOut");
-                AlwaysVisibleMapView.classList.remove("ZoomOutAndFadeOut");
-                AlwaysVisibleMapView.classList.add("ZoomOutAndFadeIn");
-                NewFloorMap.classList.add("ZoomOutAndFadeIn");
-            }, 200);
-            setTimeout(() => {
-                AlwaysVisibleMapView.classList.remove("ZoomOutAndFadeIn");
-                NewFloorMap.classList.remove("ZoomOutAndFadeIn");
-            }, 500);
-        }*/
-        let CurrentFloorMap = eById(`Floor${CurrentFloor}MapView`);
-        let NewFloorMap = eById(`Floor${f}MapView`);
-        eById(`Floor${CurrentFloor}`).classList.remove("selected");
-        eById(`Floor${f}`).classList.add("selected");
-        CurrentFloorMap.classList.remove("active");
-        NewFloorMap.classList.add("active");
-        CurrentFloor = f;
-    }
-    Floor1Button.addEventListener("click", () => {
-        animateFloorChange(1);
-    });
-    Floor2Button.addEventListener("click", () => {
-        animateFloorChange(2);
-    });
-    Floor3Button.addEventListener("click", () => {
-        animateFloorChange(3);
-    });
-    Floor4Button.addEventListener("click", () => {
-        animateFloorChange(4);
-    });
-    if (window.location.hash.startsWith("#Floor")) {
-        animateFloorChange(window.location.hash.replace("#Floor", ""));
-    }
-    // MapContainer get child element that has class "classroom"
-    let classroomList = document.getElementsByClassName("classroom");
-    console.log(classroomList);
-    for (let i = 0; i < classroomList.length; i++) {
-        classroomList[i].addEventListener("click", () => {
-            console.log(classroomList[i].id);
-            eById("ClassInfoModalContainer").style.display = "flex";
-            eById("ModalTitle").innerText = classroomList[i].id;
-        });
-    }
-    let notClassroomList = document.getElementsByClassName("notClassroom");
-    for (let i = 0; i < notClassroomList.length; i++) {
-        notClassroomList[i].addEventListener("click", () => {
-            alert(`${notClassroomList[i].id}의 부스 정보가 없습니다.`);
-        });
-    }
-    let StampView = eById("StampView");
-    let GuideModalContainer = eById("GuideModalContainer");
-
-    window.onload = function () {
-        init();
-        getClassroomList();
-        if (getCookie("ShowGuide") == null) {
-            //window.location.href = "/guide";
-            GuideModalContainer.style.display = "flex";
-            showNextGuide();
-        }
-        /*eById("TagScanButton").addEventListener("click", () => {
-            window.location.href = "/scanner";
-        });*/
-    }
-    let touchstartY = 0;
-    let touchendY = 0;
-
-    function checkDirection() {
-        if (touchendY < touchstartY) {
-            if (!StampView.classList.contains("open")) {
-                StampView.classList.toggle("open");
-            }
-        } else if (touchendY > touchstartY) {
-            if (StampView.classList.contains("open")) {
-                StampView.classList.toggle("open");
-            }
-        }
-    };
-
-    StampView.addEventListener('touchstart', e => {
-        let stampListView = eById("stampList");
-        let targetTagName = e.target.tagName.toLowerCase();
-        console.log(e.target);
-        console.log(e.target.tagName.toLowerCase());
-        console.log(stampListView.scrollTop);
-        if (stampListView.scrollTop <= 0) {
-            console.log("scroll top")
-            touchstartY = e.changedTouches[0].screenY;
-        } else if (e.target != stampListView && e.target.classList[0] != "stamp" && targetTagName != "img" && targetTagName != "h3") {
-            touchstartY = e.changedTouches[0].screenY;
-        } else {
-            touchstartY = 0;
-        }
-    });
-
-    StampView.addEventListener('touchend', e => {
-        let stampListView = eById("stampList");
-        let targetTagName = e.target.tagName.toLowerCase();
-        if (stampListView.scrollTop <= 0) {
-            touchendY = e.changedTouches[0].screenY;
-            checkDirection();
-        } else if (e.target != stampListView && e.target.classList[0] != "stamp" && targetTagName != "img" && targetTagName != "h3") {
-            touchendY = e.changedTouches[0].screenY;
-            checkDirection();
-        }
-    });
-    eById("ClassInfoModalCloseButton").addEventListener("click", () => {
-        eById("ClassInfoModalContainer").style.display = "none";
-    });
-
-    /* 가이드 */
-    let VideoPlayer = eById("GuideVideo");
-    let GuideText = eById("GuideText");
-    let NextGuideButton = eById("NextGuideButton");
-    NextGuideButton.addEventListener("click", showNextGuide);
-    let guidePage = 0;
-    VideoPlayer.pause();
-    let StudentIdInput = eById("StudentIdInput");
-    let StudentNameInput = eById("StudentNameInput");
-
-    let userAgent = window.navigator.userAgent.toLowerCase();
-
-    let displayDeviceType = "접속하신 기기";
-    let displayNFCLocation = "후면 중앙";
-    if (window.screen.width > 1024) {
-        loadGuideVideo("NoNFC");
-        displayDeviceType = "태블릿 또는 NFC 기능이 없는 휴대전화";
-    } else if (userAgent.includes("iphone")) {
-        displayDeviceType = "iPhone";
-        displayNFCLocation = "상단";
-        loadGuideVideo("iPhone");
-        document.ondblclick = function(e) {
-            e.preventDefault();
-        }
-    } else if (userAgent.includes("sm-f700") || userAgent.includes("sm-f711") || userAgent.includes("sm-f721") || userAgent.includes("sm-f731")) {
-        displayDeviceType = "갤럭시 Z 플립";
-        displayNFCLocation = "후면 하단";
-        loadGuideVideo("Bottom");
-    } else {
-        loadGuideVideo("Center");
-    }
-
-    eById("GuideHint").innerText = `${displayDeviceType}에서의 참여 방법을 알려 드릴게요.`;
-    eById("ReplayGuideButton").addEventListener("click", () => {
-        guidePage = 0;
-        showNextGuide();
-    });
-    var loginResponse;
-    function showNextGuide() {
-        console.log(guidePage);
-        NextGuideButton.disabled = true;
-        VideoPlayer.play();
-        VideoPlayer.pause();
-        VideoPlayer.style.opacity = 1;
-        switch (guidePage) {
-            case 0:
-                VideoPlayer.currentTime = 0;
-                if (window.screen.width > 1024) {
-                    GuideText.innerText = `${displayDeviceType}에서는 "태그 스캔" 버튼을 눌러서 참여할 수 있어요.`;
-                } else {
-                    GuideText.innerText = `${displayDeviceType}의 NFC 인식 위치는 ${displayNFCLocation}이에요.`;
-                }
-                setTimeout(() => {
-                    VideoPlayer.play();
-                    setTimeout(() => {
-                        VideoPlayer.pause();
-                        NextGuideButton.disabled = false;
-                    }, 840);
-                    guidePage += 1;
-                }, 500);
-                break;
-            case 1:
-                VideoPlayer.play();
-                if (window.screen.width > 1024) {
-                    GuideText.innerText = `스탬프의 아이콘을 카메라로 스캔해 주세요.`;
-                } else {
-                    GuideText.innerText = `스탬프의 아이콘에 ${displayDeviceType}의 ${displayNFCLocation}을 대주세요.`;
-                }
-                setTimeout(() => {
-                    VideoPlayer.pause();
-                    NextGuideButton.disabled = false;
-                    eById("ReplayButtonContainer").style.visibility = "visible";
-                }, 4000);
-                guidePage += 1;
-                break;
-            case 2:
-                NextGuideButton.disabled = true;
-                NextGuideButton.innerText = "시작하기";
-                GuideText.style.display = "none";
-                VideoPlayer.style.display = "none";
-                eById("ReplayButtonContainer").style.display = "none";
-                eById("PrivacyPolicyCheckboxContainer").style.display = "flex";
-
-                eById("GuideTitle").innerText = "시작 전 본인의 정보를 알려주세요";
-                eById("GuideHint").innerText = "타인의 정보를 도용할 경우 불이익이 있을 수 있습니다.";
-                eById("GuideHint").style.color = "#FF0000";
-
-                StudentIdInput.addEventListener("input", () => {
-                    StudentIdInput.value = StudentIdInput.value.replace(/[^0-9]/g, '');
-                    let l = StudentIdInput.value.length;
-                    if (l >= 6) {
-                        StudentIdInput.value = StudentIdInput.value.slice(0, 5);
-                    } else if (l >= 5) {
-                        StudentNameInput.focus();
-                    }
-                });
-                StudentNameInput.addEventListener("input", () => {
-                    let l = StudentNameInput.value.length;
-                    if (l >= 2) {
-                        NextGuideButton.disabled = false;
-                    } else {
-                        NextGuideButton.disabled = true;
-                    }
-                });
-                StudentIdInput.style.display = "block";
-                StudentNameInput.style.display = "block";
-                setTimeout(() => {
-                    StudentIdInput.classList.add("show");
-                    StudentNameInput.classList.add("show");
-                }, 100);
-
-                guidePage += 1;
-                break;
-            case 3:
-                var xhr = new XMLHttpRequest();
-                xhr.open('POST', "/login", true);
-                xhr.setRequestHeader("Content-Type", "application/json");
-
-                xhr.responseType = 'json';
-                xhr.onload = function() {
-                    var status = xhr.status;
-                    if (status === 200) {
-                        console.log(xhr.response);
-                        alert(`${xhr.response.user_name}(${xhr.response.user_id})님, 환영합니다.)`);
-                        setCookie("user_id", xhr.response.user_id, 7);
-                        setCookie("user_name", StudentIdInput.value + StudentNameInput.value, 7);
-                        setCookie("ShowGuide", "true", 1);
-                        guidePage = 0;
-                        GuideModalContainer.style.display = "none";
-                    } else {
-                        console.warn(xhr.response);
-                        alert(`로그인에 실패했습니다. 다시 시도해 주세요.`);
-                    }
-                };
-                xhr.send(`{ "user_name": "${StudentIdInput.value}${StudentNameInput.value}" }`); // 보낼 데이터 지정
-             /*
-                fetch("/login", {
-                    method: "POST",
-                    credentials: 'include',
-                    body: JSON.stringify({
-                        username: StudentIdInput.value + StudentNameInput.value,
-                    }),
-                    headers: {
-                        "Content-type": "application/json; charset=UTF-8"
-                    }
-                })
-                    .then((response) => {
-                        loginResponse = response;
-                        response.json();
-                        alert(response);
-                        console.log(response);
-                    })
-                    .then((json) => {
-                        alert(json);
-                        console.log(json);
-                    });
-                    */
-
-                break;
-            default:
-                break;
-        }
-    }
-    function loadGuideVideo(deviceType) {
-        let source1 = document.createElement("source");
-        source1.src = `/videos/Guide_NFC_${deviceType}.webm`;
-        source1.type = "video/webm";
-        let source2 = document.createElement("source");
-        source2.src = `/videos/Guide_NFC_${deviceType}.mov`;
-        source2.type = "video/mp4";
-        VideoPlayer.appendChild(source1);
-        VideoPlayer.appendChild(source2);
-    }
-</script>
+<script src="/scripts/root.js"></script>
+<script src="/scripts/JsAPI.js"></script>
+<script src="/scripts/index.js"></script>
 
 </html>
