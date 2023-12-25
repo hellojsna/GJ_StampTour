@@ -11,11 +11,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>스탬프투어</title>
+    <title>가좌고등학교 스탬프투어</title>
     <style>
         @import url('/css/font.css');
         @import url('/css/root.css');
-        @import url('/css/StampListView.css');
         @import url('/css/index.css');
     </style>
 </head>
@@ -399,7 +398,7 @@
                     <p id="GuideHint">참여 방법을 알려 드릴게요.</p>
                 </span>
                 <hr>
-                <video id="GuideVideo" class="GuideVideo" playsinline muted>
+                <video id="GuideVideo" class="GuideVideo" playsinline muted loop>
                 </video>
                 <div id="UserRegisterContainer">
                     <input id="StudentIdInput" class="UserRegisterInput" type="text" inputmode="numeric" pattern="\d*"
@@ -445,42 +444,14 @@
 
         </span>
         <div id="stampList" class="stampList"></div>
+        <div class="BottomLinkContainer">
+            <a href="/team" target="_blank">만든 사람들</a>
+            <a href="/buddha" target="_blank">부적</a>
+            <a href="/privacypolicy" target="_blank">개인정보처리방침</a>
+        </div>
     </div>
-
 </body>
-<script src="https://unpkg.com/panzoom@9.4.3/dist/panzoom.min.js"></script>
-<script src="/scripts/root.js"></script>
-<script src="/scripts/JsAPI.js"></script>
+<script src="/scripts/panzoom.js"></script>
+<script src="https://embed.tawk.to/6582447e07843602b803caeb/1hi2dn3rl" crossorigin="*"></script>
 <script src="/scripts/index.js"></script>
-<script type="text/javascript">
-    var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
-    (function () {
-        var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
-        s1.async = true;
-        s1.src = 'https://embed.tawk.to/6582447e07843602b803caeb/1hi2dn3rl';
-        s1.charset = 'UTF-8';
-        s1.setAttribute('crossorigin', '*');
-        s0.parentNode.insertBefore(s1, s0);
-
-    })();
-    window.Tawk_API.onLoad = function () {
-        console.log("Tawk API Loaded");
-        setTimeout(() => {
-            let iframes = document.getElementsByTagName("iframe");
-            let s = document.createElement("style");
-            s.innerHTML = `.tawk-chatinput-send{color:#4e7cf1 !important} ::selection{background:#4e7cf1 !important} .tawk-flex.tawk-flex-center.tawk-text-center.tawk-padding-small, .tawk-branding{padding:0 !important;transform:scale(0.9)} .tawk-icon.tawk-icon-attach-file{color:#4e7cf1} .file-upload-progress .progress-bar{background:#4e7cf1 !important} .tawk-header-text.tawk-margin-auto-left.tawk-flex-none.tawk-button-hover.tawk-button.tawk-button-text.tawk-button-color-inverse.tawk-tooltip{display:none}`
-            console.log(iframes);
-            for (let i = 0; i < iframes.length; i++) {
-                console.log(iframes[i].style.width);
-                if (iframes[i].style.width == "100%" && iframes[i].style.height == "100%") {
-                    iframes[i].contentDocument.head.appendChild(s);
-                }
-            }
-            eById("HelpButton").addEventListener("click", () => {
-                Tawk_API.maximize();
-            });
-        }, 1000);
-    };
-</script>
-
 </html>

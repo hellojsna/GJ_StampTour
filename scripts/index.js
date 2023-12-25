@@ -5,6 +5,56 @@
 //  Created by Js Na on 2023/12/12.
 //  Copyright © 2023 Js Na, All rights reserved.
 //
+
+function eById(id) {
+    return document.getElementById(id);
+}
+function eByCl(cl) {
+    return document.getElementsByClassName(cl);
+}
+function setCookie(name, value, exp) {
+    var date = new Date();
+    date.setTime(date.getTime() + exp * 24 * 60 * 60 * 1000);
+    document.cookie = encodeURIComponent(name) + '=' + encodeURIComponent(value) + ';expires=' + date.toUTCString() + ';path=/; ';
+}
+function getCookie(name) {
+    var value = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
+    return value ? value[2] : null;
+}
+function deleteCookie(name) {
+    document.cookie = encodeURIComponent(name) + '=;expires=Thu, 01 JAN 1999 00:00:10 GMT;';
+}
+var getJSON = function (url, callback) {
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', url, true);
+    xhr.responseType = 'json';
+    xhr.onload = function () {
+        var status = xhr.status;
+        if (status === 200) {
+            callback(null, xhr.response);
+        } else {
+            callback(status, xhr.response);
+        }
+    };
+    xhr.send();
+};
+
+function enableCookieUpdate() {
+    setInterval(function () {
+        let stampCookie = getCookie("LocalStamp");
+        if (stampCookie != null) {
+            let stampJSON = decodeURIComponent(stampCookie);
+            let stampList = JSON.parse(stampJSON);
+            for (let i = 0; i < stampList.length; i++) {
+                let stampData = stampList[i];
+                let stampElement = eById(stampData);
+                if (stampElement != null) {
+                    stampElement.classList.add("checked");
+                }
+            }
+        }
+    }, 1000);
+}
 /* 주요 변수 선언 */
 let CurrentFloor = 1;
 let guidePage = 0;
@@ -28,11 +78,7 @@ let NextGuideButton = eById("NextGuideButton");
 let StudentIdInput = eById("StudentIdInput");
 let StudentNameInput = eById("StudentNameInput");
 
-function init() {
-    setStampView();
-    getStampList();
-    enableCookieUpdate();
-}
+
 function getStampList() {
     getJSON(`/api/stampList.json`, function (err, data) {
         if (err != null) {
@@ -81,7 +127,7 @@ function enableMapZoom(mapElement) {
         });
     }
 }
-function animateFloorChange(f) {
+function floorChange(f) {
     let CurrentFloorMap = eById(`Floor${CurrentFloor}MapView`);
     let NewFloorMap = eById(`Floor${f}MapView`);
     eById(`Floor${CurrentFloor}`).classList.remove("selected");
@@ -102,35 +148,27 @@ function setStampView() {
 }
 function showNextGuide() {
     NextGuideButton.disabled = true;
-    VideoPlayer.play();
-    VideoPlayer.pause();
-    VideoPlayer.style.opacity = 1;
     switch (guidePage) {
         case 0:
-            VideoPlayer.currentTime = 0;
             if (window.screen.width > 1024) {
                 GuideText.innerText = `${displayDeviceType}에서는 "태그 스캔" 버튼을 눌러서 참여할 수 있어요.`;
             } else {
                 GuideText.innerText = `${displayDeviceType}의 NFC 인식 위치는 ${displayNFCLocation}이에요.`;
             }
             setTimeout(() => {
-                VideoPlayer.play();
                 setTimeout(() => {
-                    VideoPlayer.pause();
                     NextGuideButton.disabled = false;
                 }, 840);
                 guidePage += 1;
             }, 500);
             break;
         case 1:
-            VideoPlayer.play();
             if (window.screen.width > 1024) {
                 GuideText.innerText = `스탬프의 아이콘을 카메라로 스캔해 주세요.`;
             } else {
                 GuideText.innerText = `스탬프의 아이콘에 ${displayDeviceType}의 ${displayNFCLocation}을 대주세요.`;
             }
             setTimeout(() => {
-                VideoPlayer.pause();
                 NextGuideButton.disabled = false;
                 eById("ReplayButtonContainer").style.visibility = "visible";
             }, 4000);
@@ -181,7 +219,6 @@ function showNextGuide() {
             xhr.onload = function () {
                 var status = xhr.status;
                 if (status === 200) {
-                    console.log(xhr.response);
                     alert(`${xhr.response.user_name}(${xhr.response.user_id})님, 환영합니다.)`);
                     setCookie("user_id", xhr.response.user_id, 7);
                     setCookie("user_name", StudentIdInput.value + StudentNameInput.value, 7);
@@ -189,7 +226,6 @@ function showNextGuide() {
                     guidePage = 0;
                     GuideModalContainer.style.display = "none";
                 } else {
-                    console.warn(xhr.response);
                     alert(`로그인에 실패했습니다. 다시 시도해 주세요.`);
                 }
             };
@@ -225,16 +261,15 @@ for (let i = 1; i <= 4; i++) { // Loop from 1 to 4 (number of floors)
     enableMapZoom(eById(`Floor${i}MapView`)); // Constructing the map ID dynamically
 }
 for (let i = 1; i <= 4; i++) {
-    eById(`Floor${i}`).addEventListener("click", () => animateFloorChange(i));
+    eById(`Floor${i}`).addEventListener("click", () => floorChange(i));
 }
 if (window.location.hash.startsWith("#Floor")) {
-    animateFloorChange(window.location.hash.replace("#Floor", ""));
+    floorChange(window.location.hash.replace("#Floor", ""));
 }
 // MapContainer get child element that has class "classroom"
-console.log(classroomList);
 getJSON(`/api/stampList.json`, function (err, data) {
     if (err != null) {
-        alert("스탬프 목록 데이터를 불러오는 중 오류가 발생했습니다.");
+        alert("스탬프 목록을 불러오는 중 오류가 발생했습니다.");
     } else if (data !== null) {
         let sL = data.stampList;
         for (let i = 0; i < sL.length; i++) {
@@ -260,26 +295,10 @@ getJSON(`/api/stampList.json`, function (err, data) {
         }
     }
 });
-/*for (let i = 0; i < classroomList.length; i++) {
-    classroomList[i].addEventListener("click", () => {
-        console.log(classroomList[i].id);
-        ClassInfoModalContainer.style.display = "flex";
-        ClassInfoModalTitle.innerText = classroomList[i].id;
-    });
-}*/
 for (let i = 0; i < notClassroomList.length; i++) {
     notClassroomList[i].addEventListener("click", () => {
         alert(`${notClassroomList[i].id} 부스 정보가 없습니다.`);
     });
-}
-
-window.onload = function () {
-    init();
-    getClassroomList();
-    if (getCookie("ShowGuide") == null) {
-        GuideModalContainer.style.display = "flex";
-        showNextGuide();
-    }
 }
 
 StampView.addEventListener('touchstart', e => {
@@ -335,4 +354,31 @@ eById("ReplayGuideButton").addEventListener("click", () => {
     showNextGuide();
 });
 
-VideoPlayer.pause();
+
+window.onload = function () {
+    VideoPlayer.pause();
+    setStampView();
+    getStampList();
+    enableCookieUpdate();
+    if (getCookie("ShowGuide") == null) {
+        GuideModalContainer.style.display = "flex";
+        showNextGuide();
+    }
+}
+
+var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
+window.Tawk_API.onLoad = function () {
+    setTimeout(() => {
+        let iframes = document.getElementsByTagName("iframe");
+        let st = document.createElement("style");
+        st.innerHTML = `.tawk-chatinput-send{color:#4e7cf1 !important} ::selection{background:#4e7cf1 !important} .tawk-flex.tawk-flex-center.tawk-text-center.tawk-padding-small, .tawk-branding{padding:0 !important;transform:scale(0.9)} .tawk-icon.tawk-icon-attach-file{color:#4e7cf1} .file-upload-progress .progress-bar{background:#4e7cf1 !important} .tawk-header-text.tawk-margin-auto-left.tawk-flex-none.tawk-button-hover.tawk-button.tawk-button-text.tawk-button-color-inverse.tawk-tooltip{display:none}`
+        for (let i = 0; i < iframes.length; i++) {
+            if (iframes[i].style.height == "100%") {
+                iframes[i].contentDocument.head.appendChild(st);
+            }
+        }
+        document.getElementById("HelpButton").addEventListener("click", () => {
+            Tawk_API.maximize();
+        });
+    }, 1000);
+};

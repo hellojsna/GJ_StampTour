@@ -121,24 +121,10 @@ iframe {
 }
 
 @media screen and (max-width: 300px) {
+    h1 {
+        font-size: 1.8em;
+    }
     .StampViewTitle button, .StampViewTitle a {
         margin: 0;
-    }
-}
-
-:root {
-    --PrimaryBackground: #f2f2f7;
-    --SecondaryBackground: #ffffff;
-    --PrimaryText: #000000;
-    --ListBackground: #f2f2f7;
-}
-
-@media (prefers-color-scheme: dark) {
-    :root {
-        --SecondaryBackground: #1c1c1e;
-        --PrimaryBackground: #000000;
-        --PrimaryText: #ffffff;
-        --ListBackground: #2c2c2e;
-        --link: #0a84ff;
     }
 }

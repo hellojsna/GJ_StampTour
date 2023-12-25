@@ -15,36 +15,7 @@
     <style>
         @import url('/css/font.css');
         @import url('/css/root.css');
-        
-        .MainContainer {
-            width: 100%;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            margin-top: 50px;
-        }
-        .MainContainer h1 {
-            font-size: 3em;
-            margin: 0;
-        }
-        .MainContainer p {
-            margin: 5px;
-            opacity: 0;
-            animation: 0.5s ease-in-out 0.5s forwards slideAndFadeIn;
-        }
-        @keyframes slideAndFadeIn {
-            from {
-                transform: translateY(-50%);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
+        @import url('/css/error.css');
     </style>
 </head>
 
@@ -53,9 +24,9 @@
         <img class="titleLogo" src="/images/StampTourLogo.png" alt="스탬프투어"><h2>오류 페이지</h2>
     </div>
     <div class="MainContainer">
-        <h1>404 Not Found</h1>
-        <p>요청하신 페이지를 찾을 수 없습니다.</p>
-        <p><a href="/">메인 페이지로 이동</a></p>
+        <h1>만료된 링크</h1>
+        <h3>스탬프의 경우 태그를 새로 인식해 주세요.</h3>
+        <h3><a href="/">메인 페이지로 이동</a></h3>
     </div>
 </body>
 </html>

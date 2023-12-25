@@ -1,0 +1,44 @@
+<!--
+  logout.html
+  GJ_StampTour
+
+  Created by Js Na on 2023/12/21.
+  Copyright © 2023 Js Na, All rights reserved.
+-->
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>로그아웃</title>
+    <style>
+        @import url('/css/font.css');
+        @import url('/css/root.css');
+
+        .MainContainer {
+            height: 100%;
+            padding-top: 3em;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-sizing: border-box;
+            flex-wrap: wrap;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>로그아웃 완료</h1>
+</body>
+<script>
+    function clearAllCookies(domain, path) {
+        cookies = document.cookie.split('; ');
+        for (var i = cookies.length - 1; i >= 0; i--) {
+            document.cookie = encodeURIComponent(cookies[i].split('=')[0]) + '=; expires=Thu, 01 JAN 1999 00:00:10 GMT; path=/;';
+        }
+    }
+    clearAllCookies();
+</script>
+
+</html>
