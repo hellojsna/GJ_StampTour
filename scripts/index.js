@@ -70,6 +70,8 @@ let ClassInfoModalContainer = eById("ClassInfoModalContainer");
 let ClassInfoModalTitle = eById("ClassInfoModalTitle");
 let CMSN = eById("CMStampName");
 let CMSD = eById("CMStampDesc");
+let CMST = eById("CMStampType");
+let CMSS = eById("CMStampStatus");
 let VideoPlayer = eById("GuideVideo");
 let GuideHint = eById("GuideHint");
 let GuideText = eById("GuideText");
@@ -87,11 +89,13 @@ function getStampList() {
             let sL = data.stampList;
             for (let i = 0; i < sL.length; i++) {
                 let sD = sL[i];
-                let stampElement = document.createElement("div");
-                stampElement.classList.add("stamp");
-                stampElement.id = sD.stampId;
-                stampElement.innerHTML = `<img src="/images/circle.svg"><img class="CheckMark" src="/images/check.svg"><span><h2>${sD.stampName}</h2><p>${sD.stampLocation}</p></span>`;
-                eById("stampList").appendChild(stampElement);
+                if (!sD.stampId.startsWith("000000000-0000-0000-0000-")) {
+                    let stampElement = document.createElement("div");
+                    stampElement.classList.add("stamp");
+                    stampElement.id = sD.stampId;
+                    stampElement.innerHTML = `<img src="/images/circle.svg"><img class="CheckMark" src="/images/check.svg"><span><h2>${sD.stampName}</h2><p>${filterClassroomName(sD.stampLocation)}</p></span>`;
+                    eById("stampList").appendChild(stampElement);
+                }
             }
         }
     });
@@ -146,34 +150,48 @@ function setStampView() {
         showNextGuide();
     });
 }
+
+const userAgent = navigator.userAgent.toLowerCase();
+const isTablet = (/(ipad|tablet|(android(?!.*mobile))|(windows(?!.*phone)(.*touch))|kindle|playbook|silk|(puffin(?!.*(IP|AP|WP))))/.test(userAgent) || (userAgent.includes("mac") && navigator.maxTouchPoints > 4 && !userAgent.includes("iphone")));
+
 function showNextGuide() {
     NextGuideButton.disabled = true;
+    VideoPlayer.play();
+    VideoPlayer.pause();
+    VideoPlayer.style.opacity = 1;
     switch (guidePage) {
         case 0:
-            if (window.screen.width > 1024) {
-                GuideText.innerText = `${displayDeviceType}에서는 "태그 스캔" 버튼을 눌러서 참여할 수 있어요.`;
+            VideoPlayer.currentTime = 0;
+
+            if (window.screen.width > 1024 || isTablet) {
+                GuideText.innerText = `${displayDeviceType}에서는 "코드 스캔" 버튼을 눌러서 참여할 수 있어요.`;
             } else {
                 GuideText.innerText = `${displayDeviceType}의 NFC 인식 위치는 ${displayNFCLocation}이에요.`;
             }
             setTimeout(() => {
+                VideoPlayer.play();
                 setTimeout(() => {
+                    VideoPlayer.pause();
                     NextGuideButton.disabled = false;
                 }, 840);
                 guidePage += 1;
             }, 500);
             break;
-        case 1:
-            if (window.screen.width > 1024) {
-                GuideText.innerText = `스탬프의 아이콘을 카메라로 스캔해 주세요.`;
-            } else {
-                GuideText.innerText = `스탬프의 아이콘에 ${displayDeviceType}의 ${displayNFCLocation}을 대주세요.`;
-            }
-            setTimeout(() => {
-                NextGuideButton.disabled = false;
-                eById("ReplayButtonContainer").style.visibility = "visible";
-            }, 4000);
-            guidePage += 1;
-            break;
+            case 1:
+                VideoPlayer.play();
+                if (window.screen.width > 1024 || isTablet) {
+                    GuideText.innerText = `스탬프의 아이콘을 카메라로 스캔해 주세요.`;
+                } else {
+                    GuideText.innerText = `스탬프의 아이콘에 ${displayDeviceType}의 ${displayNFCLocation}을 대주세요.`;
+                }
+                setTimeout(() => {
+                    VideoPlayer.pause();
+                    NextGuideButton.innerText = "시작하기";
+                    NextGuideButton.disabled = false;
+                    eById("ReplayButtonContainer").style.display = "block";
+                }, 3800);
+                guidePage += 1;
+                break;
         case 2:
             NextGuideButton.disabled = true;
             NextGuideButton.innerText = "시작하기";
@@ -184,7 +202,7 @@ function showNextGuide() {
 
             eById("GuideTitle").innerText = "시작 전 본인의 정보를 알려주세요";
             GuideHint.innerText = "타인의 정보를 도용할 경우 불이익이 있을 수 있습니다.";
-            GuideHint.style.color = "#FF0000";
+            GuideHint.style.color = "var(--red)";
 
             StudentIdInput.addEventListener("input", () => {
                 StudentIdInput.value = StudentIdInput.value.replace(/[^0-9]/g, '');
@@ -226,22 +244,26 @@ function showNextGuide() {
                     guidePage = 0;
                     GuideModalContainer.style.display = "none";
                 } else {
-                    alert(`로그인에 실패했습니다. 다시 시도해 주세요.`);
+                    alert(`서버와 통신을 실패했습니다. 다시 시도해 주세요.`);
+                    NextGuideButton.disabled = false;
                 }
             };
             xhr.send(`{ "user_name": "${StudentIdInput.value}${StudentNameInput.value}" }`); // 보낼 데이터 지정
+            // 내가 여기 왜 xhr을 썼지???
             break;
         default:
             break;
     }
 }
 function loadGuideVideo(deviceType) {
+    let darkMode = window.matchMedia('(prefers-color-scheme: dark)').matches ? "_Dark" : "";
     let source1 = document.createElement("source");
-    source1.src = `/videos/Guide_NFC_${deviceType}.webm`;
+    source1.src = `/videos/Guide_NFC_${deviceType}${darkMode}.webm`;
     source1.type = "video/webm";
     let source2 = document.createElement("source");
-    source2.src = `/videos/Guide_NFC_${deviceType}.mov`;
+    source2.src = `/videos/Guide_NFC_${deviceType}${darkMode}.webm`;
     source2.type = "video/mp4";
+
     VideoPlayer.appendChild(source1);
     VideoPlayer.appendChild(source2);
 }
@@ -258,7 +280,7 @@ function checkDirection() {
 };
 
 for (let i = 1; i <= 4; i++) { // Loop from 1 to 4 (number of floors)
-    enableMapZoom(eById(`Floor${i}MapView`)); // Constructing the map ID dynamically
+    enableMapZoom(eById(`Floor${i}MapView`));
 }
 for (let i = 1; i <= 4; i++) {
     eById(`Floor${i}`).addEventListener("click", () => floorChange(i));
@@ -266,7 +288,10 @@ for (let i = 1; i <= 4; i++) {
 if (window.location.hash.startsWith("#Floor")) {
     floorChange(window.location.hash.replace("#Floor", ""));
 }
-// MapContainer get child element that has class "classroom"
+
+function filterClassroomName(name) {
+    return (name.startsWith("교실") ? `${name.slice(0, 3)}학년 ${name.slice(3)}반`.replace("교실", "").replace(" 0", " ") : name);
+}
 getJSON(`/api/stampList.json`, function (err, data) {
     if (err != null) {
         alert("스탬프 목록을 불러오는 중 오류가 발생했습니다.");
@@ -285,11 +310,45 @@ getJSON(`/api/stampList.json`, function (err, data) {
                     });
                 }
             } else {
+                console.log(sD.stampLocation);
                 eById(sD.stampLocation).addEventListener("click", () => {
                     ClassInfoModalContainer.style.display = "flex";
-                    ClassInfoModalTitle.innerText = sD.stampLocation;
+                    ClassInfoModalTitle.innerText = filterClassroomName(sD.stampLocation);
                     CMSN.innerText = sD.stampName;
-                    CMSD.innerText = sD.stampDesc;
+                    // stampDesc starts with [value], so check that and move to CMStampType
+                    CMST.removeAttribute('class');
+                    CMST.innerText = sD.stampDesc.slice(1, sD.stampDesc.indexOf("]"));
+                    switch (CMST.innerText) {
+                        case "공연":
+                            CMST.classList.add("gongyeon");
+                            break;
+                        case "전시":
+                            CMST.classList.add("jeonsi");
+                            break;
+                        case "전시 및 체험":
+                            CMST.classList.add("jeonsicheheom");
+                            break;
+                        case "체험":
+                            CMST.classList.add("cheheom");
+                            break;
+                        default:
+                            break;
+                    }
+                    CMSD.innerText = sD.stampDesc.slice(sD.stampDesc.indexOf("]") + 2);
+                    stampCheck = getCookie("LocalStamp");
+                    if (!sD.stampId.startsWith("000000000-0000-0000-0000-") && stampCheck != null) {
+                        let stampList = JSON.parse(decodeURIComponent(stampCheck));
+                        if (stampList.includes(sD.stampId)) {
+                            CMSS.innerText = "방문한 부스";
+                            CMSS.classList.add("checked");
+                        } else {
+                            CMSS.innerText = "방문하지 않은 부스";
+                            CMSS.classList.remove("checked");
+                        }
+                    } else {
+                        CMSS.innerText = "-";
+                        CMSS.classList.remove("checked");
+                    }
                 });
             }
         }
@@ -297,7 +356,7 @@ getJSON(`/api/stampList.json`, function (err, data) {
 });
 for (let i = 0; i < notClassroomList.length; i++) {
     notClassroomList[i].addEventListener("click", () => {
-        alert(`${notClassroomList[i].id} 부스 정보가 없습니다.`);
+        //alert(`${notClassroomList[i].id} 부스 정보가 없습니다.`);
     });
 }
 
@@ -330,17 +389,17 @@ NextGuideButton.addEventListener("click", showNextGuide);
 
 let displayDeviceType = "접속하신 기기";
 let displayNFCLocation = "후면 중앙";
-if (window.screen.width > 1024) {
-    loadGuideVideo("NoNFC");
-    displayDeviceType = "태블릿 또는 NFC 기능이 없는 휴대전화";
-} else if (uA.includes("iphone")) {
+if (uA.includes("iphone")) {
     displayDeviceType = "iPhone";
     displayNFCLocation = "상단";
     loadGuideVideo("iPhone");
     document.ondblclick = function (e) {
         e.preventDefault();
     }
-} else if (uA.includes("sm-f700") || uA.includes("sm-f711") || uA.includes("sm-f721") || uA.includes("sm-f731")) {
+} else if (window.screen.width > 1024 || isTablet) {
+    loadGuideVideo("NoNFC");
+    displayDeviceType = "태블릿 또는 NFC 기능이 없는 휴대전화"; 
+} else if (uA.includes("sm-f700") || uA.includes("sm-f707") ||  uA.includes("sm-f711") || uA.includes("sm-f721") || uA.includes("sm-f731") || uA.includes("sm-f741")) {
     displayDeviceType = "갤럭시 Z 플립";
     displayNFCLocation = "후면 하단";
     loadGuideVideo("Bottom");
@@ -354,7 +413,6 @@ eById("ReplayGuideButton").addEventListener("click", () => {
     showNextGuide();
 });
 
-
 window.onload = function () {
     VideoPlayer.pause();
     setStampView();
@@ -365,7 +423,7 @@ window.onload = function () {
         showNextGuide();
     }
 }
-
+/*
 var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
 window.Tawk_API.onLoad = function () {
     setTimeout(() => {
@@ -381,4 +439,4 @@ window.Tawk_API.onLoad = function () {
             Tawk_API.maximize();
         });
     }, 1000);
-};
+};*/

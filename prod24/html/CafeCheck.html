@@ -1,0 +1,45 @@
+<!DOCTYPE html><html lang="ko"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="theme-color" content="#0037AA"><title>Code Brew | 프로그래밍 동아리 통합 부스</title><style>@import url('/css/root.css'); @import url('/css/font.css'); @import url('/css/cafe.css'); </style></head><body><div id="MainTitleBar" class="titleBar"><img class="titleLogo" src="../images/CodeBrewLogo.png" alt="Code Brew"></div><div id="MainJs"><div id="HelloContainer"><div id="HelloText1" class="MainWelcomeMessage" style="z-index: 5;"><h1>잠시 기다려 주세요.</h1></div><div id="HelloText2" class="MainWelcomeMessage" style="z-index: 5;"></div></div><div id="LinkContainer"></div></div><script src="/scripts/root.js"></script>
+    <script>
+        // check if decodeURIComponent(getCookie("user_name")) is not null
+        // if not null, show the user name
+        // if null, redirect to index page
+        let userName = decodeURIComponent(getCookie("user_name"));
+        if (userName == "null") {
+            window.location.href = "/";
+        } else {
+            userName = userName.substring(5);
+            eById('HelloText1').innerHTML = `<p>${userName}님의 스탬프 확인 중</p>${document.getElementById('HelloText1').innerHTML}`;
+            let stampCookie = getCookie("LocalStamp");
+            if (stampCookie != null) {
+                let stampJSON = decodeURIComponent(stampCookie);
+                let stampList = JSON.parse(stampJSON);
+                // if stampList has 2B8A5E38-42F6-4C1A-AA98-B7216ACE2556, show the message
+                if (stampList.includes("EB6B6A14-56B5-472C-A1FA-A6FBAB4E365F")) {
+                    eById('HelloText2').innerHTML = '<h1>이미 카페에 방문하셨네요.</h1><p>음료는 한 번만 제공 가능합니다. 감사합니다.</p>';
+                } else if (stampList.includes("2B8A5E38-42F6-4C1A-AA98-B7216ACE2556")) {
+                    DevquesStampChecked = true;
+                    eById('HelloText2').innerHTML = '<h1>스탬프가 인증되었습니다.</h1><p>카페로 이동합니다.</p>';
+                } else {
+                    eById('HelloText2').innerHTML = '<h1>스탬프가 인증되지 않았습니다.</h1><p>데브큐스 부스에서 스탬프를 인증해주세요.</p>';
+                }
+            } else {
+                eById('HelloText2').innerHTML = '<h1>스탬프가 인증되지 않았습니다.</h1><p>데브큐스 부스에서 스탬프를 인증해주세요.</p>';
+            }
+        }
+        setTimeout(() => {
+            document.getElementById('HelloText1').classList.add('visible');
+        }, 100);
+        setTimeout(() => {
+            document.getElementById('HelloText1').classList.add('blur');
+            document.getElementById('HelloText1').style.opacity = 0;
+        }, 1000);
+        setTimeout(() => {
+            document.getElementById('HelloText2').classList.add('visible');
+            if (DevquesStampChecked) {
+                setTimeout(() => {
+                    window.location.href = "./CafeMenu.html";
+                }, 1000);
+            }
+        }, 1100);
+    </script>
+</body></html>

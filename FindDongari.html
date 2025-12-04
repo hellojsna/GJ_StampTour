@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script src="/scripts/JsAPI.js"></script>
+<script>
+    var dongariStampCount = [];
+    getJSON(`/api/stampList24.json`, function (err, data) {
+        if (err != null) {
+            alert("스탬프 목록 데이터를 불러오는 중 오류가 발생했습니다.");
+        } else if (data !== null) {
+            var stL = data.stampList;
+            console.log(stL);
+            getJSON("/DongariList.json", function (err, data) {
+                if (err != null) {
+                    alert("스탬프 목록 데이터를 불러오는 중 오류가 발생했습니다.");
+                } else if (data !== null) {
+                    let sL = data.stamp_history;
+                    console.log(sL);
+                    for (let i = 0; i < stL.length; i++) {
+                        console.log(stL[i]);
+                        console.log(stL[i].stampId);
+                        let dongari = sL[`${stL[i].stampId}`];
+                        console.log(dongari.length);
+                        dongariStampCount[`${stL[i].stampName}`] = dongari.length;
+                        dongariStampCount.sort;
+                        console.clear();
+                        console.log(dongariStampCount);
+                    }
+                }
+            });
+        }
+    });
+  
+</script>
+
+</html>

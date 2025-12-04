@@ -1,0 +1,220 @@
+{
+    "stampList": [
+        {
+            "stampId": "7B3D50A1-C85B-4175-948D-13277BDEB79A",
+            "stampLocation": "이동수업실3",
+            "stampName": "리딩북스",
+            "stampDesc": "[전시]\n독후 감상 자료 전시"
+        },
+        {
+            "stampId": "819868B2-91C7-4ADB-BF4C-C11BF5134A04",
+            "stampLocation": "교실204",
+            "stampName": "파워워킹",
+            "stampDesc": "[전시]\n올바른 워킹 자세 및 워킹 관련 자료 전시"
+        },
+        {
+            "stampId": "C92E0A0F-2EDE-402A-9FDC-B034C8319CCC",
+            "stampLocation": "교실111",
+            "stampName": "모션스토리메이커",
+            "stampDesc": "[전시]\n영상 상영 및 동아리 활동 자료 기록물 전시"
+        },
+        {
+            "stampId": "5A81A4E9-CAB2-46B3-84A8-6064B03C41FF",
+            "stampLocation": "교실211",
+            "stampName": "영화와 윤리",
+            "stampDesc": "[전시]\n동아리 활동 자료 기록물 전시 및 방명록 작성"
+        },
+        {
+            "stampId": "EB6B6A14-56B5-472C-A1FA-A6FBAB4E365F",
+            "stampLocation": "가사실",
+            "stampName": "프로그래밍부",
+            "stampDesc": "[전시 및 체험]\n프로그래밍부 × 데브큐스 통합 부스\n\n프로젝트 전시 및 체험, AI 카페 운영"
+        },
+        {
+            "stampId": "655D7FF8-9FDA-49B0-B0DB-7BC18E03E0E9",
+            "stampLocation": "교실207",
+            "stampName": "뮤지케",
+            "stampDesc": "[전시 및 체험]\n비즈 팩토리 (비즈공예 체험) / 작품 전시"
+        },
+        {
+            "stampId": "6F1B8A81-821E-41B3-9E16-3BADDF515770",
+            "stampLocation": "3층홈베이스",
+            "stampName": "창작미술반",
+            "stampDesc": "[전시 및 체험]\n미술작품 전시"
+        },
+        {
+            "stampId": "2B8A5E38-42F6-4C1A-AA98-B7216ACE2556",
+            "stampLocation": "기술실",
+            "stampName": "데브큐스(프로그래밍)",
+            "stampDesc": "[전시 및 체험]\n데브큐스 × 프로그래밍부 통합 부스\n\n프로젝트 전시 및 체험, AI 카페 운영"
+        },
+        {
+            "stampId": "C6815555-F9EB-4596-969D-29F45CC25536",
+            "stampLocation": "교실206",
+            "stampName": "친환경손뜨개",
+            "stampDesc": "[전시 및 체험]\n손뜨개 팔찌 등"
+        },
+        {
+            "stampId": "57D51777-F78F-48E1-A7F6-06F3750B0BD7",
+            "stampLocation": "4층홈베이스",
+            "stampName": "당구풍월",
+            "stampDesc": "[체험]\n솜사탕 만들기"
+        },
+        {
+            "stampId": "B7228B29-DF6E-4018-BAC9-6D869727CAB6",
+            "stampLocation": "4층홈베이스",
+            "stampName": "영어교과",
+            "stampDesc": "[전시]\n영어 교과 전시"
+        },
+        {
+            "stampId": "E05764F1-BBC2-4199-8A9D-14B6492CA560",
+            "stampLocation": "교실209",
+            "stampName": "배드민턴",
+            "stampDesc": "[체험]\n오락실(다트, 셔틀콕으로 물병맞추기 등)"
+        },
+        {
+            "stampId": "6520FB27-37B1-4CE6-8C8F-158D14DF1E4C",
+            "stampLocation": "2학년학습실·이동수업실4",
+            "stampName": "블러디(특수분장)",
+            "stampDesc": "[체험]\n페이스페인팅, 타투"
+        },
+        {
+            "stampId": "29512603-6C52-4E81-8573-2625AB02A597",
+            "stampLocation": "이동수업실2",
+            "stampName": "세담글",
+            "stampDesc": "[체험]\n크리스마스 카페 체험"
+        },
+        {
+            "stampId": "0570F851-CF50-4400-A3E2-A5735F097CFE",
+            "stampLocation": "생명과학실",
+            "stampName": "슬기로운 생명과학",
+            "stampDesc": "[체험]\n붕어빵 비누 만들기"
+        },
+        {
+            "stampId": "DFA407A5-6482-4D7B-A7D7-1E340500BF66",
+            "stampLocation": "교문 앞",
+            "stampName": "축구부",
+            "stampDesc": "[체험]\n축구공 볼링 / 신발 양궁"
+        },
+        {
+            "stampId": "40554472-8876-40D4-95C4-286BD3BC5578",
+            "stampLocation": "물리·지학실",
+            "stampName": "프마(과학)",
+            "stampDesc": "[체험]\n다양한 과학 체험(만들기, 실험) 부스 운영"
+        },
+        {
+            "stampId": "FC80FA25-C7EC-426D-93FA-C1357C3BA978",
+            "stampLocation": "화학실",
+            "stampName": "화학실험동아리",
+            "stampDesc": "[체험]\n달고나만들기"
+        },
+        {
+            "stampId": "869C012B-AE17-4607-ABF6-459393861F0A",
+            "stampLocation": "교실205",
+            "stampName": "경제경영동아리",
+            "stampDesc": "[체험]\n주식투자 게임"
+        },
+        {
+            "stampId": "0C850F03-5890-477E-8F8E-3ECCADA2BE64",
+            "stampLocation": "교실202",
+            "stampName": "교육동아리",
+            "stampDesc": "[체험]\n교육 관련 퀴즈 및 학생 체험 활동"
+        },
+        {
+            "stampId": "C1398336-5045-4F3F-BEC6-6977471927A2",
+            "stampLocation": "교실203",
+            "stampName": "데모크라시",
+            "stampDesc": "[체험]\n사회 관련 퀴즈 활동"
+        },
+        {
+            "stampId": "1D7C5DDC-B8F4-41D6-9E6F-E49C9B611180",
+            "stampLocation": "교실107",
+            "stampName": "생각을 키우는 퍼즐과 게임",
+            "stampDesc": "[체험]\n생각을 키우는 보드게임 체험"
+        },
+        {
+            "stampId": "0299EF1F-0AC5-412E-AD21-20ADEA62F502",
+            "stampLocation": "교실109",
+            "stampName": "아름문학회",
+            "stampDesc": "[체험]\n크라임씬 추리 게임"
+        },
+        {
+            "stampId": "DE1D9C44-1CD4-4C79-B941-8BD7096A6C54",
+            "stampLocation": "다원반",
+            "stampName": "정다운 제과",
+            "stampDesc": "[체험]\n학교 및 장애 관련 문제 맞히기"
+        },
+        {
+            "stampId": "F130C1FB-4402-4790-B97E-4F4FA9B50C21",
+            "stampLocation": "공용교실",
+            "stampName": "탁구반",
+            "stampDesc": "[체험]\n탁구공과 라켓을 이용한 세가지 게임 진행"
+        },
+        {
+            "stampId": "42A653E3-E0B2-44B2-9763-2B29C316A185",
+            "stampLocation": "교실106",
+            "stampName": "이코틱스",
+            "stampDesc": "[체험]\n퀴즈를 통한 게임 체험"
+        },
+        {
+            "stampId": "C3BC53ED-4656-4497-AF87-EF8848C4C2F4",
+            "stampLocation": "교실208",
+            "stampName": "요리영어부",
+            "stampDesc": "[체험]\n흑백요리사 체험"
+        },
+        {
+            "stampId": "822B2E8F-64D4-4E99-9ED1-2308E1321537",
+            "stampLocation": "교실103",
+            "stampName": "스도쿠",
+            "stampDesc": "[체험]\n숫자 퍼즐 체험"
+        },
+        {
+            "stampId": "05460289-975F-445E-A4C7-346F222BDA02",
+            "stampLocation": "교실210",
+            "stampName": "디자인경영부",
+            "stampDesc": "[체험]\n칵테일바 체험"
+        },
+        {
+            "stampId": "4F51723B-D3F4-4635-BB49-88B0568F2293",
+            "stampLocation": "교실201",
+            "stampName": "나를 알아가는 수필쓰기",
+            "stampDesc": "[체험]\n책갈피 만들기"
+        },
+        {
+            "stampId": "53FDB788-506F-43EA-A934-CA99FF7C0018",
+            "stampLocation": "교실101",
+            "stampName": "시시탐탐",
+            "stampDesc": "[체험]\n해적왕 게임 체험"
+        },
+        {
+            "stampId": "7640E928-D2DF-4225-9C57-9605DCBB8AA8",
+            "stampLocation": "교실102",
+            "stampName": "영어북클럽",
+            "stampDesc": "[체험]\n이니셜 키링 만들기, 영문 타투스티커 만들기"
+        },
+        {
+            "stampId": "E54841DB-4369-494B-94AA-258E1E6089C3",
+            "stampLocation": "진로활동실",
+            "stampName": "쓰담 산책",
+            "stampDesc": "[체험]\n교내 쓰담활동"
+        },
+        {
+            "stampId": "1510CAEC-FFD4-4808-9D23-E1880D9E613B",
+            "stampLocation": "교실108",
+            "stampName": "배드민턴 경기운영",
+            "stampDesc": "[체험]\n배드민턴 체험"
+        },
+        {
+            "stampId": "000000000-0000-0000-0000-000000000000",
+            "stampLocation": "차오름관",
+            "stampName": "방송부·밴드부·\n프리즘(댄스부)",
+            "stampDesc": "[공연]\n[방송부] 방송부 학생들이 제작한 영상 발표\n[밴드부] 밴드 공연 (5곡)\n[프리즘(댄스부)] 공연\n\n[공연 순서]\n--:-- | 방송부\n--:-- | 밴드부\n--:-- | 프리즘(댄스부)"
+        },
+        {
+            "stampId": "000000000-0000-0000-0000-111111111111",
+            "stampLocation": "4층홈베이스",
+            "stampName": "당구풍월·영어교과",
+            "stampDesc": "[체험]\n솜사탕 만들기\n영어 교과 전시"
+        }
+    ]
+}

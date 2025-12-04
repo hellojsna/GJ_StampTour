@@ -1,0 +1,53 @@
+<!--
+  CafeIntro.html
+  GJ_StampTour
+
+  Created by Js Na on 2024/12/16.
+  Copyright © 2024 Js Na, All rights reserved.
+-->
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- theme color -->
+    <meta name="theme-color" content="#0037AA">
+    <title>Code Brew | 프로그래밍 동아리 통합 부스</title>
+    <style>
+        @import url('/css/root.css');
+        @import url('/css/font.css');
+        @import url('/css/cafe.css');
+    </style>
+</head>
+
+<body>
+    <div id="MainTitleBar" class="titleBar">
+        <img class="titleLogo" src="../images/CodeBrewLogo.png" alt="Code Brew">
+    </div>
+    <div id="MainJs">
+        <div id="HelloContainer">
+            <div id="HelloText1" class="MainWelcomeMessage" style="z-index: 5;">
+                <h1>안녕하세요.</h1>
+            </div>
+            <div id="HelloText2" class="MainWelcomeMessage" style="z-index: 5;">
+                <h1>프로그래밍 동아리 통합 부스입니다.</h1>
+            </div>
+        </div>
+        <div id="LinkContainer">
+            <a href="../search.html" class="HelloLink">
+                카페 이용하기
+            </a>
+            <a href="/" class="HelloLink">
+                스탬프투어로 돌아가기
+            </a>
+        </div>
+    </div>
+    <script src="/scripts/root.js"></script>
+    <script>
+        setCookie("user_name", "20603나지성", 7);
+        setCookie("LocalStamp", JSON.stringify(["2B8A5E38-42F6-4C1A-AA98-B7216ACE2556"]), 7);
+    </script>
+</body>
+
+</html>

@@ -138,3 +138,19 @@
 	font-display: swap;
 	src: local('Pretendard Thin'), url(/fonts/Pretendard-Thin.subset.woff2) format('woff2'), url(/fonts/Pretendard-Thin.subset.woff) format('woff'), url(/fonts/Pretendard-Thin.subset.ttf) format('truetype');
 }
+
+@font-face {
+	font-family: 'KoddiUD OnGothic';
+    font-weight: 800;
+	src: url(/fonts/KoddiUDOnGothic/KoddiUDOnGothic-ExtraBold.woff2) format('woff2'), url(/fonts/KoddiUDOnGothic/KoddiUDOnGothic-ExtraBold.woff) format('woff');
+}
+@font-face {
+	font-family: 'KoddiUD OnGothic';
+	font-weight: 700;
+	src: url(/fonts/KoddiUDOnGothic/KoddiUDOnGothic-Bold.woff2) format('woff2'), url(/fonts/KoddiUDOnGothic/KoddiUDOnGothic-Bold.woff) format('woff');
+}
+@font-face {
+	font-family: 'KoddiUD OnGothic';
+	font-weight: 400;
+	src: url(/fonts/KoddiUDOnGothic/KoddiUDOnGothic-Regular.woff2) format('woff2'), url(/fonts/KoddiUDOnGothic/KoddiUDOnGothic-Regular.woff) format('woff');
+}

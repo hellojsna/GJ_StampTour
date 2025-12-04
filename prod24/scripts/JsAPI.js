@@ -1,0 +1,1 @@
+var getJSON=function(n,e){var s=new XMLHttpRequest;s.open("GET",n,!0),s.responseType="json",s.onload=function(){var n=s.status;e(200===n?null:n,s.response)},s.send()},getXML=function(n,e){var s=new XMLHttpRequest;s.open("GET",n,!0),s.responseType="xml",s.onload=function(){var n=s.status;e(200===n?null:n,s.response)},s.send()};

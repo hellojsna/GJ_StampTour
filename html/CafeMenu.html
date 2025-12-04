@@ -1,0 +1,143 @@
+<!--
+  CafeIntro.html
+  GJ_StampTour
+
+  Created by Js Na on 2024/12/16.
+  Copyright © 2024 Js Na, All rights reserved.
+-->
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- theme color -->
+    <meta name="theme-color" content="#0037AA">
+    <title>Code Brew | 프로그래밍 동아리 통합 부스</title>
+    <style>
+        @import url('/css/root.css');
+        @import url('/css/font.css');
+        @import url('/css/cafe.css');
+    </style>
+</head>
+
+<body>
+    <div id="MainTitleBar" class="titleBar">
+        <img class="titleLogo" src="../images/CodeBrewLogo.png" alt="Code Brew">
+    </div>
+    <div id="MainJs">
+        <div id="HelloContainer">
+            <div id="HelloText1" class="MainWelcomeMessage" style="z-index: 5;">
+                <h1>안녕하세요.</h1>
+            </div>
+            <div id="HelloText2" class="MainWelcomeMessage" style="z-index: 5;">
+                <h1>카페 주문을 도와드릴게요.</h1>
+            </div>
+        </div>
+        <div id="LinkContainer">
+            <a id="A1" href="./CafeMenu.html?Q=1" class="HelloLink">
+                시작하기
+            </a>
+        </div>
+    </div>
+    <script src="/scripts/root.js"></script>
+    <script>
+        // check if decodeURIComponent(getCookie("user_name")) is not null
+        // if not null, show the user name
+        // if null, redirect to index page
+        let userName = decodeURIComponent(getCookie("user_name"));
+        let CafeTable = decodeURIComponent(getCookie("CafeTable"));
+        let MenuQuestion = getParameter("Q");
+        let AddAnswer = getParameter("A");
+        if (AddAnswer) {
+            // getCookie("CafeAnswer")에 AddAnswer를 추가해서 setCookie
+            let CafeAnswer = decodeURIComponent(getCookie("CafeAnswer"));
+            if (CafeAnswer == "null") {
+                CafeAnswer = AddAnswer;
+            } else {
+                CafeAnswer = `${CafeAnswer},${AddAnswer}`;
+            }
+            setCookie("CafeAnswer", CafeAnswer, 7);
+        }
+        if (userName == "null") {
+            window.location.href = "/";
+        } else {
+            userName = userName.substring(5);
+            eById('HelloText1').innerHTML = `<h1>${userName}님,</h1>${document.getElementById('HelloText1').innerHTML}<p>[${CafeTable}]</p>`;
+            eById('HelloText2').innerHTML = `<p>${userName}님, 안녕하세요.</p>${document.getElementById('HelloText2').innerHTML}`;
+            eById('A1').innerHTML = `[${CafeTable}] 주문하기`;
+        }
+        switch (MenuQuestion) {
+            case "1":
+                deleteCookie("CafeAnswer");
+                eById('HelloText1').innerHTML = '<p>간단한 질문부터 시작해 볼게요.</p><h1>' + userName + '님의 취향을 알려주세요.</h1>';
+                eById('HelloText2').innerHTML = '<p>' + userName + '님의 취향을 알려주세요.</p><h1>어떤 맛을 좋아하시나요?</h1>';
+                eById("LinkContainer").innerHTML = '<a id="A1" href="./CafeMenu.html?Q=2&A=Q1:A1" class="HelloLink">🍋 상큼한 맛</a><a id="A2" href="./CafeMenu.html?Q=2&A=Q1:A3" class="HelloLink">🍫 달콤한 맛</a><a id="A3" href="./CafeMenu.html?Q=2&A=Q1:A5" class="HelloLink">🥜 고소한 맛</a>';
+                break;
+            case "2":
+                eById('HelloText1').innerHTML = '<p>잘 알겠어요.</p><h1>다음 질문입니다.</h1>';
+                eById('HelloText2').innerHTML = '<p>다음 질문입니다.</p><h1>시원한 음료는 어떠세요?</h1>';
+                eById("LinkContainer").innerHTML = '<a id="A1" href="./CafeMenu.html?Q=3&A=Q2:A0" class="HelloLink">❄️ 차가운 것을 원해요.</a><a id="A3" href="./CafeMenu.html?Q=3&A=Q2:A5" class="HelloLink">☕ 따뜻한 음료를 원해요.</a>';
+                break;
+            case "3":
+                eById("HelloText1").innerHTML = '<p>거의 다 됐어요.</p><h1>조금만 더 알아볼게요.</h1>';
+                eById("HelloText2").innerHTML = '<p>조금만 더 알아볼게요.</p><h1>어떤 것을 더 선호하시나요?</h1>';
+                eById("LinkContainer").innerHTML = '<a id="A1" href="./CafeMenu.html?Q=4&A=Q3:A0" class="HelloLink">🍎 과일 베이스</a><a id="A2" href="./CafeMenu.html?Q=4&A=Q3:A5" class="HelloLink">☕ 커피 베이스</a><a id="A3" href="./CafeMenu.html?Q=4&A=Q3:A3" class="HelloLink">상관 없어요.</a>';
+                break;
+            case "4":
+                eById("HelloText1").innerHTML = '<p>그렇군요.</p><h1>마지막 질문입니다.</h1>';
+                eById("HelloText2").innerHTML = '<p>마지막 질문입니다.</p><h1>선호하는 음료의 질감을 알려주세요.</h1>';
+                eById("LinkContainer").innerHTML = '<a id="A1" href="./CafeMenu.html?Q=5&A=Q4:A0" class="HelloLink">💧 깔끔하고 산뜻한 질감</a><a id="A2" href="./CafeMenu.html?Q=5&A=Q4:A3" class="HelloLink">🥛 부드럽고 크리미한 질감</a><a id="A2" href="./CafeMenu.html?Q=5&A=Q4:A5" class="HelloLink">🧊 씹는 맛이 있는 질감</a>';
+                break;
+            case "5":
+                let CafeAnswer = decodeURIComponent(getCookie("CafeAnswer"));
+                // if caseanswer starts with , remove the first character
+                if (CafeAnswer.startsWith(",")) {
+                    CafeAnswer = CafeAnswer.substring(1);
+                }
+                let AnswerList = CafeAnswer.split(',');
+                let Q1 = AnswerList[0].split(':')[1]; // 어떤 맛을 선호하시나요? (A1: 상큼한 맛, A2: 달콤한 맛, A3: 고소한 맛)
+                let Q2 = AnswerList[1].split(':')[1]; // 시원한 음료 (A1: 차가운 걸 원해요., A2: 따뜻한 음료를 원해요.)
+                let Q3 = AnswerList[2].split(':')[1]; // 선호하는 베이스 (A1: 과일 베이스, A2: 커피 베이스, A3: 상관 없어요)
+                let Q4 = AnswerList[3].split(':')[1]; // 선호하는 질감 (A1: 깔끔하고 산뜻한 질감, A2: 부드럽고 크리미한 질감, A3: 씹는 맛이 있는 질감)
+                let score = 0;
+                score += parseInt(Q1.replace("A", ""));
+                score += parseInt(Q2.replace("A", ""));
+                score += parseInt(Q3.replace("A", ""));
+                score += parseInt(Q4.replace("A", ""));
+
+                let MenuRcommendation = "아포가토";
+                if (score <= 4) {
+                    MenuRcommendation = "청포도에이드";
+                } else if (score <= 7) {
+                    MenuRcommendation = "레몬에이드";
+                } else if (score <= 10) {
+                    MenuRcommendation = "초코라떼";
+                } else if (score <= 13) {
+                    MenuRcommendation = "자바칩 프라푸치노";
+                }
+                eById("HelloText1").innerHTML = '<p>좋아요.</p><h1>맞춤 메뉴를 추천해 드릴게요.</h1>';
+                eById("HelloText2").innerHTML = `<p>${userName}님의 맞춤 메뉴는...</p><h1>${MenuRcommendation} 입니다.</h1>`;
+                eById("LinkContainer").innerHTML = `<a id="A1" href="./CafeOrder?M=${MenuRcommendation}" class="HelloLink">좋아요. 이걸로 주세요.</a><a id="A2" href="./CafeMenu.html?Q=1" class="HelloLink">다시 시작하기</a>`;
+                break;
+            default:
+                break;
+        }
+        setTimeout(() => {
+            document.getElementById('HelloText1').classList.add('visible');
+        }, 100);
+        setTimeout(() => {
+            document.getElementById('HelloText1').classList.add('blur');
+            document.getElementById('HelloText1').style.opacity = 0;
+        }, 2000);
+        setTimeout(() => {
+            document.getElementById('HelloText2').classList.add('visible');
+        }, 2100);
+        setTimeout(() => {
+            document.getElementById('LinkContainer').classList.add('visible');
+        }, 2100);
+
+    </script>
+</body>
+
+</html>

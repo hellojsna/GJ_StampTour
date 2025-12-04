@@ -19,7 +19,8 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: #ffffff;
+    background-color: var(--PrimaryBackground);
+    color: var(--PrimaryText);
     top: 0;
     left: 0;
     width: 100%;

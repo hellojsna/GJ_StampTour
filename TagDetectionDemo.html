@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tag Detection Demo | Js Na</title>
+
+
+    <!-- import aframe and then ar.js with image tracking / location based features -->
+    <script
+        src="https://cdn.jsdelivr.net/gh/aframevr/aframe@1c2407b26c61958baa93967b5412487cd94b290b/dist/aframe-master.min.js"></script>
+    <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js"></script>
+    <!-- style for the loader -->
+    <style>
+        .arjs-loader {
+            height: 100%;
+            width: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .arjs-loader div {
+            text-align: center;
+            font-size: 1.25em;
+            color: white;
+        }
+    </style>
+</head>
+
+<body style="margin : 0px; overflow: hidden; width: 100%; height: 100%;">
+    <!-- minimal loader shown until image descriptors are loaded. Loading may take a while according to the device computational power -->
+    <div id="StatusDisplay"
+        style="width: 100px; height: 50px; position: fixed; z-index: 5678; top: 0; left: 0; background-color: white;">상태
+        표시</div>
+    <video id="video" width="500" height="500" autoplay muted playsinline></video>
+
+    <script type="text/javascript" src="https://unpkg.com/@zxing/library@latest"></script>
+    <script>
+        window.addEventListener('load', async function () {
+            const codeReader = new ZXing.BrowserDatamatrixCodeReader();
+            console.log('ZXing BrowserDatamatrixCodeReader initialized');
+
+            let video = document.getElementById("video");
+            let stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: { exact: "environment" } }, audio: false });
+            video.srcObject = stream;
+            let selectedDeviceId = stream.getVideoTracks()[0].getSettings().deviceId;
+            codeReader.decodeFromInputVideoDeviceContinuously(selectedDeviceId, 'video', (result, err) => {
+                if (err) {
+                    console.error(err);
+                    document.getElementById('StatusDisplay').textContent = "";
+                } else if (result) {
+                    console.log('Found Data Matrix code!', result);
+                    document.getElementById('StatusDisplay').textContent = result.text;
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

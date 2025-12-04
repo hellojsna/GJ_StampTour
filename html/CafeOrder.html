@@ -1,0 +1,85 @@
+<!--
+  CafeIntro.html
+  GJ_StampTour
+
+  Created by Js Na on 2024/12/16.
+  Copyright © 2024 Js Na, All rights reserved.
+-->
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- theme color -->
+    <meta name="theme-color" content="#0037AA">
+    <title>Code Brew | 프로그래밍 동아리 통합 부스</title>
+    <style>
+        @import url('/css/root.css');
+        @import url('/css/font.css');
+        @import url('/css/cafe.css');
+        #MainJs {
+            color: var(--PrimaryText);
+        }
+        h1, p {
+            text-align: center;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div id="MainTitleBar" class="titleBar">
+        <img class="titleLogo" src="../images/CodeBrewLogo.png" alt="Code Brew">
+    </div>
+    <div id="MainJs">
+    </div>
+    <script src="/scripts/root.js"></script>
+    <script>
+        var MenuName = getParameter("M");
+
+        var OrderUserName = decodeURIComponent(getCookie("user_name"));
+        userName = OrderUserName.substring(5);
+        var OrderUserID = decodeURIComponent(getCookie("user_id"));
+        if (decodeURIComponent(getCookie("CafeOrderID")) != "null") {
+            let h1 = document.createElement("h1");
+            h1.innerHTML = `${userName}님, 주문이 접수되었습니다.`;
+            eById('MainJs').appendChild(h1);
+            let p = document.createElement("p");
+            p.innerHTML = `주문 코드: ${decodeURIComponent(getCookie("CafeOrderID"))}<br>주문 메뉴: ${MenuName}`;
+            eById('MainJs').appendChild(p);
+            let p2 = document.createElement("p");
+            p2.innerHTML = `프로그래밍부 스탬프 적립이 완료되었습니다.<br>음료를 수령하신 후 창을 닫아주세요.`;
+            eById('MainJs').appendChild(p2);
+        } else {
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "https://cors-proxy.jsna.workers.dev/https://gajwa.dev/CodeBrewBack/new-order.php", true);
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            xhr.send("OrderUserName=" + OrderUserName + "&OrderUserID=" + OrderUserID + "&MenuName=" + MenuName);
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    console.log(xhr.responseText);
+                    let h1 = document.createElement("h1");
+                    h1.innerHTML = `${userName}님, 주문이 접수되었습니다.`;
+                    eById('MainJs').appendChild(h1);
+                    let p = document.createElement("p");
+                    // response to json
+                    let response = JSON.parse(xhr.responseText);
+                    p.innerHTML = `주문 코드: ${response.OrderID}<br>주문 메뉴: ${MenuName}`;
+                    eById('MainJs').appendChild(p);
+                    let p2 = document.createElement("p");
+                    p2.innerHTML = `프로그래밍부 스탬프 적립이 완료되었습니다.<br>음료를 수령하신 후 창을 닫아주세요.`;
+                    eById('MainJs').appendChild(p2);
+                    setCookie("CafeOrderID", response.OrderID, 7);
+                    // create invisible iframe to stamp (https://stamp.gajwa.dev/check?s=EB6B6A14-56B5-472C-A1FA-A6FBAB4E365F)
+                    let iframe = document.createElement("iframe");
+                    iframe.src = `https://stamp.gajwa.dev/check?s=EB6B6A14-56B5-472C-A1FA-A6FBAB4E365F#DoNotClose`;
+                    //iframe.style.display = "none";
+                    document.body.appendChild(iframe);
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>

@@ -14,13 +14,13 @@ function getCookie(name) {
     return value ? value[2] : null;
 }
 
-function checkStamp() {
+function checkStamp(stampId, closeWindow = true) {
     let stampJSON = getCookie("LocalStamp");
     console.log(stampJSON);
     if (stampJSON == null) {
         // new array
         console.log("new array");
-        let stampList = ["%STAMP_ID%"];
+        let stampList = [stampId];
         console.log(stampList);
         console.log(JSON.stringify(stampList));
         setCookie("LocalStamp", JSON.stringify(stampList), 7);
@@ -29,20 +29,20 @@ function checkStamp() {
         console.log("append");
         stampJSON = decodeURIComponent(stampJSON);
         let stampList = JSON.parse(stampJSON);
-        stampList.push("%STAMP_ID%");
+        stampList.push(stampId);
         setCookie("LocalStamp", JSON.stringify(stampList), 7);
     }
     setTimeout(() => {
         eById("successAlert").classList.add("show");
         eById("successVideo").play();
-
-        setTimeout(() => {
-            if (getCookie("ShowGuide") != null) {
-                window.opener = null; window.open('', '_self'); window.close(); window.history.go(-1); $(document.body).hide();
-            }
-            window.location.href = "/";
-        }, 4000);
+        if (closeWindow) {
+            setTimeout(() => {
+                if (getCookie("ShowGuide") != null) {
+                    window.opener = null; window.open('', '_self'); window.close(); window.history.go(-1); $(document.body).hide();
+                }
+                window.location.href = "/";
+            }, 4000);
+        }
 
     }, 500);
 }
-checkStamp();

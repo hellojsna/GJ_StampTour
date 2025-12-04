@@ -82,11 +82,52 @@ body {
     align-items: center;
     justify-content: center;
 }
+.ModalTitleContainer {
+    display: flex;
+    justify-content: space-between;
+}
+#ClassInfoModalTitle, #CMStampStatus {
+    margin: 0;
+    font-size: 1.2em;
+    font-weight: 300;
+}
 #CMStampName {
-    margin-bottom: 0;
+    margin-bottom: 0.3em;
 }
 #CMStampDesc {
-    margin-top: 0;
+    margin: 0;
+}
+#CMStampStatus {
+    min-width: 50%;
+    text-align: right;
+    margin: 0 0 0.5em 0.5em;
+    opacity: 0.5;
+}
+#CMStampStatus.checked {
+    opacity: 1;
+    color: var(--green) !important;
+}
+
+#CMStampType {
+    display: inline-block;
+    margin-bottom: 0.2em;
+    border-radius: 9999px;
+    padding: 0.2em 0.4em;
+    color: #000000;
+}
+#CMStampType.gongyeon {
+    background-color: var(--red);
+    filter: brightness(1.7);
+}
+#CMStampType.jeonsi {
+    background-color: var(--link);
+    color: #ffffff;
+}
+#CMStampType.jeonsicheheom {
+    background-color: var(--green);
+}
+#CMStampType.cheheom {
+    background-color: var(--yellow);
 }
 #GuideText {
     font-weight: 600;
@@ -167,8 +208,8 @@ body {
 }
 
 #FloorSelect a {
-    background-color: #ffffff;
-    color: #4E7CF1;
+    background-color: var(--SecondaryBackground);
+    color: var(--PrimaryText);
     margin-bottom: 0.2em;
     border: 2px solid #4E7CF1;
 }
@@ -184,18 +225,22 @@ body {
     width: 100%;
     height: 100%;
 }
+.MapContainer * {
+    font-family: 'KoddiUD OnGothic', sans-serif !important;
+}
 
 .MapContainer svg {
-    width: 1400px;
-    height: 1400px;
+    width: 1200px; /* 1140px; */
+    height: 1550px;
     visibility: hidden;
     position: absolute;
     background: none;
     touch-action: pan-x pan-y;
 }
 
+
 #MainMapView {
-    background-color: #ffffff;
+    background-color: var(--PrimaryBackground);
     overflow: hidden;
     width: 1400px;
     height: 1400px;
@@ -211,13 +256,26 @@ body {
 }
 
 svg text {
-    font-size: 1.5em;
+    font-size: 1.6em;
     font-weight: bold;
-    fill: #ffffff;
+    fill: var(--PrimaryText);
     stroke: none;
     text-anchor: middle;
-    dominant-baseline: middle;
+    /* dominant-baseline: middle; */
+    dominant-baseline: central;
 }
+.verticalText {
+    -webkit-text-orientation: upright;
+    writing-mode: vertical-rl;
+    text-orientation: upright;
+}
+.small {
+    font-size: 1.3em;
+}
+text.extraSmall {
+    font-size: 1em;
+}
+
 
 rect {
     stroke: #809bf3;
@@ -227,17 +285,44 @@ rect {
     fill: #4E7CF1;
 }
 
+.classroom text {
+    fill: #ffffff;
+}
 .notClassroom {
     fill: #4E7CF133;
 }
-
-.notClassroom text {
-    fill: #000000;
+.hallway {
+    fill: #aaaaaa55;
+    stroke: none;
+}
+.node {
+    fill: #F73663;
+    visibility: hidden;
+}
+.entranceSpace {
+    fill: #4E7CF1;
+}
+.entranceUp {
+    fill: url(#EntranceUpGradient);
+}
+.entranceDown {
+    fill: url(#EntranceDownGradient);
+}
+.entranceRight {
+    fill: url(#EntranceRightGradient);
+}
+.entranceClosed {
+    filter: grayscale(1);
+}
+.EntranceGradient1 {
+    stop-color: #4E7CF1;
+}
+.EntranceGradient2 {
+    stop-color: #4E7CF100;
 }
 
-.hallway {
-    fill: #dadada;
-    stroke: none;
+.stairs {
+    fill: #f7366390;
 }
 
 .StampView {
@@ -370,5 +455,24 @@ rect {
     }
     .GuideText {
         font-size: 1em;
+    }
+}
+@media (max-height: 670px) {
+    .GuideVideo {
+        max-height: 35vh;
+    }
+    .GuideContainer {
+        padding: 0.5em;
+    }
+    #UserRegisterContainer {
+        margin: 2em 0;
+    }
+}
+@media (prefers-color-scheme: dark) {
+    .classroom {
+        fill: #4E7CF19F;
+    }
+    .notClassroom {
+        fill: #4E7CF140;
     }
 }
