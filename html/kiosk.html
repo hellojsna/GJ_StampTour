@@ -13,8 +13,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>키오스크 | 스탬프투어</title>
     <style>
-        @import url('/css/font.css');
-        @import url('/css/root.css');
+        @import url('./css/font.css');
+        @import url('./css/root.css');
 
         :root {
             --screenSaverBackground: #001b4d;
@@ -321,6 +321,9 @@
         <input type="text" id="Control-APIEndpoint" placeholder="API 엔드포인트" value="https://api.stamptour.example/scan">
         <br>
         <input type="text" id="Control-stampID" placeholder="스탬프 ID" value="591DC6BF-BFF6-466F-952E-07655A53C78D">
+        <br>
+        <input type="text" id="Control-scanData" placeholder="스캔한 값" value="123123-591DC6BF-BFF6-466F-952E-07655A53C78D">
+        <button id="Control-SetScanData">스캔 시뮬레이션</button>
         <p>동작 제어</p>
         <input type="checkbox" id="Control-MuteToggle">무음 모드</input>
         <button id="Control-TriggerScreenSaver">화면 보호기</button>

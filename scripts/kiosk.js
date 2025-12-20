@@ -52,6 +52,30 @@ var DEBUG_kiosk_API_url = "https://api.stamptour.example/scan"; // 키오스크 
 
 var DEBUG_kiosk_stamp_id = "591DC6BF-BFF6-466F-952E-07655A53C78D"; // 테스트용 스탬프 ID, 실제 운영 시 서버에서 할당 필요
 
+function handleScan(data) {
+    // MARK: 스캔한 데이터 처리
+    getJSON(`${DEBUG_kiosk_API_url}?stamp_id=${DEBUG_kiosk_stamp_id}&data=${encodeURIComponent(data)}`, function (err, res) {
+        if (err != null) {
+            console.error(`QR 코드 스캔 처리 중 오류 발생: ${err}`);
+            kioskScanFeedback("fail");
+            return;
+        }
+        try {
+            console.log("QR 코드 스캔 처리 결과:", res);
+            if (res.status == "success") {
+                kioskScanFeedback("success");
+            } else if (res.status == "already") {
+                kioskScanFeedback("already");
+            } else {
+                console.log("오류");
+                kioskScanFeedback("fail");
+            }
+        } catch (e) {
+            console.error("코드 처리 중 예외 발생:", e);
+            kioskScanFeedback("fail");
+        }
+    });
+}
 function setupScanner() {
     let config = {
         fps: 30,
@@ -61,27 +85,7 @@ function setupScanner() {
     let html5Qrcode = new Html5Qrcode("reader", config);
     html5Qrcode.start({ facingMode: "environment" }, config, function (result) {
         // MARK: QR 코드 스캔 성공
-        getJSON(`${DEBUG_kiosk_API_url}?stamp_id=${DEBUG_kiosk_stamp_id}&data=${encodeURIComponent(result)}`, function (err, res) {
-            if (err != null) {
-                console.error(`QR 코드 스캔 처리 중 오류 발생: ${err}`);
-                kioskScanFeedback("fail");
-                return;
-            }
-            try {
-                console.log("QR 코드 스캔 처리 결과:", res);
-                if (res.status == "success") {
-                    kioskScanFeedback("success");
-                } else if (res.status == "already") {
-                    kioskScanFeedback("already");
-                } else {
-                    console.log("오류");
-                    kioskScanFeedback("fail");
-                }
-            } catch (e) {
-                console.error("코드 처리 중 예외 발생:", e);
-                kioskScanFeedback("fail");
-            }
-        });
+        handleScan(result);
     });
 }
 
@@ -148,6 +152,10 @@ function setupControlPanel() {
     });
     eById("Control-stampID").addEventListener("change", function () {
         DEBUG_kiosk_stamp_id = eById("Control-stampID").value;
+    });
+    eById("Control-SetScanData").addEventListener("click", function () {
+        const simulatedData = eById("Control-scanData").value;
+        handleScan(simulatedData);
     });
     eById("Control-MuteToggle").addEventListener("change", function () {
         isSoundMuted = eById("Control-MuteToggle").checked;
