@@ -3,7 +3,7 @@
 //  GJ_StampTour
 //
 //  Created by Js Na on 2023/03/20.
-//  Copyright © 2023 Js Na, All rights reserved.
+//  Copyright © 2023 Js Na. All rights reserved.
 //
 
 function eById(id) {
