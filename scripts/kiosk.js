@@ -1,5 +1,5 @@
 //
-//  pass.js
+//  kiosk.js
 //  GJ_StampTour
 //
 //  Created by Js Na on 2025/12/19.
