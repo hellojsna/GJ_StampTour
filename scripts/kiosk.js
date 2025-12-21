@@ -151,13 +151,8 @@ function kioskScanFeedback(type) {
 }
 
 function setupControlPanel() {
-    eById("Control-APIEndpoint").addEventListener("change", function () {
-        DEBUG_kiosk_API_url = eById("Control-APIEndpoint").value;
-    });
-    eById("Control-stampID").addEventListener("change", function () {
-        DEBUG_kiosk_stamp_id = eById("Control-stampID").value;
-    });
     eById("Control-SetScanData").addEventListener("click", function () {
+        kiosk_stamp_id = eById("Control-stampID").value;
         const simulatedData = eById("Control-scanData").value;
         handleScan(simulatedData);
     });
