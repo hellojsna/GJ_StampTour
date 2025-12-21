@@ -508,6 +508,7 @@
 </div>
     <div id="ClassInfoModalContainer" class="ModalContainer">
         <div id="ClassInfoModal" class="Modal">
+            <img id="StampBackgroundImage" class="StampBackgroundImage" src="/images/Home.png" alt="배경 이미지">
             <div class="ModalTitleContainer">
                 <h3 id="ClassInfoModalTitle">교실</h3>
                 <p id="CMStampStatus">-</p>
@@ -518,8 +519,6 @@
                     <span id="CMStampType">동아리타입</span>
                     <p id="CMStampDesc">동아리행사내용</p>
                 </span>
-                <!--<p>동아리 정보가 없습니다.</p>-->
-                <!--<span style="display: flex;"><h3>(체크)</h3>&nbsp;&nbsp;<h3>동아리 이름</h3>&nbsp;&nbsp;<h3><a>기록 보기</a></h3></span>-->
             </div>
         </div>
         <button id="ClassInfoModalCloseButton" class="ModalCloseButton">
@@ -541,8 +540,9 @@
                 </video>
                 <div id="UserRegisterContainer">
                     <input id="StudentIdInput" class="UserRegisterInput" type="text" inputmode="numeric" pattern="\d*"
-                        placeholder="학번">
+                        placeholder="학번" maxlength="5">
                     <input id="StudentNameInput" class="UserRegisterInput" type="text" placeholder="이름">
+                    <input id="StudentPasswordInput" class="UserRegisterInput" type="password" inputmode="numeric" pattern="\d*" placeholder="PIN" maxlength="4">
                 </div>
                 <div id="PrivacyPolicyCheckboxContainer">
                     <input type="checkbox" id="PrivacyPolicyCheckbox">
@@ -568,7 +568,7 @@
     </div>
 
     <div class="BottomContainer right">
-        <a id="TagScanButton" href="/scanner" target="_blank">코드 스캔</a>
+        <a id="TagScanButton" href="/pass" target="_blank">방문 인증</a>
     </div>
     <div id="StampView" class="StampView">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -577,8 +577,8 @@
                 d="M7.776 5.553a.5.5 0 0 1 .448 0l6 3a.5.5 0 1 1-.448.894L8 6.56 2.224 9.447a.5.5 0 1 1-.448-.894l6-3z" />
         </svg>
         <span class="StampViewTitle">
-            <h1>스탬프투어</h1>
-            <button id="ShowGuideButton" class="LinkButton">참여 방법 알아보기 &gt;</button>
+            <h1>스탬프 목록</h1>
+            <button id="ShowGuideButton" class="LinkButton">참여 방법 다시 보기 &gt;</button>
             <!--<button id="HelpButton" class="LinkButton">채팅 지원 &gt;</button>-->
 
         </span>

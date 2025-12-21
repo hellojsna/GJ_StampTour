@@ -79,10 +79,11 @@ let NextGuideButton = eById("NextGuideButton");
 
 let StudentIdInput = eById("StudentIdInput");
 let StudentNameInput = eById("StudentNameInput");
+let StudentPasswordInput = eById("StudentPasswordInput");
 
 
 function getStampList() {
-    getJSON(`/api/stampList.json`, function (err, data) {
+    getJSON(`/api/stampList24.json`, function (err, data) {
         if (err != null) {
             alert("스탬프 목록 데이터를 불러오는 중 오류가 발생했습니다.");
         } else if (data !== null) {
@@ -154,20 +155,23 @@ function setStampView() {
 const userAgent = navigator.userAgent.toLowerCase();
 const isTablet = (/(ipad|tablet|(android(?!.*mobile))|(windows(?!.*phone)(.*touch))|kindle|playbook|silk|(puffin(?!.*(IP|AP|WP))))/.test(userAgent) || (userAgent.includes("mac") && navigator.maxTouchPoints > 4 && !userAgent.includes("iphone")));
 
+function validateRegisterInputs() {
+    if (StudentIdInput.value.length == 5 && StudentNameInput.value.length >= 2 && StudentPasswordInput.value.length == 4 && eById("PrivacyPolicyCheckbox").checked) {
+        NextGuideButton.disabled = false;
+    } else {
+        NextGuideButton.disabled = true;
+    }
+}
 function showNextGuide() {
     NextGuideButton.disabled = true;
     VideoPlayer.play();
     VideoPlayer.pause();
     VideoPlayer.style.opacity = 1;
+
     switch (guidePage) {
         case 0:
             VideoPlayer.currentTime = 0;
-
-            if (window.screen.width > 1024 || isTablet) {
-                GuideText.innerText = `${displayDeviceType}에서는 "코드 스캔" 버튼을 눌러서 참여할 수 있어요.`;
-            } else {
-                GuideText.innerText = `${displayDeviceType}의 NFC 인식 위치는 ${displayNFCLocation}이에요.`;
-            }
+            GuideText.innerText = `지도 오른쪽 아래에 있는 방문 인증 버튼을 눌러주세요.`;
             setTimeout(() => {
                 VideoPlayer.play();
                 setTimeout(() => {
@@ -179,11 +183,7 @@ function showNextGuide() {
             break;
             case 1:
                 VideoPlayer.play();
-                if (window.screen.width > 1024 || isTablet) {
-                    GuideText.innerText = `스탬프의 아이콘을 카메라로 스캔해 주세요.`;
-                } else {
-                    GuideText.innerText = `스탬프의 아이콘에 ${displayDeviceType}의 ${displayNFCLocation}을 대주세요.`;
-                }
+                GuideText.innerText = `부스에 있는 태블릿에 QR코드를 스캔해 주세요.`;
                 setTimeout(() => {
                     VideoPlayer.pause();
                     NextGuideButton.innerText = "시작하기";
@@ -206,26 +206,25 @@ function showNextGuide() {
 
             StudentIdInput.addEventListener("input", () => {
                 StudentIdInput.value = StudentIdInput.value.replace(/[^0-9]/g, '');
-                let l = StudentIdInput.value.length;
-                if (l >= 6) {
-                    StudentIdInput.value = StudentIdInput.value.slice(0, 5);
-                } else if (l >= 5) {
-                    StudentNameInput.focus();
-                }
+                validateRegisterInputs();
             });
             StudentNameInput.addEventListener("input", () => {
-                let l = StudentNameInput.value.length;
-                if (l >= 2) {
-                    NextGuideButton.disabled = false;
-                } else {
-                    NextGuideButton.disabled = true;
-                }
+                validateRegisterInputs();
+            });
+            StudentPasswordInput.addEventListener("input", () => {
+                StudentPasswordInput.value = StudentPasswordInput.value.replace(/[^0-9]/g, '');
+                validateRegisterInputs();
+            });
+            eById("PrivacyPolicyCheckbox").addEventListener("change", () => {
+                validateRegisterInputs();
             });
             StudentIdInput.style.display = "block";
             StudentNameInput.style.display = "block";
+            StudentPasswordInput.style.display = "block";
             setTimeout(() => {
                 StudentIdInput.classList.add("show");
                 StudentNameInput.classList.add("show");
+                StudentPasswordInput.classList.add("show");
             }, 100);
             guidePage += 1;
             break;
@@ -248,14 +247,16 @@ function showNextGuide() {
                     NextGuideButton.disabled = false;
                 }
             };
-            xhr.send(`{ "user_name": "${StudentIdInput.value}${StudentNameInput.value}" }`); // 보낼 데이터 지정
+            xhr.send(`{ "user": "${StudentIdInput.value}${StudentNameInput.value}", "password": "${StudentPasswordInput.value}" }`); // 보낼 데이터 지정
             // 내가 여기 왜 xhr을 썼지???
+            // GET이 아니라 POST라서 getJSON 안 쓴 듯?
             break;
         default:
             break;
     }
 }
 function loadGuideVideo(deviceType) {
+    // FIXME: NFC 관련 내용 변경
     let darkMode = window.matchMedia('(prefers-color-scheme: dark)').matches ? "_Dark" : "";
     let source1 = document.createElement("source");
     source1.src = `/videos/Guide_NFC_${deviceType}${darkMode}.webm`;
@@ -292,7 +293,7 @@ if (window.location.hash.startsWith("#Floor")) {
 function filterClassroomName(name) {
     return (name.startsWith("교실") ? `${name.slice(0, 3)}학년 ${name.slice(3)}반`.replace("교실", "").replace(" 0", " ") : name);
 }
-getJSON(`/api/stampList.json`, function (err, data) {
+getJSON(`/api/stampList24.json`, function (err, data) {
     if (err != null) {
         alert("스탬프 목록을 불러오는 중 오류가 발생했습니다.");
     } else if (data !== null) {
@@ -387,27 +388,6 @@ eById("ClassInfoModalCloseButton").addEventListener("click", () => {
 });
 NextGuideButton.addEventListener("click", showNextGuide);
 
-let displayDeviceType = "접속하신 기기";
-let displayNFCLocation = "후면 중앙";
-if (uA.includes("iphone")) {
-    displayDeviceType = "iPhone";
-    displayNFCLocation = "상단";
-    loadGuideVideo("iPhone");
-    document.ondblclick = function (e) {
-        e.preventDefault();
-    }
-} else if (window.screen.width > 1024 || isTablet) {
-    loadGuideVideo("NoNFC");
-    displayDeviceType = "태블릿 또는 NFC 기능이 없는 휴대전화"; 
-} else if (uA.includes("sm-f700") || uA.includes("sm-f707") ||  uA.includes("sm-f711") || uA.includes("sm-f721") || uA.includes("sm-f731") || uA.includes("sm-f741")) {
-    displayDeviceType = "갤럭시 Z 플립";
-    displayNFCLocation = "후면 하단";
-    loadGuideVideo("Bottom");
-} else {
-    loadGuideVideo("Center");
-}
-
-GuideHint.innerText = `${displayDeviceType}에서의 참여 방법을 알려 드릴게요.`;
 eById("ReplayGuideButton").addEventListener("click", () => {
     guidePage = 0;
     showNextGuide();

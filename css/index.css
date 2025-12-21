@@ -82,6 +82,10 @@ body {
     align-items: center;
     justify-content: center;
 }
+
+#ClassInfoModal {
+    position: relative;
+}
 .ModalTitleContainer {
     display: flex;
     justify-content: space-between;
