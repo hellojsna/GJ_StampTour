@@ -1,18 +1,84 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>인증 QR코드 | 스탬프투어</title>
-</head>
-<body>
+    <style>
+        @import url('/css/font.css');
+        @import url('/css/root.css');
 
-    <div id="QRCode"></div>
-    <p id="OTPText">000-000</p>
-    <p id="OTPTime">00초</p>
-    <script type="text/javascript" src="/scripts/totp.min.js"></script>
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            color: var(--PrimaryText);
+            text-align: center;
+        }
+
+        p {
+            margin: 0;
+        }
+
+        #PassMain {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+            padding-top: 3em;
+            box-sizing: border-box;
+        }
+
+        #PassMain > span {
+            padding: 2em 0;
+        }
+        #QRCodeContainer {
+            width: 60vw;
+            height: 60vw;
+            max-width: 15em;
+            max-height: 15em;
+            background-color: #ffffff;
+            padding: 2em;
+            border-radius: 25px;
+        }
+        #QRCode * {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="titleBar" class="titleBar">
+        <img class="titleLogo" src="/images/StampTourLogo.png" alt="스탬프투어">
+        <h2>코드 스캔</h2>
+    </div>
+    <div id="PassMain">
+        <span>
+            <h1>부스 방문 인증</h1>
+            <p>QR코드를 스캔해 주세요.</p>
+        </span>
+        <span>
+            <p id="CurrentTimeDisplay">현재 시각: 00:00:00</p>
+            <p id="CurrentUserDisplay">---</p>
+            <div id="QRCodeContainer">
+                <div id="QRCode"></div>
+            </div>
+        </span>
+        <span>
+            <p id="OTPText">000 000</p>
+            <p id="OTPTime">00초</p>
+        </span>
+    </div>
     <script type="text/javascript" src="/scripts/qrcodegen.min.js"></script>
     <script type="text/javascript" src="/scripts/root.js"></script>
     <script type="text/javascript" src="/scripts/pass.js"></script>
 </body>
+
 </html>

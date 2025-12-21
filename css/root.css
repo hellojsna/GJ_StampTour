@@ -56,7 +56,7 @@ iframe {
 }
 
 .Modal {
-    min-width: 60%;
+    min-width: 80%;
     margin: 1em;
     padding: 1em;
     background-color: var(--SecondaryBackground);
@@ -139,18 +139,20 @@ iframe {
     --ListBackground: #f2f2f7;
     --link: #007aff;
     --blurBackground: rgba(255, 255, 255, .5);
+    --gradientBackground: 255, 255, 255; /* PrimaryBackground와 같음 */
     --red: #ff3b30;
     --yellow: #ffcc00;
     --green: #34c759;
 }
 @media (prefers-color-scheme: dark) {
     :root {
-        --SecondaryBackground: #1c1c1e;
         --PrimaryBackground: #000000;
+        --SecondaryBackground: #1c1c1e;
         --PrimaryText: #ffffff;
         --ListBackground: #2c2c2e;
         --link: #0a84ff;
         --blurBackground: rgba(22, 22, 23, .5);
+        --gradientBackground: 28, 28, 30; /* SecondaryGradient와 같음 */
         --red: #ff453a;
         --yellow: #ffd60a;
         --green: #30d158;

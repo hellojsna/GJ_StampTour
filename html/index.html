@@ -508,17 +508,28 @@
 </div>
     <div id="ClassInfoModalContainer" class="ModalContainer">
         <div id="ClassInfoModal" class="Modal">
-            <img id="StampBackgroundImage" class="StampBackgroundImage" src="/images/Home.png" alt="배경 이미지">
-            <div class="ModalTitleContainer">
-                <h3 id="ClassInfoModalTitle">교실</h3>
-                <p id="CMStampStatus">-</p>
+            <div id="ModalBackgroundView" class="ModalBackgroundView">
+                <img id="StampBackgroundImage" class="StampBackgroundImage" src="/images/CoverImageTest.jpg" alt="배경 이미지">
+                <div id="ModalBackgroundBlur" class="GradientBlurView"></div>
+                <div id="ModalHeaderView">
+                    <div class="ModalTitleContainer">
+                        <h3 id="ClassInfoModalTitle">교실</h3>
+                        <p id="CMStampStatus">-</p>
+                    </div>
+                    <div class="ClassModalContent">
+                        <span>
+                            <h1 id="CMStampName">동아리명</h2>
+                        </span>
+                    </div>
+                </div>
             </div>
-            <div class="ClassModalContent">
-                <span>
-                    <h1 id="CMStampName">동아리명</h2>
-                    <span id="CMStampType">동아리타입</span>
-                    <p id="CMStampDesc">동아리행사내용</p>
-                </span>
+            <div id="ModalContentView">
+                <div class="ClassModalContent">
+                    <span>
+                        <span id="CMStampType">동아리타입</span>
+                        <p id="CMStampDesc">동아리행사내용</p>
+                    </span>
+                </div>
             </div>
         </div>
         <button id="ClassInfoModalCloseButton" class="ModalCloseButton">

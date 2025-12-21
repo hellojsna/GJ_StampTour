@@ -353,6 +353,42 @@ getJSON(`/api/stampList24.json`, function (err, data) {
                 });
             }
         }
+        const remInPx = parseFloat(getComputedStyle(document.documentElement).fontSize) || 16;
+        function calcOptimalGradientStep() {
+            return Math.floor(0.4 * remInPx);
+        }
+        function drawGradientBlur(targetElem, destElem, position = "top", amount = 25) {
+            const elementHeight = Math.floor(targetElem.offsetHeight * 1.5);
+            const stepHeightPx = calcOptimalGradientStep();
+            const steps = Math.max(1, Math.floor(elementHeight / stepHeightPx));
+            const fragment = document.createDocumentFragment();
+            const d = 2 * amount / (steps * (steps + 1));
+            console.log(`Element height: ${elementHeight}px.`);
+            console.log(`Drawing gradient blur with ${steps} steps, each ${stepHeightPx}px.`);
+            for (let i = 1; i <= steps; i++) {
+                const stepDiv = document.createElement('div');
+
+                const currentHeight = i * stepHeightPx;
+
+                const blurValue = (steps - i + 1) * d;
+                stepDiv.setAttribute('style', `${position === 'top' ? 'top: 0;' : 'bottom: 0;'} height: ${currentHeight}px; backdrop-filter: blur(${blurValue}px); -webkit-backdrop-filter: blur(${blurValue}px);`);
+                stepDiv.style.pointerEvents = 'none';
+
+                fragment.appendChild(stepDiv);
+            }
+
+            const container = document.createElement('div');
+            container.style.top = position === 'top' ? '0' : 'auto';
+            container.style.bottom = position === 'bottom' ? '0' : 'auto';
+            container.style.height = `${elementHeight}px`;
+            container.appendChild(fragment);
+            destElem.appendChild(container);
+        }
+        ClassInfoModalContainer.style.opacity = 0;
+        ClassInfoModalContainer.style.display = "flex";
+        drawGradientBlur(eById("ModalBackgroundBlur"), eById("ModalBackgroundBlur"), "bottom");
+        ClassInfoModalContainer.style.display = "none";
+        ClassInfoModalContainer.style.opacity = 1;
     }
 });
 for (let i = 0; i < notClassroomList.length; i++) {
