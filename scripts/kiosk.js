@@ -47,34 +47,38 @@ function setupScreenSaver() {
     resetScreenSaverTimer();
 }
 
-
-var DEBUG_kiosk_API_url = "https://api.stamptour.example/scan"; // 키오스크 스캔 처리 API 엔드포인트
-
-var DEBUG_kiosk_stamp_id = "591DC6BF-BFF6-466F-952E-07655A53C78D"; // 테스트용 스탬프 ID, 실제 운영 시 서버에서 할당 필요
+var kiosk_stamp_id = "591DC6BF-BFF6-466F-952E-07655A53C78D"; // 테스트용 스탬프 ID, 실제 운영 시 서버에서 할당 필요.
 
 function handleScan(data) {
     // MARK: 스캔한 데이터 처리
-    getJSON(`${DEBUG_kiosk_API_url}?stamp_id=${DEBUG_kiosk_stamp_id}&data=${encodeURIComponent(data)}`, function (err, res) {
-        if (err != null) {
-            console.error(`QR 코드 스캔 처리 중 오류 발생: ${err}`);
-            kioskScanFeedback("fail");
-            return;
-        }
-        try {
-            console.log("QR 코드 스캔 처리 결과:", res);
-            if (res.status == "success") {
-                kioskScanFeedback("success");
-            } else if (res.status == "already") {
-                kioskScanFeedback("already");
-            } else {
-                console.log("오류");
+    // FIXME: 백엔드에서 GET으로 안 바꿔줘서 어쩔 수 없이 xhr 사용해서 POST함.
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', "/stamp/issue", true);
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.responseType = 'json';
+    xhr.onload = function () {
+        var status = xhr.status;
+        if (status === 200) {
+            try {
+                console.log("QR 코드 스캔 처리 결과:", res);
+                if (res.status == "success") {
+                    kioskScanFeedback("success");
+                } else if (res.status == "already") {
+                    kioskScanFeedback("already");
+                } else {
+                    console.log("오류");
+                    kioskScanFeedback("fail");
+                }
+            } catch (e) {
+                console.error("코드 처리 중 예외 발생:", e);
                 kioskScanFeedback("fail");
             }
-        } catch (e) {
-            console.error("코드 처리 중 예외 발생:", e);
+        } else {
+            alert(`서버와 통신을 실패했습니다. 다시 시도해 주세요.`);
             kioskScanFeedback("fail");
         }
-    });
+    };
+    xhr.send(`{ "otp": "${data}", "stamp_id": "${kiosk_stamp_id}" }`); // 보낼 데이터 지정
 }
 function setupScanner() {
     let config = {
