@@ -60,6 +60,7 @@ function handleScan(data) {
         var status = xhr.status;
         if (status === 200) {
             try {
+                const res = xhr.response;
                 console.log("QR 코드 스캔 처리 결과:", res);
                 if (res.status == "success") {
                     kioskScanFeedback("success");
