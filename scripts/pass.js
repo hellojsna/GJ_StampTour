@@ -51,7 +51,7 @@ async function generateToken() {
             new QRCode(eById("QRCode"), {
                 text: token, // 서버에서 생성한 토큰으로 QR코드 생성
                 colorDark: "#000000",
-                colorLight: "#ffffff",
+                colorLight: "#ffffff00",
                 correctLevel: QRCode.CorrectLevel.H
             });
         }
@@ -62,7 +62,7 @@ setInterval(async function () {
     // 현재 시각: hh:mm:ss 형식
     eById("CurrentTimeDisplay").innerText = `현재 시각: ${new Date().toTimeString().slice(0, 8)}`;
     timeUntilNextCode -= 1;
-    eById("OTPTime").innerText = `${timeUntilNextCode}초`;
+    eById("OTPTime").innerText = `${timeUntilNextCode}초 후 새로고침`;
     if (isDebugMode) console.log(`다음 토큰 생성까지 ${timeUntilNextCode}초 남음.`);
     if (timeUntilNextCode == 0) {
         if (isDebugMode) console.log("새 토큰 생성");
