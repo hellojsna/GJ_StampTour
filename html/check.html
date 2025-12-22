@@ -36,7 +36,11 @@
 </body>
 <script src="/scripts/check.js"></script>
 <script>
-    stampId = "%STAMP_ID%";
+    function getParameter(name) {
+        if (name = (new RegExp('[?&]' + encodeURIComponent(name) + '=([^&]*)')).exec(location.search))
+            return decodeURIComponent(name[1]);
+    }
+    stampId = getParameter("stampId");
     checkStamp(stampId, !window.location.hash.endsWith("DoNotClose"));
 </script>
 </html>

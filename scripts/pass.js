@@ -6,11 +6,15 @@
 //  Copyright © 2025 Js Na. All rights reserved.
 //
 
-const isDebugMode = true; // PROD에서 false로 설정 요망
+const programmingCafeId = ""; // 프로그래밍부 부스 ID
+
 var user_id = getCookie("user_id");
-var user_name = getCookie("user_name");
-var last_token = "";
+var user_name = decodeURIComponent(getCookie("user_name"));
+var student_id = user_name.replace(/[^0-9]/g, "").slice(-5);
+var last_token_list = [];
+
 var timeUntilNextCode = 30;
+var codeGenerationCount = 0;
 
 var getJSON = function (url, callback) {
     var xhr = new XMLHttpRequest();
@@ -26,48 +30,58 @@ var getJSON = function (url, callback) {
     };
     xhr.send();
 };
-
-if (isDebugMode && (!user_id || !user_name)) {
-    alert("PROD에서 제거 요망: 쿠키에 user_id 또는 user_name 없음.");
-    if (!user_id) user_id = "591DC6BFBFF6466F952E07655A53C78D";
-    if (!user_name) user_name = "12345홍길동";
-}
-
 async function generateToken() {
-    getJSON(`/otp/generate`, function (err, data) {
-        if (err != null) {
-            alert("인증 코드를 불러오는 중 오류가 발생했습니다.");
-        } else if (data !== null) {
-            /*if (last_token == data.last_otp) {
-                // TODO: 백엔드 완성 후 구현
-                // 마지막으로 생성했던 토큰이 인증 처리됨 -> 스탬프 처리 완료
-                // data.last_stamp_id 저장
-            }*/
-            const token = data.otp;
-            last_token = token;
-            eById("OTPText").innerText = `${token.slice(0, 3)} ${token.slice(3, 6)}`;
-            eById("QRCode").innerHTML = "";
+    if (codeGenerationCount > 5) {
+        alert("인증 시간 초과. 메인 화면으로 돌아갑니다.");
+        setTimeout(() => {
+            if (getCookie("ShowGuide") != null) {
+                window.opener = null; window.open('', '_self'); window.close(); window.history.go(-1); $(document.body).hide();
+            }
+            window.location.href = "/";
+        }, 100);
+    } else {
+        getJSON(`/otp/generate`, function (err, data) {
+            if (err != null) {
+                alert("인증 코드를 불러오는 중 오류가 발생했습니다.");
+            } else if (data !== null) {
+                if (data.last !== null) {
+                    if (last_token_list.includes(data.last.otp)) {
+                        // TODO: 백엔드 완성 후 구현
+                        // 마지막으로 생성했던 토큰이 인증 처리됨 -> 스탬프 처리 완료
+                        // data.last_stamp_id 저장
+                        if (data.last.stamp_id == programmingCafeId) {
+                            // 프로그래밍 카페 주문 페이지로 리다이렉트
+                            console.log("프로그래밍부");
+                            window.location.href = `http://210.91.63.199:5000/?student_id=${student_id}`;
+                        } else {
+                            window.location.href = `/check?stampId=${data.last.stamp_id}`;
+                        }
+                    }
+                }
+                const token = data.otp;
+                last_token_list.push(token);
+                eById("OTPText").innerText = `${token.slice(0, 3)} ${token.slice(3, 6)}`;
+                eById("QRCode").innerHTML = "";
 
-            new QRCode(eById("QRCode"), {
-                text: token, // 서버에서 생성한 토큰으로 QR코드 생성
-                colorDark: "#000000",
-                colorLight: "#ffffff00",
-                correctLevel: QRCode.CorrectLevel.H
-            });
-        }
-    });
+                new QRCode(eById("QRCode"), {
+                    text: token, // 서버에서 생성한 토큰으로 QR코드 생성
+                    colorDark: "#000000",
+                    colorLight: "#ffffff00",
+                    correctLevel: QRCode.CorrectLevel.H
+                });
+                codeGenerationCount += 1;
+            }
+        });
+    }
 }
 generateToken();
 setInterval(async function () {
-    // 현재 시각: hh:mm:ss 형식
     eById("CurrentTimeDisplay").innerText = `현재 시각: ${new Date().toTimeString().slice(0, 8)}`;
     timeUntilNextCode -= 1;
     eById("OTPTime").innerText = `${timeUntilNextCode}초 후 새로고침`;
-    if (isDebugMode) console.log(`다음 토큰 생성까지 ${timeUntilNextCode}초 남음.`);
     if (timeUntilNextCode == 0) {
-        if (isDebugMode) console.log("새 토큰 생성");
         await generateToken();
-        timeUntilNextCode = 30;
+        timeUntilNextCode = 10;
     }
 }, 1000);
 

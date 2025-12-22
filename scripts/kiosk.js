@@ -64,18 +64,14 @@ function handleScan(data) {
                 console.log("QR 코드 스캔 처리 결과:", res);
                 if (res.status == "success") {
                     kioskScanFeedback("success");
-                } else if (res.status == "already") {
-                    kioskScanFeedback("already");
-                } else {
-                    console.log("오류");
-                    kioskScanFeedback("fail");
                 }
             } catch (e) {
                 console.error("코드 처리 중 예외 발생:", e);
                 kioskScanFeedback("fail");
             }
         } else {
-            alert(`서버와 통신을 실패했습니다. 다시 시도해 주세요.`);
+            // 이미 쓴 거 400 리턴
+            //alert(`서버와 통신을 실패했습니다. 다시 시도해 주세요.`);
             kioskScanFeedback("fail");
         }
     };
@@ -88,9 +84,15 @@ function setupScanner() {
         formatsToSupport: [Html5QrcodeSupportedFormats.QR_CODE],
     };
     let html5Qrcode = new Html5Qrcode("reader", config);
+    var scanLocked = false;
     html5Qrcode.start({ facingMode: "environment" }, config, function (result) {
         // MARK: QR 코드 스캔 성공
+        if (scanLocked) return;
+        scanLocked = true;
         handleScan(result);
+        setTimeout(function () {
+            scanLocked = false;
+        }, 5000);
     });
 }
 
@@ -152,6 +154,9 @@ function kioskScanFeedback(type) {
 }
 
 function setupControlPanel() {
+    eById("Control-stampID").addEventListener("change", function () {
+        kiosk_stamp_id = eById("Control-stampID").value;
+    });
     eById("Control-SetScanData").addEventListener("click", function () {
         kiosk_stamp_id = eById("Control-stampID").value;
         const simulatedData = eById("Control-scanData").value;
