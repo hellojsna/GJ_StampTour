@@ -2,8 +2,8 @@
   check.html
   GJ_StampTour
 
-  Created by Js Na on 2023/09/13.
-  Copyright © 2023 Js Na, All rights reserved.
+  Created by Js Na on 2025/12/23.
+  Copyright © 2025 Js Na. All rights reserved.
 -->
 <!DOCTYPE html>
 <html lang="ko">
@@ -36,7 +36,11 @@
 </body>
 <script src="/scripts/check.js"></script>
 <script>
-    stampId = "%STAMP_ID%";
+    function getParameter(name) {
+        if (name = (new RegExp('[?&]' + encodeURIComponent(name) + '=([^&]*)')).exec(location.search))
+            return decodeURIComponent(name[1]);
+    }
+    stampId = getParameter("stampId");
     checkStamp(stampId, !window.location.hash.endsWith("DoNotClose"));
 </script>
 </html>

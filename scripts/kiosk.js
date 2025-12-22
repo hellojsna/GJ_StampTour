@@ -24,6 +24,8 @@ var getJSON = function (url, callback) {
     xhr.send();
 };
 
+const programmingCafeId = ""; // 프로그래밍부 부스 ID
+
 let screenSaverTimeout;
 const screenSaverDelay = 60000; // 1분
 function activateScreenSaver() {
@@ -63,7 +65,12 @@ function handleScan(data) {
                 const res = xhr.response;
                 console.log("QR 코드 스캔 처리 결과:", res);
                 if (res.status == "success") {
-                    kioskScanFeedback("success");
+                    kioskScanFeedback("success", res.user_name);
+                    if (kiosk_stamp_id == programmingCafeId) {
+                        setTimeout(() => {
+                            window.location.href = `http://210.91.63.199:5000/?student_id=${res.student_id}`;
+                        }, 1000);
+                    }
                 }
             } catch (e) {
                 console.error("코드 처리 중 예외 발생:", e);
@@ -97,7 +104,7 @@ function setupScanner() {
 }
 
 var isSoundMuted = false;
-function kioskScanFeedback(type) {
+function kioskScanFeedback(type, user_name) {
     function playSound(sound) { // iOS WebKit 및 일부 브라우저 호환성 처리 필요함.
         if (isSoundMuted) return;
         const soundMap = {
@@ -136,7 +143,7 @@ function kioskScanFeedback(type) {
     eById("ScannerImage").classList.add(type);
     switch (type) {
         case "success":
-            eById("ScanResult").innerText = "방문 인증 완료.\n홍길동님, 환영합니다.";
+            eById("ScanResult").innerText = `방문 인증 완료.\n${user_name}님, 환영합니다.`;
             playSound("success");
             break;
         case "already":

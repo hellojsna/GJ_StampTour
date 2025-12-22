@@ -52,9 +52,9 @@ async function generateToken() {
                         if (data.last.stamp_id == programmingCafeId) {
                             // 프로그래밍 카페 주문 페이지로 리다이렉트
                             console.log("프로그래밍부");
-                            window.location.href = `http://210.91.63.199:5000/?student_id=${student_id}`;
+                            window.location.href = `http://210.91.63.199:5000/wait/${student_id}`;
                         } else {
-                            window.location.href = `/check?stampId=${data.last.stamp_id}`;
+                            window.location.href = `/check_local?stampId=${data.last.stamp_id}`;
                         }
                     }
                 }
