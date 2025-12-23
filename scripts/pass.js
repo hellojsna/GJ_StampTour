@@ -13,7 +13,7 @@ var user_name = decodeURIComponent(getCookie("user_name"));
 var student_id = user_name.replace(/[^0-9]/g, "").slice(-5);
 var last_token_list = [];
 
-var timeUntilNextCode = 30;
+var timeUntilNextCode = 7;
 var codeGenerationCount = 0;
 
 var getJSON = function (url, callback) {
@@ -31,7 +31,7 @@ var getJSON = function (url, callback) {
     xhr.send();
 };
 async function generateToken() {
-    if (codeGenerationCount > 5) {
+    if (codeGenerationCount > 10) {
         alert("인증 시간 초과. 메인 화면으로 돌아갑니다.");
         setTimeout(() => {
             if (getCookie("ShowGuide") != null) {
@@ -81,7 +81,7 @@ setInterval(async function () {
     eById("OTPTime").innerText = `${timeUntilNextCode}초 후 새로고침`;
     if (timeUntilNextCode == 0) {
         await generateToken();
-        timeUntilNextCode = 10;
+        timeUntilNextCode = 7;
     }
 }, 1000);
 
