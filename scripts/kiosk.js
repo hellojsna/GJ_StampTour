@@ -157,6 +157,8 @@ function handleScan(data) {
                 console.error("코드 처리 중 예외 발생:", e);
                 kioskScanFeedback("fail");
             }
+        } else if (status === 409) {
+            kioskScanFeedback("already");
         } else {
             // 이미 쓴 거 400 리턴
             //alert(`서버와 통신을 실패했습니다. 다시 시도해 주세요.`);
@@ -223,7 +225,7 @@ function resumeScanner() {
     }
 }
 
-var isSoundMuted = false;
+var isSoundMuted = true;
 function kioskScanFeedback(type, user_name) {
     function playSound(sound) { // iOS WebKit 및 일부 브라우저 호환성 처리 필요함.
         if (isSoundMuted) return;
