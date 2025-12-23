@@ -193,7 +193,6 @@ function showNextGuide() {
                 GuideText.innerText = `부스에 있는 태블릿에 QR코드를 스캔해 주세요.`;
                 setTimeout(() => {
                     VideoPlayer.pause();
-                    NextGuideButton.innerText = "시작하기";
                     NextGuideButton.disabled = false;
                     eById("ReplayButtonContainer").style.display = "block";
                 }, 4000);
@@ -230,7 +229,6 @@ function showNextGuide() {
             GuideHint.style.color = "inherit";
 
             NextGuideButton.disabled = true;
-            NextGuideButton.innerText = "시작하기";
             StudentIdInput.style.display = "none";
             StudentNameInput.style.display = "none";
             StudentPasswordInput.addEventListener("input", () => {
@@ -249,6 +247,7 @@ function showNextGuide() {
         case 4:
             GuideTitle.innerText = "개인정보 수집·이용 동의";
             GuideHint.innerText = "개인정보처리방침을 확인해 주세요.";
+            NextGuideButton.innerText = "시작하기";
             eById("UserRegisterContainer").style.display = "none";
             eById("RegisterPrivacyPolicyIframe").style.display = "block";
             PrivacyPolicyCheckboxContainer.style.display = "flex";
@@ -282,16 +281,24 @@ function showNextGuide() {
     }
 }
 function loadGuideVideo() {
+    let iOS = (/iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream);
     let darkMode = window.matchMedia('(prefers-color-scheme: dark)').matches ? "_Dark" : "";
-    let source1 = document.createElement("source");
-    source1.src = `/videos/Guide_2025${darkMode}.webm`;
-    source1.type = "video/webm";
-    let source2 = document.createElement("source");
-    source2.src = `/videos/Guide_2025${darkMode}.mp4`;
-    source2.type = "video/mp4";
+    if (iOS) {
+        let iOSsource = document.createElement("source");
+        iOSsource.src = `/videos/Guide_2025_iOS${darkMode}.mov`;
+        iOSsource.type = "video/mp4";
+        VideoPlayer.appendChild(iOSsource);
+    } else {
+        let source1 = document.createElement("source");
+        source1.src = `/videos/Guide_2025${darkMode}.webm`;
+        source1.type = "video/webm";
+        let source2 = document.createElement("source");
+        source2.src = `/videos/Guide_2025${darkMode}.mp4`;
+        source2.type = "video/mp4";
 
-    VideoPlayer.appendChild(source1);
-    VideoPlayer.appendChild(source2);
+        VideoPlayer.appendChild(source1);
+        VideoPlayer.appendChild(source2);
+    }
 }
 function checkDirection() {
     if (touchendY < touchstartY) {

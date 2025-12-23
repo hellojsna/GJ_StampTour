@@ -56,17 +56,25 @@
     }
     
     function loadSuccessVideo() {
+        let iOS = (/iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream);
         let darkMode = window.matchMedia('(prefers-color-scheme: dark)').matches ? "_Dark" : "";
-        let source1 = document.createElement("source");
-        source1.src = `/videos/Success_2025${darkMode}.webm`;
-        source1.type = "video/webm";
-        let source2 = document.createElement("source");
-        source2.src = `/videos/Success_2025${darkMode}.mp4`;
-        source2.type = "video/mp4";
-
         let successVideo = eById("successVideo");
-        successVideo.appendChild(source1);
-        successVideo.appendChild(source2);
+        if (iOS) {
+            let iOSsource = document.createElement("source");
+            iOSsource.src = `/videos/Success_2025_iOS${darkMode}.mov`;
+            iOSsource.type = "video/mp4";
+            successVideo.appendChild(iOSsource);
+        } else {
+            let source1 = document.createElement("source");
+            source1.src = `/videos/Success_2025${darkMode}.webm`;
+            source1.type = "video/webm";
+            let source2 = document.createElement("source");
+            source2.src = `/videos/Success_2025${darkMode}.mp4`;
+            source2.type = "video/mp4";
+
+            successVideo.appendChild(source1);
+            successVideo.appendChild(source2);
+        }
     }
 
     const programmingCafeId = "F7EC2374-02E6-47C9-817B-003712DF96E8"; // 프로그래밍부 부스 ID
