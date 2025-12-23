@@ -341,6 +341,10 @@ getJSON(`/api/stampList.json`, function (err, data) {
                         ClassInfoModalContainer.style.display = "flex";
                         ClassInfoModalTitle.innerText = `${sDsL[j]}(${(sDsL[j - 1]) ? sDsL[j - 1] : sDsL[j + 1]})`;
                         CMBG.src = `/images/stamps/${sD.stampId}.webp`;
+                        CMBG.onerror = function () {
+                            CMBG.src = `/images/stamps/default.webp`;
+                            CMBG.onerror = null;
+                        };
                         CMSN.innerText = sD.stampName;
                         CMSD.innerText = sD.stampDesc;
                     });

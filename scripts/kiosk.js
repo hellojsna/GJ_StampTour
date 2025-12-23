@@ -305,6 +305,9 @@ function setupControlPanel() {
     eById("Control-SetScanData").addEventListener("click", function () {
         const simulatedData = eById("Control-scanData").value;
         handleScan(simulatedData);
+        setTimeout(function () {
+            updateScanResultWelcome();
+        }, 3000);
     });
     eById("Control-MuteToggle").addEventListener("change", function () {
         isSoundMuted = eById("Control-MuteToggle").checked;
