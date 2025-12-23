@@ -139,6 +139,7 @@ function handleScan(data) {
     xhr.responseType = 'json';
     xhr.onload = function () {
         var status = xhr.status;
+        console.log(status);
         if (status === 200) {
             try {
                 const res = xhr.response;
@@ -197,7 +198,7 @@ function startScanner() {
             setTimeout(function () {
                 scanLocked = false;
                 updateScanResultWelcome();
-            }, 7000);
+            }, 3000);
         }).then(function () {
             scannerRunning = true;
         }).catch(function (e) {
@@ -423,6 +424,7 @@ function setupStampInformation() {
                 updateScreenSaverStamp(kiosk_stamp_name, kiosk_stamp_location);
                 updateScanResultWelcome();
                 resetScreenSaverTimer();
+                selector.style.display = 'none'; // 선택된 경우 숨김
             } else {
                 kiosk_stamp_id = '';
                 kiosk_stamp_name = '';

@@ -27,9 +27,7 @@
         <h2>처리 중입니다...</h2>
     </div>
     <div id="successAlert" class="successAlert">
-        <video id="successVideo" muted playsinline>
-            <source src="/videos/success.mov" type="video/mp4">
-        </video>
+        <video id="successVideo" muted playsinline></video>
         <h1>스탬프 인식 완료</h1>
         <p>메인 화면으로 자동으로 이동합니다.</p>
     </div>
@@ -40,8 +38,38 @@
         if (name = (new RegExp('[?&]' + encodeURIComponent(name) + '=([^&]*)')).exec(location.search))
             return decodeURIComponent(name[1]);
     }
+
+    function showAnimation() {
+        setTimeout(() => {
+            eById("successAlert").classList.add("show");
+            eById("successVideo").play();
+            if (closeWindow) {
+                setTimeout(() => {
+                    if (getCookie("ShowGuide") != null) {
+                        window.opener = null; window.open('', '_self'); window.close(); window.history.go(-1); $(document.body).hide();
+                    }
+                    window.location.href = "/";
+                }, 4000);
+            }
+
+        }, 500);
+    }
     
-    const programmingCafeId = "051B7657-86AC-481E-B6D4-B8D865D8791F"; // 프로그래밍부 부스 ID
+    function loadSuccessVideo() {
+        let darkMode = window.matchMedia('(prefers-color-scheme: dark)').matches ? "_Dark" : "";
+        let source1 = document.createElement("source");
+        source1.src = `/videos/Success_2025${darkMode}.webm`;
+        source1.type = "video/webm";
+        let source2 = document.createElement("source");
+        source2.src = `/videos/Success_2025${darkMode}.mp4`;
+        source2.type = "video/mp4";
+
+        let successVideo = eById("successVideo");
+        successVideo.appendChild(source1);
+        successVideo.appendChild(source2);
+    }
+
+    const programmingCafeId = "F7EC2374-02E6-47C9-817B-003712DF96E8"; // 프로그래밍부 부스 ID
 
     const stampId = getParameter("stampId");
 
@@ -49,9 +77,9 @@
     const student_id = user_name.replace(/[^0-9]/g, "").slice(-5);
     if (stampId == programmingCafeId) {
         console.log("프로그래밍부");
-        checkStamp(stampId, false);
+        showAnimation();
         setTimeout(() => {
-            window.location.href = `http://210.91.63.199:5000/wait/${student_id}`;
+            window.location.href = `http://ghcafe.gajwa.dev/wait/${student_id}`;
         }, 4500);
         window.onpageshow = function(event) {
             if (event.persisted) {
@@ -59,9 +87,18 @@
             }
         };
     } else {
-        checkStamp(stampId, !window.location.hash.endsWith("DoNotClose"));
+        showAnimation();
+        const closeWindow = !window.location.hash.endsWith("DoNotClose");
+        if (closeWindow) {
+            setTimeout(() => {
+                if (getCookie("ShowGuide") != null) {
+                    window.opener = null; window.open('', '_self'); window.close(); window.history.go(-1); $(document.body).hide();
+                }
+                window.location.href = "/";
+            }, 4500);
+        }
     }
 
-
+    loadSuccessVideo();
 </script>
 </html>

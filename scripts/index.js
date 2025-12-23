@@ -74,6 +74,7 @@ let CMSD = eById("CMStampDesc");
 let CMST = eById("CMStampType");
 let CMSS = eById("CMStampStatus");
 let VideoPlayer = eById("GuideVideo");
+let GuideTitle = eById("GuideTitle");
 let GuideHint = eById("GuideHint");
 let GuideText = eById("GuideText");
 let NextGuideButton = eById("NextGuideButton");
@@ -81,7 +82,7 @@ let NextGuideButton = eById("NextGuideButton");
 let StudentIdInput = eById("StudentIdInput");
 let StudentNameInput = eById("StudentNameInput");
 let StudentPasswordInput = eById("StudentPasswordInput");
-
+let PrivacyPolicyCheckboxContainer = eById("PrivacyPolicyCheckboxContainer");
 
 function getStampList() {
     getJSON(`/api/stampList.json`, function (err, data) {
@@ -157,12 +158,16 @@ function setStampView() {
 const userAgent = navigator.userAgent.toLowerCase();
 const isTablet = (/(ipad|tablet|(android(?!.*mobile))|(windows(?!.*phone)(.*touch))|kindle|playbook|silk|(puffin(?!.*(IP|AP|WP))))/.test(userAgent) || (userAgent.includes("mac") && navigator.maxTouchPoints > 4 && !userAgent.includes("iphone")));
 
-function validateRegisterInputs() {
-    if (StudentIdInput.value.length == 5 && StudentNameInput.value.length >= 2 && StudentPasswordInput.value.length == 4 && eById("PrivacyPolicyCheckbox").checked) {
-        NextGuideButton.disabled = false;
-    } else {
-        NextGuideButton.disabled = true;
+function validateRegisterInputs(registerStep) {
+    let isButtonDisabled = false;
+    if (registerStep == 0) {
+        isButtonDisabled = !(StudentIdInput.value.length == 5 && StudentNameInput.value.length >= 2);
+    } else if (registerStep == 1) {
+        isButtonDisabled = !(StudentPasswordInput.value.length == 4);
+    } else if (registerStep == 2) {
+        isButtonDisabled = !(eById("PrivacyPolicyCheckbox").checked);
     }
+    NextGuideButton.disabled = isButtonDisabled;
 }
 function showNextGuide() {
     NextGuideButton.disabled = true;
@@ -179,7 +184,7 @@ function showNextGuide() {
                 setTimeout(() => {
                     VideoPlayer.pause();
                     NextGuideButton.disabled = false;
-                }, 840);
+                }, 1100);
                 guidePage += 1;
             }, 500);
             break;
@@ -191,46 +196,65 @@ function showNextGuide() {
                     NextGuideButton.innerText = "시작하기";
                     NextGuideButton.disabled = false;
                     eById("ReplayButtonContainer").style.display = "block";
-                }, 3800);
+                }, 4000);
                 guidePage += 1;
                 break;
         case 2:
             NextGuideButton.disabled = true;
-            NextGuideButton.innerText = "시작하기";
             GuideText.style.display = "none";
             VideoPlayer.style.display = "none";
             eById("ReplayButtonContainer").style.display = "none";
-            eById("PrivacyPolicyCheckboxContainer").style.display = "flex";
 
-            eById("GuideTitle").innerText = "시작 전 본인의 정보를 알려주세요";
+            GuideTitle.innerText = "학번과 이름을 입력해 주세요.";
             GuideHint.innerText = "타인의 정보를 도용할 경우 불이익이 있을 수 있습니다.";
             GuideHint.style.color = "var(--red)";
 
             StudentIdInput.addEventListener("input", () => {
                 StudentIdInput.value = StudentIdInput.value.replace(/[^0-9]/g, '');
-                validateRegisterInputs();
+                validateRegisterInputs(0);
             });
             StudentNameInput.addEventListener("input", () => {
-                validateRegisterInputs();
-            });
-            StudentPasswordInput.addEventListener("input", () => {
-                StudentPasswordInput.value = StudentPasswordInput.value.replace(/[^0-9]/g, '');
-                validateRegisterInputs();
-            });
-            eById("PrivacyPolicyCheckbox").addEventListener("change", () => {
-                validateRegisterInputs();
+                validateRegisterInputs(0);
             });
             StudentIdInput.style.display = "block";
             StudentNameInput.style.display = "block";
-            StudentPasswordInput.style.display = "block";
             setTimeout(() => {
                 StudentIdInput.classList.add("show");
                 StudentNameInput.classList.add("show");
-                StudentPasswordInput.classList.add("show");
             }, 100);
             guidePage += 1;
             break;
         case 3:
+            GuideTitle.innerText = "계정 암호를 설정해 주세요.";
+            GuideHint.innerText = "다시 로그인할 때 필요합니다.";
+            GuideHint.style.color = "inherit";
+
+            NextGuideButton.disabled = true;
+            NextGuideButton.innerText = "시작하기";
+            StudentIdInput.style.display = "none";
+            StudentNameInput.style.display = "none";
+            StudentPasswordInput.addEventListener("input", () => {
+                StudentPasswordInput.value = StudentPasswordInput.value.replace(/[^0-9]/g, '');
+                validateRegisterInputs(1);
+            });
+            eById("PrivacyPolicyCheckbox").addEventListener("change", () => {
+                validateRegisterInputs(1);
+            });
+            StudentPasswordInput.style.display = "block";
+            setTimeout(() => {
+                StudentPasswordInput.classList.add("show");
+            }, 100);
+            guidePage += 1;
+            break;
+        case 4:
+            GuideTitle.innerText = "개인정보 수집·이용 동의";
+            GuideHint.innerText = "개인정보처리방침을 확인해 주세요.";
+            eById("UserRegisterContainer").style.display = "none";
+            eById("RegisterPrivacyPolicyIframe").style.display = "block";
+            PrivacyPolicyCheckboxContainer.style.display = "flex";
+            guidePage += 1;
+            break;
+        case 5:
             var xhr = new XMLHttpRequest();
             xhr.open('POST', "/login", true);
             xhr.setRequestHeader("Content-Type", "application/json");
@@ -257,14 +281,13 @@ function showNextGuide() {
             break;
     }
 }
-function loadGuideVideo(deviceType) {
-    // FIXME: NFC 관련 내용 변경
+function loadGuideVideo() {
     let darkMode = window.matchMedia('(prefers-color-scheme: dark)').matches ? "_Dark" : "";
     let source1 = document.createElement("source");
-    source1.src = `/videos/Guide_NFC_${deviceType}${darkMode}.webm`;
+    source1.src = `/videos/Guide_2025${darkMode}.webm`;
     source1.type = "video/webm";
     let source2 = document.createElement("source");
-    source2.src = `/videos/Guide_NFC_${deviceType}${darkMode}.webm`;
+    source2.src = `/videos/Guide_2025${darkMode}.mp4`;
     source2.type = "video/mp4";
 
     VideoPlayer.appendChild(source1);
@@ -436,6 +459,8 @@ eById("ReplayGuideButton").addEventListener("click", () => {
     guidePage = 0;
     showNextGuide();
 });
+
+loadGuideVideo();
 
 window.onload = function () {
     VideoPlayer.pause();

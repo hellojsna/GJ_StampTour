@@ -328,17 +328,20 @@
         </select>
         <button id="Control-StartScanner">스캐너 활성화</button>
         <br>
-        <input type="text" id="Control-scanData" placeholder="스캔한 값" value="123456">
-        <button id="Control-SetScanData">스캔 시뮬레이션</button>
-        <button id="Control-Fullscreen">전체 화면</button>
-        <p>동작 제어</p>
-        <input type="checkbox" id="Control-MuteToggle" checked>무음 모드</input>
         <button id="Control-TriggerScreenSaver">화면 보호기</button>
-        <br>
-        <p>피드백 테스트</p>
-        <button id="Control-ScanSuccess">인증 성공</button>
-        <button id="Control-ScanAlready">이미 인증됨</button>
-        <button id="Control-ScanFail">인증 실패</button>
+        <button id="Control-Fullscreen">전체 화면</button>
+        <span style="display: none;">
+            <input type="text" id="Control-scanData" placeholder="스캔한 값" value="123456">
+            <button id="Control-SetScanData">스캔 시뮬레이션</button>
+            <p>동작 제어</p>
+            <input type="checkbox" id="Control-MuteToggle" checked>무음 모드</input>
+            <button id="Control-TriggerScreenSaver">화면 보호기</button>
+            <br>
+            <p>피드백 테스트</p>
+            <button id="Control-ScanSuccess">인증 성공</button>
+            <button id="Control-ScanAlready">이미 인증됨</button>
+            <button id="Control-ScanFail">인증 실패</button>
+        </span>
     </div>
     <div id="ScreenSaver">
         <div class="background">

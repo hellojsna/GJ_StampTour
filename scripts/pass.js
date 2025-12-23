@@ -11,7 +11,7 @@ var user_name = decodeURIComponent(getCookie("user_name"));
 var student_id = user_name.replace(/[^0-9]/g, "").slice(-5);
 var last_token_list = [];
 
-var timeUntilNextCode = 7;
+var timeUntilNextCode = 5;
 var codeGenerationCount = 0;
 
 var getJSON = function (url, callback) {
@@ -44,14 +44,10 @@ async function generateToken() {
             } else if (data !== null) {
                 if (data.last !== null) {
                     if (last_token_list.includes(data.last.otp)) {
-                        // TODO: 백엔드 완성 후 구현
-                        // 마지막으로 생성했던 토큰이 인증 처리됨 -> 스탬프 처리 완료
-                        // data.last_stamp_id 저장
-                        window.location.href = `/check_local?stampId=${data.last.stamp_id}`;
-                        if (data.last.stamp_id == programmingCafeId) {
-
-                        } else {
-                        }
+                        checkStamp(data.last.stamp_id);
+                        setTimeout(() => {
+                            window.location.href = `/check_local?stampId=${data.last.stamp_id}`;
+                        }, 100);
                     }
                 }
                 const token = data.otp;
@@ -74,11 +70,11 @@ generateToken();
 setInterval(async function () {
     eById("CurrentTimeDisplay").innerText = `현재 시각: ${new Date().toTimeString().slice(0, 8)}`;
     timeUntilNextCode -= 1;
-    eById("OTPTime").innerText = `${timeUntilNextCode}초 후 새로고침`;
     if (timeUntilNextCode == 0) {
         await generateToken();
-        timeUntilNextCode = 7;
+        timeUntilNextCode = 5;
     }
+     eById("OTPTime").innerText = `${timeUntilNextCode}초 후 새로고침`;
 }, 1000);
 
 eById("CurrentTimeDisplay").innerText = `현재 시각: ${new Date().toTimeString().slice(0, 8)}`;

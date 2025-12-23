@@ -581,17 +581,18 @@
                     <p id="GuideHint">참여 방법을 알려 드릴게요.</p>
                 </span>
                 <hr>
-                <video id="GuideVideo" class="GuideVideo" playsinline muted loop>
+                <video id="GuideVideo" class="GuideVideo" playsinline muted>
                 </video>
                 <div id="UserRegisterContainer">
                     <input id="StudentIdInput" class="UserRegisterInput" type="text" inputmode="numeric" pattern="\d*"
                         placeholder="학번" maxlength="5">
                     <input id="StudentNameInput" class="UserRegisterInput" type="text" placeholder="이름">
-                    <input id="StudentPasswordInput" class="UserRegisterInput" type="password" inputmode="numeric" pattern="\d*" placeholder="PIN" maxlength="4">
+                    <input id="StudentPasswordInput" class="UserRegisterInput" type="text" inputmode="numeric" pattern="\d*" placeholder="PIN" maxlength="4">
                 </div>
+                <iframe id="RegisterPrivacyPolicyIframe" src="/privacy_policy"></iframe>
                 <div id="PrivacyPolicyCheckboxContainer">
                     <input type="checkbox" id="PrivacyPolicyCheckbox">
-                    <label for="PrivacyPolicyCheckbox"><a href="/privacypolicy">개인정보처리방침</a>에 동의합니다.</label>
+                    <label for="PrivacyPolicyCheckbox">개인정보 수집·이용에 동의합니다.</label>
                 </div>
                 <h3 id="GuideText" class="GuideText"></h3>
                 <div id="ReplayButtonContainer">
@@ -631,7 +632,7 @@
         <div class="BottomLinkContainer">
             <a href="/team" target="_blank">만든 사람들</a>
             <a href="/buddha" target="_blank">부적</a>
-            <a href="/privacypolicy" target="_blank">개인정보처리방침</a>
+            <a href="/privacy_policy" target="_blank">개인정보처리방침</a>
         </div>
     </div>
 </body>

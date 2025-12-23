@@ -14,7 +14,7 @@ function getCookie(name) {
     return value ? value[2] : null;
 }
 
-function checkStamp(stampId, closeWindow = true) {
+function checkStamp(stampId) {
     let stampJSON = getCookie("LocalStamp");
     console.log(stampJSON);
     if (stampJSON == null) {
@@ -32,17 +32,4 @@ function checkStamp(stampId, closeWindow = true) {
         stampList.push(stampId);
         setCookie("LocalStamp", JSON.stringify(stampList), 7);
     }
-    setTimeout(() => {
-        eById("successAlert").classList.add("show");
-        eById("successVideo").play();
-        if (closeWindow) {
-            setTimeout(() => {
-                if (getCookie("ShowGuide") != null) {
-                    window.opener = null; window.open('', '_self'); window.close(); window.history.go(-1); $(document.body).hide();
-                }
-                window.location.href = "/";
-            }, 4000);
-        }
-
-    }, 500);
 }
