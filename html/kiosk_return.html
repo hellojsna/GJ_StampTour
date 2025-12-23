@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>완료 | 카페</title>
+    <style>
+        @import url('/css/font.css');
+        @import url('/css/root.css');
+
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            color: var(--PrimaryText);
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        p {
+            font-size: 1.5rem;
+            opacity: 0.9;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>주문 완료</h1>
+    <p>스탬프투어로 돌아갑니다.</p>
+    <script>
+        // kiosk.html에 완료 메시지 전송
+        if (window.parent && window.parent !== window) {
+            window.parent.postMessage({
+                type: 'CAFE_COMPLETE'
+            }, '*');
+        }
+        setTimeout(function () {
+            if (window.parent && window.parent !== window) {
+                window.parent.postMessage({
+                    type: 'CAFE_COMPLETE'
+                }, '*');
+            }
+        }, 1000);
+    </script>
+</body>
+
+</html>

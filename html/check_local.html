@@ -40,7 +40,28 @@
         if (name = (new RegExp('[?&]' + encodeURIComponent(name) + '=([^&]*)')).exec(location.search))
             return decodeURIComponent(name[1]);
     }
-    stampId = getParameter("stampId");
-    checkStamp(stampId, !window.location.hash.endsWith("DoNotClose"));
+    
+    const programmingCafeId = "051B7657-86AC-481E-B6D4-B8D865D8791F"; // 프로그래밍부 부스 ID
+
+    const stampId = getParameter("stampId");
+
+    const user_name = decodeURIComponent(getCookie("user_name"));
+    const student_id = user_name.replace(/[^0-9]/g, "").slice(-5);
+    if (stampId == programmingCafeId) {
+        console.log("프로그래밍부");
+        checkStamp(stampId, false);
+        setTimeout(() => {
+            window.location.href = `http://210.91.63.199:5000/wait/${student_id}`;
+        }, 4500);
+        window.onpageshow = function(event) {
+            if (event.persisted) {
+                window.close();
+            }
+        };
+    } else {
+        checkStamp(stampId, !window.location.hash.endsWith("DoNotClose"));
+    }
+
+
 </script>
 </html>

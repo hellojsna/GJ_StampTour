@@ -83,7 +83,7 @@ let StudentPasswordInput = eById("StudentPasswordInput");
 
 
 function getStampList() {
-    getJSON(`/api/stampList24.json`, function (err, data) {
+    getJSON(`/api/stampList.json`, function (err, data) {
         if (err != null) {
             alert("스탬프 목록 데이터를 불러오는 중 오류가 발생했습니다.");
         } else if (data !== null) {
@@ -146,10 +146,11 @@ function setStampView() {
     eById("StampView").addEventListener("click", function () {
         eById("StampView").classList.toggle("open");
     });
+    /*
     eById("ShowGuideButton").addEventListener("click", function () {
         eById("GuideModalContainer").style.display = "flex";
         showNextGuide();
-    });
+    });*/
 }
 
 const userAgent = navigator.userAgent.toLowerCase();
@@ -293,7 +294,7 @@ if (window.location.hash.startsWith("#Floor")) {
 function filterClassroomName(name) {
     return (name.startsWith("교실") ? `${name.slice(0, 3)}학년 ${name.slice(3)}반`.replace("교실", "").replace(" 0", " ") : name);
 }
-getJSON(`/api/stampList24.json`, function (err, data) {
+getJSON(`/api/stampList.json`, function (err, data) {
     if (err != null) {
         alert("스탬프 목록을 불러오는 중 오류가 발생했습니다.");
     } else if (data !== null) {

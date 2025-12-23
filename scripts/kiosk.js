@@ -38,6 +38,10 @@ function deleteCookie(name) {
     document.cookie = encodeURIComponent(name) + '=;expires=Thu, 01 JAN 1999 00:00:10 GMT;';
 }
 
+function filterClassroomName(name) {
+    return (name.startsWith("교실") ? `${name.slice(0, 3)}학년 ${name.slice(3)}반`.replace("교실", "").replace(" 0", " ") : name);
+}
+
 let programmingCafeId = ""; // 프로그래밍부 부스 ID (자동 탐지)
 let kiosk_stamp_name = ""; // 선택된 스탬프 이름
 let kiosk_stamp_location = ""; // 선택된 스탬프 위치
@@ -68,17 +72,63 @@ function resetScreenSaverTimer() {
 function setupScreenSaver() {
     document.addEventListener("click", deactivateScreenSaver);
     document.addEventListener("touchstart", deactivateScreenSaver);
-    resetScreenSaverTimer();
 }
 
 function updateScreenSaverStamp(name, location) {
     const nameEl = document.querySelector('#StartGuide .StampName');
     const locEl = document.querySelector('#StartGuide .StampLocation');
     if (nameEl) nameEl.innerText = name || '정보 없음';
-    if (locEl) locEl.innerText = location || '정보 없음';
+    if (locEl) locEl.innerText = filterClassroomName(location || '정보 없음');
+}
+function updateScanResultWelcome() {
+    const ScanResult = eById('ScanResult');
+    if (ScanResult) {
+        if (kiosk_stamp_name) {
+            ScanResult.innerText = `환영합니다. ${kiosk_stamp_name} 부스입니다.`;
+        } else {
+            ScanResult.innerText = '환영합니다.';
+        }
+    }
 }
 
-var kiosk_stamp_id = "591DC6BF-BFF6-466F-952E-07655A53C78D"; // 테스트용 스탬프 ID, 실제 운영 시 서버에서 할당 필요.
+// Cafe iframe 관리
+function showCafeIframe(studentId) {
+    const existingIframe = eById('CafeIframe');
+    if (existingIframe) return; // 이미 있으면 무시
+
+    const iframe = document.createElement('iframe');
+    iframe.id = 'CafeIframe';
+    iframe.src = `https://ghcafe.gajwa.dev/?student_id=${studentId}`;
+    iframe.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border: none;
+        z-index: 99999;
+        background: white;
+    `;
+    document.body.appendChild(iframe);
+}
+
+function hideCafeIframe() {
+    const iframe = eById('CafeIframe');
+    if (iframe) {
+        iframe.remove();
+        updateScanResultWelcome(); // 환영 메시지 복원
+    }
+}
+
+// postMessage 리스너: cafe 페이지에서 완료 신호 받기
+window.addEventListener('message', function (event) {
+    
+    if (event.data && event.data.type === 'CAFE_COMPLETE') {
+        hideCafeIframe();
+    }
+});
+
+var kiosk_stamp_id = "";
 
 function handleScan(data) {
     // MARK: 스캔한 데이터 처리
@@ -97,7 +147,9 @@ function handleScan(data) {
                     kioskScanFeedback("success", res.user_name);
                     if (kiosk_stamp_id == programmingCafeId) {
                         setTimeout(() => {
-                            window.location.href = `http://210.91.63.199:5000/?student_id=${res.user_name.replace(/[^0-9]/g, "").slice(-5)}`;
+                            // iframe으로 카페 페이지 띄우기
+                            const studentId = res.user_name.replace(/[^0-9]/g, "").slice(-5);
+                            showCafeIframe(studentId);
                         }, 1000);
                     }
                 }
@@ -128,25 +180,28 @@ function setupScanner() {
     if (!html5Qrcode) {
         html5Qrcode = new Html5Qrcode("reader", scannerConfig);
     }
-    startScanner();
+    // 자동 시작하지 않음 - 사용자가 버튼 클릭 시에만 시작
 }
 
 function startScanner() {
     if (!html5Qrcode) return;
     if (scannerRunning) return;
-    const startTarget = selectedCameraId || { facingMode: "environment" };
-    html5Qrcode.start(startTarget, scannerConfig, function (result) {
-        if (scanLocked) return;
-        scanLocked = true;
-        handleScan(result);
-        setTimeout(function () {
-            scanLocked = false;
-        }, 7000);
-    }).then(function () {
-        scannerRunning = true;
-    }).catch(function (e) {
-        console.error("스캐너 시작 실패:", e);
-    });
+    setTimeout(function () {
+        const startTarget = selectedCameraId || { facingMode: "environment" };
+        html5Qrcode.start(startTarget, scannerConfig, function (result) {
+            if (scanLocked) return;
+            scanLocked = true;
+            handleScan(result);
+            setTimeout(function () {
+                scanLocked = false;
+                updateScanResultWelcome();
+            }, 7000);
+        }).then(function () {
+            scannerRunning = true;
+        }).catch(function (e) {
+            console.error("스캐너 시작 실패:", e);
+        });
+    }, 500);
 }
 
 function stopScanner() {
@@ -227,6 +282,23 @@ function kioskScanFeedback(type, user_name) {
 
 function setupControlPanel() {
     setupCameraSelector();
+
+    // 스캐너 활성화 버튼
+    const startBtn = eById("Control-StartScanner");
+    if (startBtn) {
+        startBtn.addEventListener("click", function () {
+            if (!html5Qrcode) {
+                html5Qrcode = new Html5Qrcode("reader", scannerConfig);
+            }
+            if (!scannerRunning) {
+                startScanner();
+                startBtn.innerText = "스캐너 활성화됨";
+                startBtn.disabled = true;
+                resetScreenSaverTimer(); // 스캐너 활성화 시 화면보호기 타이머 시작
+            }
+        });
+    }
+
     eById("Control-SetScanData").addEventListener("click", function () {
         const simulatedData = eById("Control-scanData").value;
         handleScan(simulatedData);
@@ -245,7 +317,7 @@ function setupControlPanel() {
             document.exitFullscreen && document.exitFullscreen();
         }
     });
-    
+
     eById("Control-ScanSuccess").addEventListener("click", function () {
         kioskScanFeedback("success");
     });
@@ -272,18 +344,29 @@ function setupCameraSelector() {
 
     Html5Qrcode.getCameras().then(function (devices) {
         camSelector.innerHTML = '';
+        
+        // 첫 번째 항목: '카메라 선택' 비활성화
+        var placeholder = document.createElement('option');
+        placeholder.value = '';
+        placeholder.textContent = '카메라 선택';
+        placeholder.disabled = true;
+        placeholder.selected = true;
+        camSelector.appendChild(placeholder);
+        
         devices.forEach(function (d) {
             var opt = document.createElement('option');
             opt.value = d.id;
-            opt.textContent = d.label || ("Camera " + (camSelector.options.length + 1));
+            opt.textContent = d.label || ("Camera " + camSelector.options.length);
             camSelector.appendChild(opt);
         });
-        // 선택 변경 시 재시작
+        // 선택 변경 시 카메라 ID만 업데이트 (재시작 안 함)
         camSelector.addEventListener('change', function () {
             selectedCameraId = camSelector.value || null;
-            stopScanner().then(function () {
-                startScanner();
-            });
+            if (scannerRunning) {
+                stopScanner().then(function () {
+                    startScanner();
+                });
+            }
         });
     }).catch(function (e) {
         console.error('카메라 목록을 가져오지 못했습니다:', e);
@@ -318,7 +401,7 @@ function setupStampInformation() {
             stampList.forEach(function (s) {
                 var opt = document.createElement('option');
                 opt.value = s.stampId;
-                opt.textContent = s.stampName + (s.stampLocation ? (' — ' + s.stampLocation) : '');
+                opt.textContent = s.stampName + (s.stampLocation ? (' | ' + filterClassroomName(s.stampLocation)) : '');
                 opt.dataset.stampName = s.stampName;
                 selector.appendChild(opt);
             });
@@ -336,13 +419,15 @@ function setupStampInformation() {
                 kiosk_stamp_name = savedName || found.stampName || '';
                 kiosk_stamp_location = savedLoc || found.stampLocation || '';
                 updateScreenSaverStamp(kiosk_stamp_name, kiosk_stamp_location);
+                updateScanResultWelcome();
+                resetScreenSaverTimer();
             } else {
                 kiosk_stamp_id = '';
                 kiosk_stamp_name = '';
                 kiosk_stamp_location = '';
                 updateScreenSaverStamp('', '');
             }
-            
+
             // 변경 이벤트
             selector.addEventListener('change', function () {
                 const selectedId = selector.value;
@@ -350,10 +435,12 @@ function setupStampInformation() {
                 kiosk_stamp_id = selectedId;
                 kiosk_stamp_name = selected.stampName || '';
                 kiosk_stamp_location = selected.stampLocation || '';
-                setCookie('kiosk_stamp_id', kiosk_stamp_id, 365);
-                setCookie('kiosk_stamp_name', kiosk_stamp_name, 365);
-                setCookie('kiosk_stamp_location', kiosk_stamp_location, 365);
+                setCookie('kiosk_stamp_id', kiosk_stamp_id, 7);
+                setCookie('kiosk_stamp_name', kiosk_stamp_name, 7);
+                setCookie('kiosk_stamp_location', kiosk_stamp_location, 7);
                 updateScreenSaverStamp(kiosk_stamp_name, kiosk_stamp_location);
+                updateScanResultWelcome();
+                resetScreenSaverTimer();
             });
         } catch (e) {
             console.error('스탬프 선택 초기화 중 오류:', e);
@@ -384,17 +471,9 @@ function setupTitleToggle() {
         toggleControlPanel();
     });
     let lastTap = 0;
-    titleLabel.addEventListener('touchend', function () {
-        const now = Date.now();
-        if (now - lastTap < 400) {
-            toggleControlPanel();
-        }
-        lastTap = now;
-    }, { passive: true });
 }
 setupScreenSaver();
 
-setupScanner();
 setupControlPanel();
 
 setupStampInformation();

@@ -6,8 +6,6 @@
 //  Copyright © 2025 Js Na. All rights reserved.
 //
 
-const programmingCafeId = ""; // 프로그래밍부 부스 ID
-
 var user_id = getCookie("user_id");
 var user_name = decodeURIComponent(getCookie("user_name"));
 var student_id = user_name.replace(/[^0-9]/g, "").slice(-5);
@@ -49,12 +47,10 @@ async function generateToken() {
                         // TODO: 백엔드 완성 후 구현
                         // 마지막으로 생성했던 토큰이 인증 처리됨 -> 스탬프 처리 완료
                         // data.last_stamp_id 저장
+                        window.location.href = `/check_local?stampId=${data.last.stamp_id}`;
                         if (data.last.stamp_id == programmingCafeId) {
-                            // 프로그래밍 카페 주문 페이지로 리다이렉트
-                            console.log("프로그래밍부");
-                            window.location.href = `http://210.91.63.199:5000/wait/${student_id}`;
+
                         } else {
-                            window.location.href = `/check_local?stampId=${data.last.stamp_id}`;
                         }
                     }
                 }

@@ -176,8 +176,7 @@ body {
     box-sizing: border-box;
 }
 
-#ClassInfoModalTitle,
-#CMStampStatus {
+#ClassInfoModalTitle {
     margin: 0;
     font-size: 1.2em;
     font-weight: 300;
@@ -188,8 +187,9 @@ body {
 }
 
 #CMStampStatus {
-    min-width: 50%;
-    text-align: right;
+    display: inline-block;
+    margin-bottom: 0.2em;
+    padding: 0.2em 0.4em;
 }
 
 #CMStampStatus.checked {
