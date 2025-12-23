@@ -325,6 +325,10 @@ if (window.location.hash.startsWith("#Floor")) {
 function filterClassroomName(name) {
     return (name.startsWith("교실") ? `${name.slice(0, 3)}학년 ${name.slice(3).replace(/[^0-9]/g, "")}반`.replace("교실", "").replace(" 0", " ") : name);
 }
+CMBG.onerror = function () {
+    CMBG.src = `/images/stamps/default.webp`;
+    // FIXME: default.webp 없으면 무한 반복될 수 있음.
+};
 getJSON(`/api/stampList.json`, function (err, data) {
     if (err != null) {
         alert("스탬프 목록을 불러오는 중 오류가 발생했습니다.");
@@ -341,10 +345,6 @@ getJSON(`/api/stampList.json`, function (err, data) {
                         ClassInfoModalContainer.style.display = "flex";
                         ClassInfoModalTitle.innerText = `${sDsL[j]}(${(sDsL[j - 1]) ? sDsL[j - 1] : sDsL[j + 1]})`;
                         CMBG.src = `/images/stamps/${sD.stampId}.webp`;
-                        CMBG.onerror = function () {
-                            CMBG.src = `/images/stamps/default.webp`;
-                            CMBG.onerror = null;
-                        };
                         CMSN.innerText = sD.stampName;
                         CMSD.innerText = sD.stampDesc;
                     });
