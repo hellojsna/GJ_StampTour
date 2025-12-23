@@ -39,7 +39,7 @@ function deleteCookie(name) {
 }
 
 function filterClassroomName(name) {
-    return (name.startsWith("교실") ? `${name.slice(0, 3)}학년 ${name.slice(3)}반`.replace("교실", "").replace(" 0", " ") : name);
+    return (name.startsWith("교실") ? `${name.slice(0, 3)}학년 ${name.slice(3).replace(/[^0-9]/g, "")}반`.replace("교실", "").replace(" 0", " ") : name);
 }
 
 let programmingCafeId = ""; // 프로그래밍부 부스 ID (자동 탐지)

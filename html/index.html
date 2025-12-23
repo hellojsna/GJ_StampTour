@@ -25,487 +25,515 @@
         <h2>부스 지도</h2>
     </div>
     <div id="MapContainer" class="MainContainer MapContainer"
-    style="width: 100%; height: inherit; overflow: hidden; cursor: default;">
-    <svg id="Floor1MapView" class="active">
-        <defs>
-            <filter id="blur">
-                <feGaussianBlur in="SourceGraphic" stdDeviation="5" />
-            </filter>
-            <linearGradient id="EntranceUpGradient" gradientTransform="rotate(90)">
-                <stop class="EntranceGradient1" offset="0%" />
-                <stop class="EntranceGradient2" offset="100%" />
-            </linearGradient>
-            <linearGradient id="EntranceDownGradient" gradientTransform="rotate(90)">
-                <stop class="EntranceGradient2" offset="0%" />
-                <stop class="EntranceGradient1" offset="100%" />
-            </linearGradient>
-            <linearGradient id="EntranceRightGradient">
-                <stop class="EntranceGradient1" offset="0%" />
-                <stop class="EntranceGradient2" offset="100%" />
-            </linearGradient>
-        </defs>
-        <g id="Floor1Map">
-            <polygon class="hallway" points="3.5,445 100.5,348 152.5,400 152.5,495 147.5,495 100.5,542" />
-            <rect class="hallway" x="152.5" y="400" width="47.5" height="95" />
-            <rect class="hallway" x="167.5" y="100" width="32.5" height="300" />
-            <rect class="hallway" x="200" y="400" width="835" height="45" />
-            <rect class="hallway" x="200" y="445" width="210" height="100" />
-            <rect class="hallway" x="692.5" y="0" width="32.5" height="400" />
-            <rect class="hallway" x="1002.5" y="445" width="32.5" height="355" />
+        style="width: 100%; height: inherit; overflow: hidden; cursor: default;">
+        <svg id="Floor1MapView" class="active">
+            <defs>
+                <filter id="blur">
+                    <feGaussianBlur in="SourceGraphic" stdDeviation="5" />
+                </filter>
+                <linearGradient id="EntranceUpGradient" gradientTransform="rotate(90)">
+                    <stop class="EntranceGradient1" offset="0%" />
+                    <stop class="EntranceGradient2" offset="100%" />
+                </linearGradient>
+                <linearGradient id="EntranceDownGradient" gradientTransform="rotate(90)">
+                    <stop class="EntranceGradient2" offset="0%" />
+                    <stop class="EntranceGradient1" offset="100%" />
+                </linearGradient>
+                <linearGradient id="EntranceRightGradient">
+                    <stop class="EntranceGradient1" offset="0%" />
+                    <stop class="EntranceGradient2" offset="100%" />
+                </linearGradient>
+            </defs>
+            <g id="Floor1Map">
+                <polygon class="hallway" points="3.5,445 100.5,348 152.5,400 152.5,495 147.5,495 100.5,542" />
+                <rect class="hallway" x="152.5" y="400" width="47.5" height="95" />
+                <rect class="hallway" x="167.5" y="100" width="32.5" height="300" />
+                <rect class="hallway" x="200" y="400" width="835" height="45" />
+                <rect class="hallway" x="200" y="445" width="210" height="100" />
+                <rect class="hallway" x="692.5" y="0" width="32.5" height="400" />
+                <rect class="hallway" x="1002.5" y="445" width="32.5" height="355" />
 
-            <polygon class="hallway stairs" points="134.2,434.3 171.2,471.3 100.5,542 63.5,505" />
-            <rect class="hallway stairs" x="640" y="0" width="52.5" height="100" />
-            <rect class="hallway stairs" x="882.5" y="445" width="52.5" height="100" />
+                <polygon class="hallway stairs" points="134.2,434.3 171.2,471.3 100.5,542 63.5,505" />
+                <rect class="hallway stairs" x="640" y="0" width="52.5" height="100" />
+                <rect class="hallway stairs" x="882.5" y="445" width="52.5" height="100" />
 
-            <!--출입구-->
-            <rect class="hallway entranceSpace entranceClosed" x="95" y="150" width="72.5" height="50" />
-            <rect class="hallway entranceUp entranceClosed" x="95" y="200" width="72.5" height="20" />
-            <rect class="hallway entranceSpace" x="200" y="495" width="72.5" height="50" />
-            <rect class="hallway entranceUp" x="200" y="545" width="72.5" height="20" />
+                <!--출입구-->
+                <rect class="hallway entranceSpace entranceClosed" x="95" y="150" width="72.5" height="50" />
+                <rect class="hallway entranceUp entranceClosed" x="95" y="200" width="72.5" height="20" />
+                <rect class="hallway entranceSpace" x="200" y="495" width="72.5" height="50" />
+                <rect class="hallway entranceUp" x="200" y="545" width="72.5" height="20" />
 
-            <rect class="hallway entranceSpace" x="316.25" y="350" width="72.5" height="50" />
-            <rect class="hallway entranceDown" x="316.25" y="330" width="72.5" height="20" />
+                <rect class="hallway entranceSpace" x="316.25" y="350" width="72.5" height="50" />
+                <rect class="hallway entranceDown" x="316.25" y="330" width="72.5" height="20" />
 
-            <rect class="hallway entranceSpace entranceClosed" x="640" y="100" width="52.5" height="50" />
-            <rect class="hallway entranceUp entranceClosed" x="640" y="150" width="52.5" height="20" />
+                <rect class="hallway entranceSpace entranceClosed" x="640" y="100" width="52.5" height="50" />
+                <rect class="hallway entranceUp entranceClosed" x="640" y="150" width="52.5" height="20" />
 
-            <rect class="hallway entranceSpace" x="935" y="350" width="67.5" height="50" />
-            <rect class="hallway entranceDown" x="935" y="330" width="67.5" height="20" />
+                <rect class="hallway entranceSpace" x="935" y="350" width="67.5" height="50" />
+                <rect class="hallway entranceDown" x="935" y="330" width="67.5" height="20" />
 
-            <rect class="hallway entranceSpace" x="935" y="445" width="67.5" height="50" />
-            <rect class="hallway entranceUp" x="935" y="495" width="67.5" height="20" />
+                <rect class="hallway entranceSpace" x="935" y="445" width="67.5" height="50" />
+                <rect class="hallway entranceUp" x="935" y="495" width="67.5" height="20" />
 
-            <!-- 차오름관 -->
-            <rect class="hallway" x="272.5" y="750" width="27.5" height="50" />
-            <rect class="hallway stairs" x="300" y="750" width="100" height="50" />
+                <!-- 차오름관 -->
+                <rect class="hallway" x="272.5" y="750" width="27.5" height="50" />
+                <rect class="hallway stairs" x="300" y="750" width="100" height="50" />
 
-            <rect class="hallway entranceSpace" x="200" y="750" width="72.5" height="50" />
-            <rect class="hallway entranceDown" x="200" y="730" width="72.5" height="20" />
-            <rect class="hallway entranceSpace" x="380" y="800" width="20" height="72.5" />
-            <rect class="hallway entranceRight" x="400" y="800" width="20" height="72.5" />
+                <rect class="hallway entranceSpace" x="200" y="750" width="72.5" height="50" />
+                <rect class="hallway entranceDown" x="200" y="730" width="72.5" height="20" />
+                <rect class="hallway entranceSpace" x="380" y="800" width="20" height="72.5" />
+                <rect class="hallway entranceRight" x="400" y="800" width="20" height="72.5" />
 
-            <g id="급식실" class="notClassroom">
-                <rect x="106" y="800" width="294" height="400" />
-                <text x="253" y="1000">급식실</text>
-            </g>
+                <g id="급식실" class="notClassroom">
+                    <rect x="106" y="800" width="294" height="400" />
+                    <text x="253" y="1000">급식실</text>
+                </g>
 
-            <g id="교문 앞" class="classroom">
-                <rect x="30" y="607.5" rx="10px" ry="10px" width="80" height="80" />
-                <text x="70" y="647.5">교문 앞</text>
-            </g>
+                <!-- 본관 -->
+                <g id="다목적교실1" class="notClassroom">
+                    <rect x="95" y="0" width="52.5" height="100" />
+                    <rect x="147.5" y="0" width="157.5" height="100" />
+                    <text x="226.25" y="50">다목적교실1</text>
+                </g>
+                <rect class="notClassroom" x="95" y="100" width="72.5" height="50" />
+                <rect class="notClassroom" x="200" y="100" width="105" height="50" />
+                <g id="컴퓨터실" class="notClassroom">
+                    <rect x="200" y="150" width="105" height="150" />
+                    <text x="252.5" y="225">컴퓨터실</text>
+                </g>
+                <g id="중앙현관" class="notClassroom">
+                    <rect x="325" y="460" rx="10px" ry="10px" width="80" height="80" />
+                    <text x="365" y="500" style="font-size: 1.2em;">중앙현관</text>
+                </g>
+                <g id="행정실" class="notClassroom">
+                    <rect x="410" y="445" width="105" height="100" />
+                    <text x="462.5" y="495">행정실</text>
+                </g>
+                <g id="교장실" class="notClassroom">
+                    <rect x="515" y="445" width="105" height="100" />
+                    <text x="567.5" y="495">교장실</text>
+                </g>
+                <g id="학교운영위실" class="notClassroom">
+                    <rect x="620" y="445" width="52.5" height="100" />
+                    <text x="646.25" y="495" dx="0.5em" dy="-1em" class="verticalText small">학교</text>
+                    <text x="646.25" y="495" dx="-0.5em" class="verticalText small">운영위실</text>
+                </g>
+                <g id="일시적관찰실" class="notClassroom">
+                    <rect x="672.5" y="445" width="52.5" height="100" />
+                    <text x="698.75" y="495" dx="0.5em" dy="-0.5em" class="verticalText small">일시적</text>
+                    <text x="698.75" y="495" dx="-0.5em" dy="0.5em" class="verticalText small">관찰실</text>
+                </g>
+                <g id="보건실" class="notClassroom">
+                    <rect x="725" y="445" width="105" height="100" />
+                    <text x="777.5" y="495">보건실</text>
+                </g>
+                <g id="발간실" class="notClassroom">
+                    <rect x="830" y="445" width="52.5" height="100" />
+                    <text x="856.25" y="495" style="writing-mode: vertical-rl;">발간실</text>
+                </g>
+                <g id="밴드부실" class="notClassroom">
+                    <rect x="1035" y="400" width="105" height="100" />
+                    <text x="1087.5" y="450">밴드부실</text>
+                </g>
+                <rect class="notClassroom" x="1035" y="500" width="105" height="100" />
+                <g id="시청각실" class="notClassroom">
+                    <rect x="1035" y="600" width="105" height="200" />
+                    <text x="1087.5" y="700">시청각실</text>
+                </g>
+                <g id="화장실1" class="notClassroom">
+                    <rect x="200" y="300" width="105" height="100" />
+                    <text x="252.5" y="350">화장실</text>
+                </g>
+                <g id="화장실2" class="notClassroom">
+                    <rect x="567.5" y="300" width="125" height="100" />
+                    <text x="630" y="350">화장실</text>
+                </g>
+                <g id="세담터도서관" class="notClassroom">
+                    <rect x="725" y="0" width="105" height="300" />
+                    <text x="777.5" y="150" dy="-0.3em">세담터</text>
+                    <text x="777.5" y="150" dy="0.8em" class="small">(도서관)</text>
+                </g>
+                <rect class="notClassroom" x="725" y="300" width="105" height="100" />
 
-            <!-- 본관 -->
-            <g id="이동수업실1" class="notClassroom">
-                <rect x="95" y="0" width="52.5" height="100" />
-                <rect x="147.5" y="0" width="157.5" height="100" />
-                <text x="226.25" y="50" dy="-0.3em">이동수업실1</text>
-                <text x="226.25" y="50" dy="0.8em" style="font-size: 1em;">(축제예비공간)</text>
+                <g id="운동장" class="notClassroom">
+                    <rect x="460" y="850" width="680" height="500" />
+                    <text x="800" y="1100">운동장</text>
+                </g>
+                <g id="농구장" class="notClassroom">
+                    <rect x="800" y="1350" width="340" height="200" />
+                    <text x="970" y="1450">농구장</text>
+                </g>
             </g>
-            <rect class="notClassroom" x="95" y="100" width="72.5" height="50" />
-            <rect class="notClassroom" x="200" y="100" width="105" height="50" />
-            <g id="컴퓨터실" class="notClassroom">
-                <rect x="200" y="150" width="105" height="150" />
-                <text x="252.5" y="225">컴퓨터실</text>
-            </g>
-            <!--<g id="중앙현관" class="notClassroom">
-                <rect x="325" y="460" rx="10px" ry="10px" width="80" height="80" />
-                <text x="365" y="500" style="font-size: 1.2em;">중앙현관</text>
-            </g>-->
-            <g id="행정실" class="notClassroom">
-                <rect x="410" y="445" width="105" height="100" />
-                <text x="462.5" y="495">행정실</text>
-            </g>
-            <g id="교장실" class="notClassroom">
-                <rect x="515" y="445" width="105" height="100" />
-                <text x="567.5" y="495">교장실</text>
-            </g>
-            <g id="학교운영위실" class="notClassroom">
-                <rect x="620" y="445" width="52.5" height="100" />
-            </g>
-            <g id="일시적관찰실" class="notClassroom">
-                <rect x="672.5" y="445" width="52.5" height="100" />
-            </g>
-            <g id="보건실" class="notClassroom">
-                <rect x="725" y="445" width="105" height="100" />
-                <text x="777.5" y="495">보건실</text>
-            </g>
-            <g id="발간실" class="notClassroom">
-                <rect x="830" y="445" width="52.5" height="100" />
-            </g>
-            <g id="밴드부실" class="notClassroom">
-                <rect x="1035" y="400" width="105" height="100" />
-                <text x="1087.5" y="450">밴드부실</text>
-            </g>
-            <rect class="notClassroom" x="1035" y="500" width="105" height="100" />
-            <g id="시청각실" class="notClassroom">
-                <rect x="1035" y="600" width="105" height="200" />
-                <text x="1087.5" y="700">시청각실</text>
-            </g>
-            <g id="화장실1" class="notClassroom">
-                <rect x="200" y="300" width="105" height="100" />
-                <text x="252.5" y="350">화장실</text>
-            </g>
-            <g id="화장실2" class="notClassroom">
-                <rect x="567.5" y="300" width="125" height="100" />
-                <text x="630" y="350">화장실</text>
-            </g>
-            <g id="세담터도서관" class="notClassroom">
-                <rect x="725" y="0" width="105" height="300" />
-                <text x="777.5" y="150" dy="-0.3em">세담터</text>
-                <text x="777.5" y="150" dy="0.8em" class="small">(도서관)</text>
-            </g>
-            <rect class="notClassroom" x="725" y="300" width="105" height="100" />
+        </svg>
+        <svg id="Floor2MapView">
+            <defs>
+                <filter id="blur">
+                    <feGaussianBlur in="SourceGraphic" stdDeviation="5" />
+                </filter>
+            </defs>
+            <g id="Floor2Map">
+                <polygon class="hallway" points="3.5,445 100.5,348 152.5,400 152.5,495 147.5,495 100.5,542" />
+                <rect class="hallway" x="152.5" y="400" width="47.5" height="95" />
+                <rect class="hallway" x="167.5" y="100" width="32.5" height="300" />
+                <rect class="hallway" x="200" y="400" width="835" height="45" />
+                <rect class="hallway" x="200" y="445" width="105" height="100" />
+                <rect class="hallway" x="692.5" y="0" width="32.5" height="400" />
+                <rect class="hallway" x="1002.5" y="445" width="32.5" height="355" />
 
-            <g id="운동장" class="notClassroom">
-                <rect x="460" y="850" width="680" height="500" />
-                <text x="800" y="1100">운동장</text>
-            </g>
-            <g id="농구장" class="notClassroom">
-                <rect x="800" y="1350" width="340" height="200" />
-                <text x="970" y="1450">농구장</text>
-            </g>
-        </g>
-    </svg>
-    <svg id="Floor2MapView">
-        <defs>
-            <filter id="blur">
-                <feGaussianBlur in="SourceGraphic" stdDeviation="5" />
-            </filter>
-        </defs>
-        <g id="Floor2Map">
-            <polygon class="hallway" points="3.5,445 100.5,348 152.5,400 152.5,495 147.5,495 100.5,542" />
-            <rect class="hallway" x="152.5" y="400" width="47.5" height="95" />
-            <rect class="hallway" x="167.5" y="100" width="32.5" height="300" />
-            <rect class="hallway" x="200" y="400" width="835" height="45" />
-            <rect class="hallway" x="200" y="445" width="105" height="100" />
-            <rect class="hallway" x="692.5" y="0" width="32.5" height="400" />
-            <rect class="hallway" x="1002.5" y="445" width="32.5" height="355" />
+                <polygon class="hallway stairs" points="134.2,434.3 171.2,471.3 100.5,542 63.5,505" />
+                <rect class="hallway stairs" x="640" y="0" width="52.5" height="100" />
+                <rect class="hallway stairs" x="882.5" y="445" width="52.5" height="100" />
 
-            <polygon class="hallway stairs" points="134.2,434.3 171.2,471.3 100.5,542 63.5,505" />
-            <rect class="hallway stairs" x="640" y="0" width="52.5" height="100" />
-            <rect class="hallway stairs" x="882.5" y="445" width="52.5" height="100" />
+                <!-- 차오름관 연결통로 -->
+                <rect class="hallway" x="200" y="545" width="72.5" height="255" />
 
-            <!-- 차오름관 연결통로 -->
-            <rect class="hallway" x="200" y="545" width="72.5" height="255" />
+                <!-- 차오름관 -->
+                <rect class="hallway" x="272.5" y="750" width="27.5" height="50" />
+                <rect class="hallway stairs" x="300" y="750" width="100" height="50" />
 
-            <!-- 차오름관 -->
-            <rect class="hallway" x="272.5" y="750" width="27.5" height="50" />
-            <rect class="hallway stairs" x="300" y="750" width="100" height="50" />
+                <g id="차오름관" class="notClassroom">
+                    <rect x="106" y="800" width="294" height="400" />
+                    <text x="253" y="1000">차오름관</text>
+                </g>
 
-            <g id="차오름관" class="classroom">
-                <rect x="106" y="800" width="294" height="400" />
-                <text x="253" y="1000">차오름관</text>
-            </g>
+                <!-- 본관 -->
+                <g id="화학실" class="notClassroom">
+                    <rect x="95" y="0" width="157.5" height="100" />
+                    <rect x="252.5" y="0" width="52.5" height="100" />
+                    <text x="173.75" y="50">화학실</text>
+                </g>
+                <g id="학생회실" class="notClassroom">
+                    <rect x="95" y="100" width="72.5" height="100" />
+                    <text x="131.25" y="150" class="verticalText small">학생회실</text>
+                </g>
+                <g id="생명과학실" class="notClassroom">
+                    <rect x="200" y="100" width="105" height="150" />
+                    <text x="252.5" y="175" class="small">생명과학실</text>
+                </g>
+                <g id="진로상담부" class="notClassroom">
+                    <rect x="200" y="250" width="105" height="50" />
+                    <text x="252.5" y="275" class="small">진로상담부</text>
+                </g>
+                <!-- !!FIXME: 2층 탁구장 공간 추가 -->
+                <!--<g id="2층홈베이스" class="notClassroom">
+                    <rect x="212.5" y="455" rx="10px" ry="10px" width="80" height="80" />
+                    <text x="252.5" y="495" style="font-size: 1.2em;">홈베이스</text>
+                </g>-->
+                <!--<g id="2층홈베이스" class="notClassroom">
+                    <rect x="325" y="460" rx="10px" ry="10px" width="80" height="80" />
+                    <text x="365" y="500" style="font-size: 1.2em;">홈베이스</text>
+                </g>-->
+                <!--<g id="교실105" class="notClassroom">
+                    <rect x="305" y="445" width="105" height="100" />
+                    <text x="357.5" y="495">1-5</text>
+                </g>-->
+                <!-- 2025 스탬프투어 - 동아리 2개 한 교실 사용 -->
+                <g id="교실105A" class="notClassroom">
+                    <rect x="305" y="445" width="105" height="50" />
+                    <text x="357.5" y="470" dy="-0.5em" class="small">1-5</text>
+                    <!-- extrasmall -->
+                    <text x="357.5" y="470" dy="0.5em" class="extraSmall">(아고라)</text>
+                </g>
+                <g id="교실105B" class="notClassroom">
+                    <rect x="305" y="495" width="105" height="50" />
+                    <text x="357.5" y="520" dy="-0.5em"  class="small">1-5</text>
+                    <text x="357.5" y="520" dy="0.7em" style="font-size:0.85em" class="extraSmall">(크리에이티브랩)</text>
+                </g>
+                <g id="교실106" class="notClassroom">
+                    <rect x="410" y="445" width="105" height="100" />
+                    <text x="462.5" y="495">1-6</text>
+                </g>
+                <g id="방송실" class="notClassroom">
+                    <rect x="515" y="445" width="105" height="100" />
+                    <text x="567.5" y="495">방송실</text>
+                </g>
+                <g id="제1교무실" class="notClassroom">
+                    <rect x="620" y="445" width="157.5" height="100" />
+                    <text x="698.75" y="495">제1교무실</text>
+                </g>
 
-            <!-- 본관 -->
-            <g id="화학실" class="classroom">
-                <rect x="95" y="0" width="157.5" height="100" />
-                <rect x="252.5" y="0" width="52.5" height="100" />
-                <text x="173.75" y="50">화학실</text>
-            </g>
-            <g id="학생회실" class="notClassroom">
-                <rect x="95" y="100" width="72.5" height="100" />
-                <text x="131.25" y="150" class="verticalText small">학생회실</text>
-            </g>
-            <g id="생명과학실" class="classroom">
-                <rect x="200" y="100" width="105" height="150" />
-                <text x="252.5" y="175" class="small">생명과학실</text>
-            </g>
-            <g id="진로상담부" class="notClassroom">
-                <rect x="200" y="250" width="105" height="50" />
-                <text x="252.5" y="275" class="small">진로상담부</text>
-            </g>
-            <!-- !!FIXME: 2층 탁구장 공간 추가 -->
-            <!--<g id="2층홈베이스" class="notClassroom">
-                <rect x="212.5" y="455" rx="10px" ry="10px" width="80" height="80" />
-                <text x="252.5" y="495" style="font-size: 1.2em;">홈베이스</text>
-            </g>-->
-            <!--<g id="2층홈베이스" class="classroom">
-                <rect x="325" y="460" rx="10px" ry="10px" width="80" height="80" />
-                <text x="365" y="500" style="font-size: 1.2em;">홈베이스</text>
-            </g>-->
-            <g id="교실106" class="classroom">
-                <rect x="305" y="445" width="105" height="100" />
-                <text x="357.5" y="495">1-6</text>
-            </g>
-            <g id="교실107" class="classroom">
-                <rect x="410" y="445" width="105" height="100" />
-                <text x="462.5" y="495">1-7</text>
-            </g>
-            <g id="방송실" class="notClassroom">
-                <rect x="515" y="445" width="105" height="100" />
-                <text x="567.5" y="495">방송실</text>
-            </g>
-            <g id="제1교무실" class="notClassroom">
-                <rect x="620" y="445" width="157.5" height="100" />
-                <text x="698.75" y="495">제1교무실</text>
-            </g>
+                <g id="성적처리실" class="notClassroom">
+                    <rect x="777.5" y="445" width="52.5" height="100" />
+                    <text x="803.75" y="495" dx="0.5em" dy="-0.5em" class="verticalText small">성적</text>
+                    <text x="803.75" y="495" dx="-0.5em" class="verticalText small">처리실</text>
+                </g>
 
-            <g id="성적처리실" class="notClassroom">
-                <rect x="777.5" y="445" width="52.5" height="100" />
+                <g id="교원연수실" class="notClassroom">
+                    <rect x="830" y="445" width="52.5" height="100" />
+                    <text x="856.25" y="495" dx="0.5em" dy="-0.5em" class="verticalText small">교원</text>
+                    <text x="856.25" y="495" dx="-0.5em" class="verticalText small">연수실</text>
+                </g>
+                <g id="교실107" class="notClassroom">
+                    <rect x="1035" y="400" width="105" height="100" />
+                    <text x="1087.5" y="450">1-7</text>
+                </g>
+                <g id="교실108" class="notClassroom">
+                    <rect x="1035" y="500" width="105" height="100" />
+                    <text x="1087.5" y="550">1-8</text>
+                </g>
+                <g id="교실109" class="notClassroom">
+                    <rect x="1035" y="600" width="105" height="100" />
+                    <text x="1087.5" y="650">1-9</text>
+                </g>
+                <g id="교실110" class="notClassroom">
+                    <rect x="1035" y="700" width="105" height="100" />
+                    <text x="1087.5" y="750">1-10</text>
+                </g>
+                <g id="화장실1" class="notClassroom">
+                    <rect x="200" y="300" width="105" height="100" />
+                    <text x="252.5" y="350">화장실</text>
+                </g>
+                <g id="화장실2" class="notClassroom">
+                    <rect x="567.5" y="300" width="125" height="100" />
+                    <text x="630" y="350">화장실</text>
+                </g>
+                <g id="학교시설관리본부" class="notClassroom">
+                    <rect x="725" y="0" width="105" height="50" />
+                    <text x="777.5" y="25" dy="-0.5em" class="small">학교시설</text>
+                    <text x="777.5" y="25" dy="0.5em" class="small">관리본부</text>
+                </g>
+                <g id="평가준비실" class="notClassroom">
+                    <rect x="725" y="50" width="105" height="50" />
+                    <text x="777.5" y="75" class="small">평가준비실</text>
+                </g>
+                <g id="다목적교실2" class="notClassroom">
+                    <rect x="725" y="100" width="105" height="200" />
+                    <text x="777.5" y="200" dy="-0.5em">다목적</text>
+                    <text x="777.5" y="200" dy="0.5em">교실2</text>
+                </g>
+                <g id="제2교무실" class="notClassroom">
+                    <rect x="725" y="300" width="105" height="100" />
+                    <text x="777.5" y="350" class="small">제2교무실</text>
+                </g>
             </g>
+        </svg>
+        <svg id="Floor3MapView" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <filter id="blur">
+                    <feGaussianBlur in="SourceGraphic" stdDeviation="5" />
+                </filter>
+            </defs>
+            <g id="Floor3Map">
+                <polygon class="hallway" points="3.5,445 100.5,348 152.5,400 152.5,495 147.5,495 100.5,542" />
+                <rect class="hallway" x="152.5" y="400" width="47.5" height="95" />
+                <rect class="hallway" x="167.5" y="100" width="32.5" height="300" />
+                <rect class="hallway" x="200" y="400" width="835" height="45" />
+                <rect class="hallway" x="200" y="445" width="105" height="100" />
+                <rect class="hallway" x="692.5" y="0" width="32.5" height="400" />
+                <rect class="hallway" x="1002.5" y="445" width="32.5" height="355" />
 
-            <g id="교원연수실" class="notClassroom">
-                <rect x="830" y="445" width="52.5" height="100" />
+                <polygon class="hallway stairs" points="134.2,434.3 171.2,471.3 100.5,542 63.5,505" />
+                <rect class="hallway stairs" x="640" y="0" width="52.5" height="100" />
+                <rect class="hallway stairs" x="882.5" y="445" width="52.5" height="100" />
+                <!-- 본관 -->
+                <g id="물리지학실" class="notClassroom">
+                    <rect x="95" y="0" width="157.5" height="100" />
+                    <rect x="252.5" y="0" width="52.5" height="100" />
+                    <!-- split to 2 elements <text x="173.75" y="50">물리·지구과학실</text> -->
+                    <text x="173.75" y="50" dy="-0.5em">물리·</text>
+                    <text x="173.75" y="50" dy="0.5em">지학실</text>
+                </g>
+                <g id="진로활동실" class="notClassroom">
+                    <rect x="95" y="100" width="72.5" height="100" />
+                    <text x="131.25" y="150" dx="0.5em" dy="-0.5em" class="verticalText small">진로</text>
+                    <text x="131.25" y="150" dx="-0.5em" class="verticalText small">활동실</text>
+                </g>
+                <g id="다원반" class="notClassroom">
+                    <rect x="200" y="100" width="105" height="150" />
+                    <text x="252.5" y="175">다원반</text>
+                </g>
+                <g id="학부모상주실" class="notClassroom">
+                    <rect x="200" y="250" width="105" height="50" />
+                    <text x="252.5" y="275" dy="-0.5em" class="small">학부모</text>
+                    <text x="252.5" y="275" dy="0.5em" class="small">상주실</text>
+                </g>
+                <!--<g id="3층홈베이스" class="notClassroom">
+                    <rect x="212.5" y="455" rx="10px" ry="10px" width="80" height="80" />
+                    <text x="252.5" y="495" style="font-size: 1.2em;">홈베이스</text>
+                </g>-->
+                <g id="이동수업실1" class="notClassroom">
+                    <rect x="305" y="445" width="105" height="100" />
+                    <text x="357.5" y="495" dy="-0.5em" class="small">이동수업실</text>
+                    <text x="357.5" y="495" dy="0.5em" class="small">1</text>
+                </g>
+                <g id="이동수업실2" class="notClassroom">
+                    <rect x="410" y="445" width="105" height="100" />
+                    <text x="462.5" y="495" dy="-0.5em" class="small">이동수업실</text>
+                    <text x="462.5" y="495" dy="0.5em" class="small">2</text>
+                </g>
+                <g id="교실210" class="notClassroom">
+                    <rect x="515" y="445" width="105" height="100" />
+                    <text x="567.5" y="495">2-10</text>
+                </g>
+                <g id="교실211" class="notClassroom">
+                    <rect x="620" y="445" width="105" height="100" />
+                    <text x="672.5" y="495">2-11</text>
+                </g>
+                <g id="이동수업실3" class="notClassroom">
+                    <rect x="725" y="445" width="105" height="100" />
+                    <text x="777.5" y="495" dy="-0.5em" class="small">이동수업실</text>
+                    <text x="777.5" y="495" dy="0.5em" class="small">3</text>
+                </g>
+                <g id="1학년연수실" class="notClassroom">
+                    <rect x="830" y="445" width="52.5" height="100" />
+                    <text x="856.25" y="495" dx="0.5em" dy="-0.5em" class="verticalText small" text-rendering="optimizeLegibility">1학년</text>
+                    <text x="856.25" y="495" dx="-0.5em" dy="0.5em" class="verticalText small">연수실</text>
+                </g>
+                <g id="교실101" class="notClassroom">
+                    <rect x="1035" y="400" width="105" height="100" />
+                    <text x="1087.5" y="450">1-1</text>
+                </g>
+                <g id="교실102" class="notClassroom">
+                    <rect x="1035" y="500" width="105" height="100" />
+                    <text x="1087.5" y="550">1-2</text>
+                </g>
+                <g id="교실103" class="notClassroom">
+                    <rect x="1035" y="600" width="105" height="100" />
+                    <text x="1087.5" y="650">1-3</text>
+                </g>
+                <g id="교실104" class="notClassroom">
+                    <rect x="1035" y="700" width="105" height="100" />
+                    <text x="1087.5" y="750">1-4</text>
+                </g>
+                <g id="화장실1" class="notClassroom">
+                    <rect x="200" y="300" width="105" height="100" />
+                    <text x="252.5" y="350">화장실</text>
+                </g>
+                <g id="화장실2" class="notClassroom">
+                    <rect x="567.5" y="300" width="125" height="100" />
+                    <text x="630" y="350">화장실</text>
+                </g>
+                <g id="상담실위클래스" class="notClassroom">
+                    <rect x="725" y="0" width="105" height="100" />
+                    <text x="777.5" y="50" dy="-0.5em">상담실</text>
+                    <text x="777.5" y="50" dy="0.5em" class="small">(위클래스)</text>
+                </g>
+                <g id="1학년학습실" class="notClassroom">
+                    <rect x="725" y="100" width="105" height="200" />
+                    <text x="777.5" y="200" dy="-0.5em">1학년</text>
+                    <text x="777.5" y="200" dy="0.5em">학습실</text>
+                </g>
+                <g id="1학년교무실" class="notClassroom">
+                    <rect x="725" y="300" width="105" height="100" />
+                    <text x="777.5" y="350" dy="-0.5em">1학년</text>
+                    <text x="777.5" y="350" dy="0.5em">교무실</text>
+                </g>
             </g>
-            <g id="교실108" class="classroom">
-                <rect x="1035" y="400" width="105" height="100" />
-                <text x="1087.5" y="450">1-8</text>
-            </g>
-            <g id="교실109" class="classroom">
-                <rect x="1035" y="500" width="105" height="100" />
-                <text x="1087.5" y="550">1-9</text>
-            </g>
-            <g id="교실110" class="notClassroom">
-                <rect x="1035" y="600" width="105" height="100" />
-                <text x="1087.5" y="650">1-10</text>
-            </g>
-            <g id="교실111" class="classroom">
-                <rect x="1035" y="700" width="105" height="100" />
-                <text x="1087.5" y="750">1-11</text>
-            </g>
-            <g id="화장실1" class="notClassroom">
-                <rect x="200" y="300" width="105" height="100" />
-                <text x="252.5" y="350">화장실</text>
-            </g>
-            <g id="화장실2" class="notClassroom">
-                <rect x="567.5" y="300" width="125" height="100" />
-                <text x="630" y="350">화장실</text>
-            </g>
-            <g id="학교시설관리본부" class="notClassroom">
-                <rect x="725" y="0" width="105" height="50" />
-            </g>
-            <g id="평가준비실" class="notClassroom">
-                <rect x="725" y="50" width="105" height="50" />
-            </g>
-            <g id="공용교실" class="classroom">
-                <rect x="725" y="100" width="105" height="200" />
-                <text x="777.5" y="200" dy="-0.5em">공용</text>
-                <text x="777.5" y="200" dy="0.5em">교실</text>
-            </g>
-            <g id="제2교무실" class="notClassroom">
-                <rect x="725" y="300" width="105" height="100" />
-                <text x="777.5" y="350" class="small">제2교무실</text>
-            </g>
-        </g>
-    </svg>
-    <svg id="Floor3MapView" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-            <filter id="blur">
-                <feGaussianBlur in="SourceGraphic" stdDeviation="5" />
-            </filter>
-        </defs>
-        <g id="Floor3Map">
-            <polygon class="hallway" points="3.5,445 100.5,348 152.5,400 152.5,495 147.5,495 100.5,542" />
-            <rect class="hallway" x="152.5" y="400" width="47.5" height="95" />
-            <rect class="hallway" x="167.5" y="100" width="32.5" height="300" />
-            <rect class="hallway" x="200" y="400" width="835" height="45" />
-            <rect class="hallway" x="200" y="445" width="105" height="100" />
-            <rect class="hallway" x="692.5" y="0" width="32.5" height="400" />
-            <rect class="hallway" x="1002.5" y="445" width="32.5" height="355" />
+        </svg>
+        <svg id="Floor4MapView">
+            <defs>
+                <filter id="blur">
+                    <feGaussianBlur in="SourceGraphic" stdDeviation="5" />
+                </filter>
+            </defs>
+            <g id="Floor4Map">
+                <polygon class="hallway" points="3.5,445 100.5,348 152.5,400 152.5,495 147.5,495 100.5,542" />
+                <rect class="hallway" x="152.5" y="400" width="47.5" height="95" />
+                <rect class="hallway" x="167.5" y="100" width="32.5" height="300" />
+                <rect class="hallway" x="200" y="400" width="835" height="45" />
+                <rect class="hallway" x="200" y="445" width="105" height="100" />
+                <rect class="hallway" x="692.5" y="0" width="32.5" height="400" />
+                <rect class="hallway" x="1002.5" y="445" width="32.5" height="355" />
 
-            <polygon class="hallway stairs" points="134.2,434.3 171.2,471.3 100.5,542 63.5,505" />
-            <rect class="hallway stairs" x="640" y="0" width="52.5" height="100" />
-            <rect class="hallway stairs" x="882.5" y="445" width="52.5" height="100" />
-            <!-- 본관 -->
-            <g id="물리·지학실" class="classroom">
-                <rect x="95" y="0" width="157.5" height="100" />
-                <rect x="252.5" y="0" width="52.5" height="100" />
-                <!-- split to 2 elements <text x="173.75" y="50">물리·지구과학실</text> -->
-                <text x="173.75" y="50">물리·지학실</text>
+                <polygon class="hallway stairs" points="134.2,434.3 171.2,471.3 100.5,542 63.5,505" />
+                <rect class="hallway stairs" x="640" y="0" width="52.5" height="100" />
+                <rect class="hallway stairs" x="882.5" y="445" width="52.5" height="100" />
+                <!-- 본관 -->
+                <g id="기술실" class="notClassroom">
+                    <rect x="95" y="0" width="157.5" height="100" />
+                    <rect x="252.5" y="0" width="52.5" height="100" />
+                    <text x="173.75" y="50">기술실</text>
+                </g>
+                <g id="뉴턴실" class="notClassroom">
+                    <rect x="95" y="100" width="72.5" height="100" />
+                    <text x="131.25" y="150">뉴턴실</text>
+                </g>
+                <g id="가사실" class="notClassroom">
+                    <rect x="200" y="100" width="105" height="150" />
+                    <text x="252.5" y="175">가사실</text>
+                </g>
+                <g id="가우스실" class="notClassroom">
+                    <rect x="200" y="250" width="105" height="50" />
+                    <text x="252.5" y="275">가우스실</text>
+                </g>
+                <g id="4층홈베이스" class="notClassroom">
+                    <rect x="212.5" y="455" rx="10px" ry="10px" width="80" height="80" />
+                    <text x="252.5" y="495" style="font-size: 1.2em;">홈베이스</text>
+                </g>
+                <g id="교실201" class="notClassroom">
+                    <rect x="305" y="445" width="105" height="100" />
+                    <text x="357.5" y="495">2-1</text>
+                </g>
+                <g id="교실202" class="notClassroom">
+                    <rect x="410" y="445" width="105" height="100" />
+                    <text x="462.5" y="495">2-2</text>
+                </g>
+                <g id="교실203" class="notClassroom">
+                    <rect x="515" y="445" width="105" height="100" />
+                    <text x="567.5" y="495">2-3</text>
+                </g>
+                <g id="교실204" class="notClassroom">
+                    <rect x="620" y="445" width="105" height="100" />
+                    <text x="672.5" y="495">2-4</text>
+                </g>
+                <g id="교실205" class="notClassroom">
+                    <rect x="725" y="445" width="105" height="100" />
+                    <text x="777.5" y="495">2-5</text>
+                </g>
+                <g id="2학년연수실" class="notClassroom">
+                    <rect x="830" y="445" width="52.5" height="100" />
+                    <text x="856.25" y="495" dx="0.5em" dy="-0.5em" class="verticalText small"
+                        class="verticalText small">2학년</text>
+                    <text x="856.25" y="495" dx="-0.5em" dy="0.5em" class="verticalText small">연수실</text>
+                </g>
+                <g id="교실206" class="notClassroom">
+                    <rect x="1035" y="400" width="105" height="100" />
+                    <text x="1087.5" y="450">2-6</text>
+                </g>
+                <g id="교실207" class="notClassroom">
+                    <rect x="1035" y="500" width="105" height="100" />
+                    <text x="1087.5" y="550">2-7</text>
+                </g>
+                <g id="교실208" class="notClassroom">
+                    <rect x="1035" y="600" width="105" height="100" />
+                    <text x="1087.5" y="650">2-8</text>
+                </g>
+                <g id="교실209" class="notClassroom">
+                    <rect x="1035" y="700" width="105" height="100" />
+                    <text x="1087.5" y="750">2-9</text>
+                </g>
+                <g id="화장실1" class="notClassroom">
+                    <rect x="200" y="300" width="105" height="100" />
+                    <text x="252.5" y="350">화장실</text>
+                </g>
+                <g id="화장실2" class="notClassroom">
+                    <rect x="567.5" y="300" width="125" height="100" />
+                    <text x="630" y="350">화장실</text>
+                </g>
+                <g id="학생안전인권부" class="notClassroom">
+                    <rect x="725" y="0" width="105" height="50" />
+                    <text x="777.5" y="25" dy="-0.5em" class="small">학생안전</text>
+                    <text x="777.5" y="25" dy="0.5em" class="small">인권부</text>
+                </g>
+                <g id="오일러실" class="notClassroom">
+                    <rect x="725" y="50" width="105" height="50" />
+                    <text x="777.5" y="75" class="small">오일러실</text>
+                </g>
+                <g id="이동수업실5" class="notClassroom">
+                    <rect x="725" y="100" width="105" height="200" />
+                    <!-- Like <text x="462.5" y="495" dy="-0.5em" class="small">이동수업실</text>
+                    <text x="462.5" y="495" dy="0.5em" class="small">2</text>-->
+                    <text x="777.5" y="200" dy="-0.5em" class="small">이동수업실</text>
+                    <text x="777.5" y="200" dy="0.5em" class="small">5</text>
+                </g>
+                <g id="2학년교무실" class="notClassroom">
+                    <rect x="725" y="300" width="105" height="100" />
+                    <text x="777.5" y="350" dy="-0.5em">2학년</text>
+                    <text x="777.5" y="350" dy="0.5em">교무실</text>
+                </g>
             </g>
-            <g id="진로활동실" class="classroom">
-                <rect x="95" y="100" width="72.5" height="100" />
-                <text x="131.25" y="150" dx="0.5em" dy="-0.5em" class="verticalText small">진로</text>
-                <text x="131.25" y="150" dx="-0.5em" class="verticalText small">활동실</text>
-            </g>
-            <g id="다원반" class="classroom">
-                <rect x="200" y="100" width="105" height="150" />
-                <text x="252.5" y="175">다원반</text>
-            </g>
-            <g id="학부모상주실" class="notClassroom">
-                <rect x="200" y="250" width="105" height="50" />
-            </g>
-            <g id="3층홈베이스" class="classroom">
-                <rect x="212.5" y="455" rx="10px" ry="10px" width="80" height="80" />
-                <text x="252.5" y="495" style="font-size: 1.2em;">홈베이스</text>
-            </g>
-            <g id="이동수업실2" class="classroom">
-                <rect x="305" y="445" width="105" height="100" />
-                <text x="357.5" y="495" dy="-0.5em" class="small">이동수업실</text>
-                <text x="357.5" y="495" dy="0.5em" class="small">2</text>
-            </g>
-            <g id="이동수업실3" class="classroom">
-                <rect x="410" y="445" width="105" height="100" />
-                <text x="462.5" y="495" dy="-0.5em" class="small">이동수업실</text>
-                <text x="462.5" y="495" dy="0.5em" class="small">3</text>
-            </g>
-            <g id="교실210" class="classroom">
-                <rect x="515" y="445" width="105" height="100" />
-                <text x="567.5" y="495">2-10</text>
-            </g>
-            <g id="교실211" class="classroom">
-                <rect x="620" y="445" width="105" height="100" />
-                <text x="672.5" y="495">2-11</text>
-            </g>
-            <g id="교실101" class="classroom">
-                <rect x="725" y="445" width="105" height="100" />
-                <text x="777.5" y="495">1-1</text>
-            </g>
-            <g id="1학년연수실" class="notClassroom">
-                <rect x="830" y="445" width="52.5" height="100" />
-            </g>
-            <g id="교실102" class="classroom">
-                <rect x="1035" y="400" width="105" height="100" />
-                <text x="1087.5" y="450">1-2</text>
-            </g>
-            <g id="교실103" class="classroom">
-                <rect x="1035" y="500" width="105" height="100" />
-                <text x="1087.5" y="550">1-3</text>
-            </g>
-            <g id="교실104" class="classroom">
-                <rect x="1035" y="600" width="105" height="100" />
-                <text x="1087.5" y="650">1-4</text>
-            </g>
-            <g id="교실105" class="classroom">
-                <rect x="1035" y="700" width="105" height="100" />
-                <text x="1087.5" y="750">1-5</text>
-            </g>
-            <g id="화장실1" class="notClassroom">
-                <rect x="200" y="300" width="105" height="100" />
-                <text x="252.5" y="350">화장실</text>
-            </g>
-            <g id="화장실2" class="notClassroom">
-                <rect x="567.5" y="300" width="125" height="100" />
-                <text x="630" y="350">화장실</text>
-            </g>
-            <g id="상담실위클래스" class="notClassroom">
-                <rect x="725" y="0" width="105" height="100" />
-                <text x="777.5" y="50" dy="-0.5em">상담실</text>
-                <text x="777.5" y="50" dy="0.5em" class="small">(위클래스)</text>
-            </g>
-            <g id="1학년학습실" class="notClassroom">
-                <rect x="725" y="100" width="105" height="200" />
-                <text x="777.5" y="200" dy="-0.5em">1학년</text>
-                <text x="777.5" y="200" dy="0.5em">학습실</text>
-            </g>
-            <g id="1학년교무실" class="notClassroom">
-                <rect x="725" y="300" width="105" height="100" />
-                <text x="777.5" y="350" dy="-0.5em">1학년</text>
-                <text x="777.5" y="350" dy="0.5em">교무실</text>
-            </g>
-        </g>
-    </svg>
-    <svg id="Floor4MapView">
-        <defs>
-            <filter id="blur">
-                <feGaussianBlur in="SourceGraphic" stdDeviation="5" />
-            </filter>
-        </defs>
-        <g id="Floor4Map">
-            <polygon class="hallway" points="3.5,445 100.5,348 152.5,400 152.5,495 147.5,495 100.5,542" />
-            <rect class="hallway" x="152.5" y="400" width="47.5" height="95" />
-            <rect class="hallway" x="167.5" y="100" width="32.5" height="300" />
-            <rect class="hallway" x="200" y="400" width="835" height="45" />
-            <rect class="hallway" x="200" y="445" width="105" height="100" />
-            <rect class="hallway" x="692.5" y="0" width="32.5" height="400" />
-            <rect class="hallway" x="1002.5" y="445" width="32.5" height="355" />
-
-            <polygon class="hallway stairs" points="134.2,434.3 171.2,471.3 100.5,542 63.5,505" />
-            <rect class="hallway stairs" x="640" y="0" width="52.5" height="100" />
-            <rect class="hallway stairs" x="882.5" y="445" width="52.5" height="100" />
-            <!-- 본관 -->
-            <g id="기술실" class="classroom">
-                <rect x="95" y="0" width="157.5" height="100" />
-                <rect x="252.5" y="0" width="52.5" height="100" />
-                <text x="173.75" y="50">기술실</text>
-            </g>
-            <g id="뉴턴실" class="notClassroom">
-                <rect x="95" y="100" width="72.5" height="100" />
-                <text x="131.25" y="150">뉴턴실</text>
-            </g>
-            <g id="가사실" class="classroom">
-                <rect x="200" y="100" width="105" height="150" />
-                <text x="252.5" y="175">가사실</text>
-            </g>
-            <g id="가우스실" class="notClassroom">
-                <rect x="200" y="250" width="105" height="50" />
-                <text x="252.5" y="275">가우스실</text>
-            </g>
-            <g id="4층홈베이스" class="classroom">
-                <rect x="212.5" y="455" rx="10px" ry="10px" width="80" height="80" />
-                <text x="252.5" y="495" style="font-size: 1.2em;">홈베이스</text>
-            </g>
-            <g id="교실201" class="classroom">
-                <rect x="305" y="445" width="105" height="100" />
-                <text x="357.5" y="495">2-1</text>
-            </g>
-            <g id="교실202" class="classroom">
-                <rect x="410" y="445" width="105" height="100" />
-                <text x="462.5" y="495">2-2</text>
-            </g>
-            <g id="교실203" class="classroom">
-                <rect x="515" y="445" width="105" height="100" />
-                <text x="567.5" y="495">2-3</text>
-            </g>
-            <g id="교실204" class="classroom">
-                <rect x="620" y="445" width="105" height="100" />
-                <text x="672.5" y="495">2-4</text>
-            </g>
-            <g id="교실205" class="classroom">
-                <rect x="725" y="445" width="105" height="100" />
-                <text x="777.5" y="495">2-5</text>
-            </g>
-            <g id="2학년연수실" class="notClassroom">
-                <rect x="830" y="445" width="52.5" height="100" />
-            </g>
-            <g id="교실206" class="classroom">
-                <rect x="1035" y="400" width="105" height="100" />
-                <text x="1087.5" y="450">2-6</text>
-            </g>
-            <g id="교실207" class="classroom">
-                <rect x="1035" y="500" width="105" height="100" />
-                <text x="1087.5" y="550">2-7</text>
-            </g>
-            <g id="교실208" class="classroom">
-                <rect x="1035" y="600" width="105" height="100" />
-                <text x="1087.5" y="650">2-8</text>
-            </g>
-            <g id="교실209" class="classroom">
-                <rect x="1035" y="700" width="105" height="100" />
-                <text x="1087.5" y="750">2-9</text>
-            </g>
-            <g id="화장실1" class="notClassroom">
-                <rect x="200" y="300" width="105" height="100" />
-                <text x="252.5" y="350">화장실</text>
-            </g>
-            <g id="화장실2" class="notClassroom">
-                <rect x="567.5" y="300" width="125" height="100" />
-                <text x="630" y="350">화장실</text>
-            </g>
-            <g id="학생안전인권부" class="notClassroom">
-                <rect x="725" y="0" width="105" height="50" />
-                <text x="777.5" y="25" dy="-0.5em" class="small">학생안전</text>
-                <text x="777.5" y="25" dy="0.5em" class="small">인권부</text>
-            </g>
-            <g id="오일러실" class="notClassroom">
-                <rect x="725" y="50" width="105" height="50" />
-                <text x="777.5" y="75" class="small">오일러실</text>
-            </g>
-            <g id="2학년학습실·이동수업실4" class="classroom">
-                <rect x="725" y="100" width="105" height="200" />
-                <text x="777.5" y="200" dy="-1em">2학년</text>
-                <text x="777.5" y="200">학습실</text>
-                <text x="777.5" y="200" dy="1.5em" class="extraSmall">(이동수업실4)</text>
-            </g>
-            <g id="2학년교무실" class="notClassroom">
-                <rect x="725" y="300" width="105" height="100" />
-                <text x="777.5" y="350" dy="-0.5em">2학년</text>
-                <text x="777.5" y="350" dy="0.5em">교무실</text>
-            </g>
-        </g>
-    </svg>
-</div>
+        </svg>
+    </div>
     <div id="ClassInfoModalContainer" class="ModalContainer">
         <div id="ClassInfoModal" class="Modal">
             <div id="ModalBackgroundView" class="ModalBackgroundView">

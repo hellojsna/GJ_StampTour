@@ -68,6 +68,7 @@ let stampListView = eById("stampList");
 let GuideModalContainer = eById("GuideModalContainer");
 let ClassInfoModalContainer = eById("ClassInfoModalContainer");
 let ClassInfoModalTitle = eById("ClassInfoModalTitle");
+let CMBG = eById("StampBackgroundImage");
 let CMSN = eById("CMStampName");
 let CMSD = eById("CMStampDesc");
 let CMST = eById("CMStampType");
@@ -292,7 +293,7 @@ if (window.location.hash.startsWith("#Floor")) {
 }
 
 function filterClassroomName(name) {
-    return (name.startsWith("교실") ? `${name.slice(0, 3)}학년 ${name.slice(3)}반`.replace("교실", "").replace(" 0", " ") : name);
+    return (name.startsWith("교실") ? `${name.slice(0, 3)}학년 ${name.slice(3).replace(/[^0-9]/g, "")}반`.replace("교실", "").replace(" 0", " ") : name);
 }
 getJSON(`/api/stampList.json`, function (err, data) {
     if (err != null) {
@@ -304,18 +305,24 @@ getJSON(`/api/stampList.json`, function (err, data) {
             let sDsL = sD.stampLocation.split(",");
             if (sDsL.length > 1) {
                 for (let j = 0; j < sDsL.length; j++) {
+                    eById(sDsL[j]).classList.remove("notClassroom");
+                    eById(sDsL[j]).classList.add("classroom");
                     eById(sDsL[j]).addEventListener("click", () => {
                         ClassInfoModalContainer.style.display = "flex";
                         ClassInfoModalTitle.innerText = `${sDsL[j]}(${(sDsL[j - 1]) ? sDsL[j - 1] : sDsL[j + 1]})`;
+                        CMBG.src = `/images/stamps/${sD.stampId}.webp`;
                         CMSN.innerText = sD.stampName;
                         CMSD.innerText = sD.stampDesc;
                     });
                 }
             } else {
                 console.log(sD.stampLocation);
+                eById(sD.stampLocation).classList.remove("notClassroom");
+                eById(sD.stampLocation).classList.add("classroom");
                 eById(sD.stampLocation).addEventListener("click", () => {
                     ClassInfoModalContainer.style.display = "flex";
                     ClassInfoModalTitle.innerText = filterClassroomName(sD.stampLocation);
+                    CMBG.src = `/images/stamps/${sD.stampId}.webp`;
                     CMSN.innerText = sD.stampName;
                     // stampDesc starts with [value], so check that and move to CMStampType
                     CMST.removeAttribute('class');
